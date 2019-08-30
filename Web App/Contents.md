@@ -1,7 +1,7 @@
 # **<a name="webapp">Web Application table of Contents</a>**
 * [XSS](#xss)
 * [SQLi](#SQLi)
-
+* [Command Injection](#Cinject)
 
 
 
@@ -268,8 +268,28 @@ to find each password charater
 
 
 
+# **<a name="Cinject">Command Injection</a>**
 
+ A number of characters function as command separators,  allowing commands to be chained together. The following command  separators work on both Windows and Unix-based systems:         
+            •                 &            
+            •                 &&            
+            •                 |            
+            •                 ||            
+                             The following command separators work only on Unix-based systems:         
+            •                 ;            
+            •                 Newline (0x0a or \n)            
+                             On Unix-based systems, you can also use backticks or the  dollar character to perform inline execution of an injected command  within the original command:         
+            •                \` injected command \`            
+            •                 $( injected command )       
 
+### Blind   
+The following examples are of POST requests
+
+Tests to see if there is a delay doing the ping  
+`email=test%40gmail.com||ping+-c+10+127.0.0.1||&subject=test&message=test`
+
+Tests by putting output to a web viewable directory  
+`email=test%40gmail.com||whoami+>+/var/www/images/who.txt||&subject=test&message=test`
 
 
 
