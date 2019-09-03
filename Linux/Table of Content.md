@@ -18,6 +18,7 @@
     - [Reverse Shell](#rev_shell)
     - [Execute a Remote Script](#remote_script)
     - [TTY](#TTY)
+    - [Escape Limited Shell](#limitshell)
 
 
 
@@ -356,6 +357,7 @@ Set PATH TERM and SHELL if missing:
 `export TERM=xterm`  
 `export SHELL=bash`  
 
+<a name="limitshell"/><a>
 ### Escape Limited Shell
 
 `echo os.system('/bin/bash')`  
