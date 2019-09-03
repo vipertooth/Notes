@@ -3,7 +3,7 @@
 * [SQLi](#SQLi)
 * [Command Injection](#Cinject)
 * [Directory Path Traversal](#pathtrav)
-
+* [LFI to RCE](#lfi2rce)
 
 
 
@@ -322,6 +322,8 @@ odd characters or double encoded
 `%252f`  
 
 
+
+# **<a name="lfi2rce">LFI to RCE</a>**
 
 
 
