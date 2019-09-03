@@ -17,7 +17,7 @@
 - [Maintaining control](#maintain)
     - [Reverse Shell](#rev_shell)
     - [Execute a Remote Script](#remote_script)
-- [Fun if Windows is present and accessible](#windows)
+
 
 
 <a name="collecting_info"/></a>
