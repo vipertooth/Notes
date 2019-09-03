@@ -317,7 +317,7 @@ except:
         sys.exit()
  ```
  
- 
+`sudo apt-get update -o APT::Update::Pre-Invoke::= /bin/bash`
  
 <a name="maintain"/><a>
 ## Maintaining control
