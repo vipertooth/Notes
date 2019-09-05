@@ -45,7 +45,7 @@ From Kali
 ### Dynamic Forwarding
 
 From target    
-`plink 192.168.1.16 -P 22 -C -R 127.0.0.1:2222:22`    
+`plink 192.168.1.16 -P 22 -C -R 2222:127.0.0.1:22`    
 `ssh -f -N -R 2222:127.0.0.1:22 root@192.168.1.16`
 
 From Kali   
