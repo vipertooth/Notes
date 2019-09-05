@@ -22,7 +22,7 @@ Plink.exe is Windows binary for ssh can be found at:
 
 ### Remote Forwarding
 
-To get to server at 10.0.0.10
+Goal: To get to server at 10.0.0.10
 
 From Target   
 `plink -P 22 -C -R 127.0.0.1:4444:10.0.0.10:80 root@192.168.1.16`   
@@ -43,6 +43,8 @@ From Kali
 `rdesktop 192.168.1.30:3390`
 
 ### Dynamic Forwarding
+
+Firewall only allows inbound port 2222 and 80
 
 From target    
 `plink -P 22 -N -C -R 2222:127.0.0.1:22 root@192.168.1.16`    
