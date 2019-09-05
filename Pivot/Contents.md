@@ -55,3 +55,17 @@ From Kali
 `socks4   127.0.0.1   8080`
 
 `proxychains nmap -sT -Pn <IP>`
+
+
+
+### Other tools
+
+HTTPTunnel   
+
+stunnel 
+
+socat
+
+Reference:   
+https://www.cybrary.it/0p3n/pivot-network-port-forwardingredirection-hands-look/   
+https://technostuff.blogspot.com/2008/10/some-useful-socat-commands.html    
