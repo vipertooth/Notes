@@ -1,20 +1,19 @@
 
-The Attacking Box (Kali Linux)
-IP: 192.168.1.16
-Netmask: 255.255.255.0
-Gateway: 192.168.1.1
+The Attacking Box (Kali Linux)   
+IP: 192.168.1.16   
+Netmask: 255.255.255.0   
+Gateway: 192.168.1.1   
 
-The pivot host (Windows XP) or linux
-Dual-Homed – Configure 2 Network Cards in VirtualBox!
-user: lowuser
-FIRST IP: 192.168.1.30
-Netmask: 255.255.255.0
-SECOND IP: 10.0.0.2
-Netmask: 255.0.0.0
+The pivot host (Windows XP) or linux     
+User: lowuser   
+FIRST IP: 192.168.1.30   
+Netmask: 255.255.255.0   
+SECOND IP: 10.0.0.2   
+Netmask: 255.0.0.0    
 
-Web server (IIS, Apache – Windows or Linux, whatever u like) -> I use a Windows 2012 server
-IP: 10.0.0.10
-Netmask: 255.0.0.0
+Web server    
+IP: 10.0.0.10   
+Netmask: 255.0.0.0   
 
 # Port Forwarding
 
