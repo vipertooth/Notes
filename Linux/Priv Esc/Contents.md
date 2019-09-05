@@ -2,5 +2,5 @@ test
 
 with VI
 
-:set shell=/bin/bash:shell
+:set shell=/bin/bash   
 :!bash
