@@ -25,7 +25,7 @@ Plink.exe is Windows binary for ssh can be found at:
 To get to server at 10.0.0.10
 
 From Target   
-`plink 192.168.1.16 -P 22 -C -R 127.0.0.1:4444:10.0.0.10:80`   
+`plink -P 22 -C -R 127.0.0.1:4444:10.0.0.10:80 root@192.168.1.16`   
 `ssh -p 22  -R 127.0.0.1:4444:10.0.0.10:80 root@192.168.1.16`
 
 From Kali   
@@ -36,7 +36,7 @@ From Kali
 Firewall rule blocking 3389
 
 From Target   
-`plink 192.168.1.16 -P 22 -C -L 192.168.1.30:3390:192.168.1.30:3389`   
+`plink -P 22 -C -L 192.168.1.30:3390:192.168.1.30:3389 root@192.168.1.16`   
 `ssh -p 22 -L 192.168.1.30:3390:192.168.1.30:3389 root@192.168.1.16`
 
 From Kali   
@@ -45,7 +45,7 @@ From Kali
 ### Dynamic Forwarding
 
 From target    
-`plink 192.168.1.16 -P 22 -C -R 2222:127.0.0.1:22`    
+`plink -P 22 -N -C -R 2222:127.0.0.1:22 root@192.168.1.16`    
 `ssh -f -N -R 2222:127.0.0.1:22 root@192.168.1.16`
 
 From Kali   
