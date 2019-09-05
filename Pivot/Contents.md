@@ -16,7 +16,8 @@ IP: 10.0.0.10
 Netmask: 255.0.0.0   
 
 # Port Forwarding
-
+ 
+Plink.exe is Windows binary for ssh
 
 ### Remote Forwarding
 
