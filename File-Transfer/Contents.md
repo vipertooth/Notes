@@ -44,6 +44,19 @@ echo bye >> ftp.txt
 ftp -v -n -s:ftp.txt
 ```
 
+## Web
+
+Start a web service
+
+`service apache2 start`
+
+place transfer file in /var/www/
+
+use current directory with any port
+
+`python -m SimpleHTTPServer 9000`   
+`python3 -m http.server 9000`   
+
 ### VBScript transfer
 
 ```
