@@ -40,7 +40,7 @@ From Target
 From Kali   
 `rdesktop 192.168.1.30:3390`
 
-### dynamic forwarding
+### Dynamic Forwarding
 
 From target    
 `plink 192.168.1.16 -P 22 -C -R 127.0.0.1:2222:22`    
