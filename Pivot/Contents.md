@@ -17,7 +17,8 @@ Netmask: 255.0.0.0
 
 # Port Forwarding
  
-Plink.exe is Windows binary for ssh
+Plink.exe is Windows binary for ssh can be found at:   
+`/usr/share/windows-resources/binaries/plink.exe`   
 
 ### Remote Forwarding
 
