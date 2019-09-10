@@ -38,7 +38,7 @@ It assumes that each space, from left to right, is the dividing point between th
 C:\Services\My.exe
 
 To find services with spaces and without quotes, run the following CMD command:   
-`wmic service get name,startname,startmode,pathname | findstr /i /v "c:\windows" | findstr /v """`
+`wmic service get name,startname,startmode,pathname | findstr /i /v "c:\windows" | findstr /v """`    
 Or try this alternative using regex:   
 `wmic service get name,startname,startmode,pathname | findstr /r /c:"\\.* .*exe" | findstr /v """`
 
