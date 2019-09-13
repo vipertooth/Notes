@@ -558,9 +558,13 @@ $ gpg -a --export $KEYID > ~/Desktop/gpgkeys/<name>_pub_key/<name>_public_key_as
 
 ```
 
-Change the last line of ssh.pub to 
+Change the last line of ssh.pub to yubikey something 
 
 # Backup
+
+Copy the .gnupg file from /home/user/.gnupg to gpgkeys folder.
+
+Backup the gpgkeys folder to external device.
 
 Once GPG keys are moved to YubiKey, they cannot be moved again! Create an **encrypted** backup of the keyring and consider using a [paper copy](https://www.jabberwocky.com/software/paperkey/) of the keys as an additional backup.
 
@@ -672,66 +676,6 @@ $ sudo mount /dev/mapper/usb /mnt/encrypted-usb
 $ sudo cp -avi $GNUPGHOME /mnt/encrypted-usb
 ```
 
-**Optional** Backup the OneRNG package:
-
-```console
-$ sudo cp onerng_3.6-1_all.deb /mnt/encrypted-usb
-```
-
-Keep the backup mounted if you plan on setting up two or more keys as `keytocard` **will [delete](https://lists.gnupg.org/pipermail/gnupg-users/2016-July/056353.html) the local copy** on save.
-
-Otherwise, unmount and disconnected the encrypted volume:
-
-```console
-$ sudo umount /mnt/encrypted-usb
-
-$ sudo cryptsetup luksClose usb
-```
-
-Create another partition to store the public key, or skip this step if you plan on uploading it to a key server.
-
-**Important** Without the *public* key, you will not be able to use GPG to encrypt, decrypt, nor sign messages. However, you will still be able to use YubiKey for SSH authentication.
-
-```console
-$ sudo fdisk /dev/sdb
-
-Command (m for help): n
-Partition type
-   p   primary (1 primary, 0 extended, 3 free)
-   e   extended (container for logical partitions)
-Select (default p):
-Partition number (2-4, default 2):
-First sector (22528-31116287, default 22528):
-Last sector, +sectors or +size{K,M,G,T,P} (22528-31116287, default 31116287): +10M
-
-Created a new partition 2 of type 'Linux' and of size 10 MiB.
-
-Command (m for help): w
-The partition table has been altered.
-Calling ioctl() to re-read partition table.
-Syncing disks.
-
-$ sudo mkfs.ext2 /dev/sdb2
-Creating filesystem with 10240 1k blocks and 2560 inodes
-Superblock backups stored on blocks:
-        8193
-
-Allocating group tables: done
-Writing inode tables: done
-Writing superblocks and filesystem accounting information: done
-
-$ sudo mkdir /mnt/public
-
-$ sudo mount /dev/sdb2 /mnt/public/
-
-$ gpg --armor --export $KEYID | sudo tee /mnt/public/$KEYID-$(date +%F).txt
-```
-
-Windows:
-
-```console
-$ gpg -o \path\to\dir\pubkey.gpg --armor --export $KEYID
-```
 
 **Optional** Upload the public key to a [public keyserver](https://debian-administration.org/article/451/Submitting_your_GPG_key_to_a_keyserver):
 
@@ -747,119 +691,6 @@ $ gpg --keyserver hkps://keyserver.ubuntu.com:443 --send-key $KEYID
 
 After some time, the public key will to propagate to [other](https://pgp.key-server.io/pks/lookup?search=doc%40duh.to&fingerprint=on&op=vindex) [servers](https://pgp.mit.edu/pks/lookup?search=doc%40duh.to&op=index).
 
-**OpenBSD**
-
-Attach a USB disk and determine its label:
-
-```console
-$ dmesg | grep sd.\ at
-sd2 at scsibus5 targ 1 lun 0: <TS-RDF5, SD Transcend, TS37> SCSI4 0/direct removable serial.00000000000000000000
-```
-
-Print the existing partitions to make sure it's the right device:
-
-```console
-$ doas disklabel -h sd2
-```
-
-Initialize the disk by creating an `a` partition with FS type `RAID` and size of 10 Megabytes:
-
-```console
-$ doas fdisk -iy sd2
-Writing MBR at offset 0.
-
-$ doas disklabel -E sd2
-Label editor (enter '?' for help at any prompt)
-sd2> a a
-offset: [64]
-size: [31101776] 10M
-FS type: [4.2BSD] RAID
-sd2*> w
-sd2> q
-No label changes
-```
-
-Encrypt with bioctl:
-
-```console
-$ doas bioctl -c C -l sd2a softraid0
-New passphrase:
-Re-type passphrase:
-softraid0: CRYPTO volume attached as sd3
-```
-
-Create an `i` partition on the new crypto volume and the filesystem:
-
-```console
-$ doas fdisk -iy sd3
-Writing MBR at offset 0.
-
-$ doas disklabel -E sd3
-Label editor (enter '?' for help at any prompt)
-sd3> a i
-offset: [64]
-size: [16001]
-FS type: [4.2BSD]
-sd3*> w
-sd3> q
-No label changes.
-
-$ doas newfs sd3i
-/dev/rsd3i: 7.8MB in 16000 sectors of 512 bytes
-4 cylinder groups of 1.95MB, 125 blocks, 256 inodes each
-super-block backups (for fsck -b #) at:
- 32, 4032, 8032, 12032,
-```
-
-Mount the filesystem and copy the temporary directory with the keyring:
-
-```console
-$ doas mkdir /mnt/encrypted-usb
-
-$ doas mount /dev/sd3i /mnt/encrypted-usb
-
-$ doas cp -avi $GNUPGHOME /mnt/encrypted-usb
-```
-
-Keep the backup mounted if you plan on setting up two or more keys as `keytocard` **will [delete](https://lists.gnupg.org/pipermail/gnupg-users/2016-July/056353.html) the local copy** on save.
-
-Otherwise, unmount and disconnected the encrypted volume:
-
-```console
-$ doas umount /mnt/encrypted-usb
-
-$ doas bioctl -d sd3
-```
-
-See [OpenBSD FAQ#14](https://www.openbsd.org/faq/faq14.html#softraidCrypto) for more information.
-
-Create another partition to store the public key, or skip this step if you plan on uploading it to a key server.
-
-**Important** Without the public key, you will not be able to use GPG to encrypt, decrypt, nor sign messages. However, you will still be able to use YubiKey for SSH authentication.
-
-```console
-$ doas disklabel -E sd2
-Label editor (enter '?' for help at any prompt)
-sd2> a b
-offset: [32130]
-size: [31069710] 10M
-FS type: [swap] 4.2BSD
-sd2*> w
-sd2> q
-No label changes.
-
-$ doas newfs sd2b
-/dev/rsd2b: 15.7MB in 32096 sectors of 512 bytes
-5 cylinder groups of 3.89MB, 249 blocks, 512 inodes each
-super-block backups (for fsck -b #) at:
- 32, 8000, 15968, 23936, 31904,
-
-$ doas mkdir /mnt/public
-
-$ doas mount /dev/sd2b /mnt/public
-
-$ gpg --armor --export $KEYID | doas tee /mnt/public/$KEYID.txt
-```
 
 # Configure Smartcard
 
@@ -1105,15 +936,8 @@ Ensure you have:
 * Saved the password to that encrypted volume in a separate location.
 * Saved a copy of the public key somewhere easily accessible later.
 
-Reboot or [securely delete](http://srm.sourceforge.net/) `$GNUPGHOME` and remove the secret keys from the GPG keyring:
+Reboot 
 
-```console
-$ sudo srm -r $GNUPGHOME || sudo rm -rf $GNUPGHOME
-
-$ gpg --delete-secret-key $KEYID
-```
-
-**Important** Make sure you have securely erased all generated keys and revocation certificates if an ephemeral enviroment was not used!
 
 # Using keys
 
