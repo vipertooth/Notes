@@ -7,9 +7,7 @@ Keys stored on YubiKey are non-exportable (as opposed to file-based keys that ar
 
 - [Purchase YubiKey](#purchase-yubikey)
 - [Verify YubiKey](#verify-yubikey)
-- [Download OS image](#download-os-image)
 - [Required software](#required-software)
-  * [Entropy](#entropy)
 - [Creating keys](#creating-keys)
 - [Master key](#master-key)
 - [Sub-keys](#sub-keys)
