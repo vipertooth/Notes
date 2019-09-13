@@ -1,6 +1,6 @@
 This is a guide to using [YubiKey](https://www.yubico.com/products/yubikey-hardware/) as a [SmartCard](https://security.stackexchange.com/questions/38924/how-does-storing-gpg-ssh-private-keys-on-smart-cards-compare-to-plain-usb-drives) for storing GPG encryption, signing and authentication keys, which can also be used for SSH. Many of the principles in this document are applicable to other smart card devices.
 
-Modifed from original at [Original](https://github.com/drduh/YubiKey-Guide/blob/master/README.md) by Vipertooth to be used by Kryptos Operators
+Modifed from [Original](https://github.com/drduh/YubiKey-Guide/blob/master/README.md) by Vipertooth to be used by Kryptos Operators
 
 Keys stored on YubiKey are non-exportable (as opposed to file-based keys that are stored on disk) and are convenient for everyday use. Instead of having to remember and enter passphrases to unlock SSH/GPG keys, YubiKey needs only a physical touch after being unlocked with a PIN code. All signing and encryption operations happen on the card, rather than in OS memory.
 
@@ -92,6 +92,8 @@ Create a temporary directory which will be cleared on [reboot](https://en.wikipe
 ```console
 $ mkdir gpgkeys
 
+$ cd gpgkeys
+
 ```
 
 
@@ -114,6 +116,8 @@ ydOmByxmDe63u7gqx2XI9eDgpvJwibNH
 ```
 
 On Linux or OpenBSD, select the password with the mouse to copy it to the clipboard and paste using the middle mouse button or `Shift`-`Insert`.
+
+Save a copy of your gpg random generated key to a notes files   
 
 Generate a new key with GPG, selecting `(8) RSA (set your own capabilities)`, `Certify` capability only and `4096` bit key size.
 
