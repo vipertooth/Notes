@@ -5,7 +5,7 @@ Modifed from original at [Original](https://github.com/drduh/YubiKey-Guide/blob/
 Keys stored on YubiKey are non-exportable (as opposed to file-based keys that are stored on disk) and are convenient for everyday use. Instead of having to remember and enter passphrases to unlock SSH/GPG keys, YubiKey needs only a physical touch after being unlocked with a PIN code. All signing and encryption operations happen on the card, rather than in OS memory.
 
 
-- [Purchase YubiKey](#purchase yubikey)
+- [Purchase YubiKey](#purchase-yubikey)
 - [Verify YubiKey](#verify-yubikey)
 - [Download OS image](#download-os-image)
 - [Required software](#required-software)
