@@ -90,12 +90,11 @@ $ sudo apt update && sudo apt install -y \
 Create a temporary directory which will be cleared on [reboot](https://en.wikipedia.org/wiki/Tmpfs):
 
 ```console
-$ mkdir gpgkeys
+$ mkdir ~/Desktop/gpgkeys
 
-$ cd gpgkeys
+$ cd ~/Desktop/gpgkeys
 
 ```
-
 
 
 Disable networking for the remainder of the setup.
@@ -543,18 +542,23 @@ The master key and sub-keys will be encrypted with your passphrase when exported
 Save a copy of your keys:
 
 ```console
-$ gpg --armor --export-secret-keys $KEYID > $GNUPGHOME/mastersub.key
+$ gpg --armor --export-secret-keys $KEYID > ~/Desktop/gpgkeys/masterkeyprivate.key
 
-$ gpg --armor --export-secret-subkeys $KEYID > $GNUPGHOME/sub.key
+$ gpg --armor --export-secret-subkeys $KEYID > ~/Desktop/gpgkeys/subkeysprivate.key
+
+$ mkdir ~/Desktop/gpgkeys/<FirstInitalLastname>_pub_key
+
+$ cd <name>_pub_key
+
+$ gpg --export-ssh-key $KEYID > ~/Desktop/gpgkeys/<name>_pub_key/ssh_public_yubikey_<name>.pub
+
+$ gpg --export $KEYID > ~/Desktop/gpgkeys/<name>_pub_key/<name>_public_key.asc
+
+$ gpg -a --export $KEYID > ~/Desktop/gpgkeys/<name>_pub_key/<name>_public_key_ascii.txt
+
 ```
 
-On Windows, note that using any extension other than `.gpg` or attempting IO redirection to a file will garble the secret key, making it impossible to import it again at a later date:
-
-```console
-$ gpg -o \path\to\dir\mastersub.gpg --armor --export-secret-keys $KEYID
-
-$ gpg -o \path\to\dir\sub.gpg --armor --export-secret-subkeys $KEYID
-```
+Change the last line of ssh.pub to 
 
 # Backup
 
