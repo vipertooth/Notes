@@ -70,8 +70,6 @@ This website verifies the YubiKey's device attestation certificates signed by a 
 
 Boot the OS image and configure networking.
 
-**Note** If the screen locks, unlock with `user`/`live`.
-
 Open the terminal and install required software packages.
 
 **Debian/Ubuntu**
@@ -86,130 +84,17 @@ $ sudo apt update && sudo apt install -y \
     yubikey-personalization
 ```
 
-**Arch**
-
-```console
-$ sudo pacman -Syu \
-    gnupg2 pcsclite ccid hopenpgp-tools \
-    yubikey-personalization
-```
-
-**RHEL7**
-
-```console
-$ sudo yum install -y \
-    gnupg2 pinentry-curses pcsc-lite pcsc-lite-libs gnupg2-smime
-```
-
-**OpenBSD**
-
-```console
-$ doas pkg_add gnupg pcsc-tools
-```
-
-**macOS**
-
-Download and install [Homebrew](https://brew.sh/) and the following Brew packages:
-
-```console
-$ brew install gnupg yubikey-personalization hopenpgp-tools ykman pinentry-mac
-```
-
-**Windows**
-
-Download and install [Gpg4Win](https://www.gpg4win.org/) and [PuTTY](https://putty.org).
-
-You may also need more recent versions of [yubikey-personalization](https://developers.yubico.com/yubikey-personalization/Releases/) and [yubico-c](https://developers.yubico.com/yubico-c/Releases/).
-
-## Entropy
-
-Generating cryptographic keys requires high-quality [randomness](https://www.random.org/randomness/), measured as entropy.
-
-To check the available entropy available on Linux:
-
-```console
-$ cat /proc/sys/kernel/random/entropy_avail
-849
-```
-
-Most operating systems use software-based pseudorandom number generators. A hardware random number generator like [OneRNG](http://onerng.info/onerng/) will [increase the speed](https://lwn.net/Articles/648550/) of entropy generation and possibly the quality.
-
-Install and configure OneRNG software:
-
-```console
-$ sudo apt install -y \
-    at rng-tools python-gnupg openssl
-
-$ wget https://github.com/OneRNG/onerng.github.io/raw/master/sw/onerng_3.6-1_all.deb
-
-$ sha256sum onerng_3.6-1_all.deb
-a9ccf7b04ee317dbfc91518542301e2d60ebe205d38e80563f29aac7cd845ccb  onerng_3.6-1_all.deb
-
-$ sudo dpkg -i onerng_3.6-1_all.deb
-
-$ echo "HRNGDEVICE=/dev/ttyACM0" | sudo tee /etc/default/rng-tools
-```
-
-Plug in the device and restart rng-tools:
-
-```console
-$ sudo atd
-
-$ sudo service rng-tools restart
-```
-
-Test by emptying `/dev/random` - the light on the device will dim briefly:
-
-```console
-$ cat /dev/random >/dev/null
-[Press Control-C]
-```
-
-After a few seconds, verify the available entropy pool is quickly re-seeded:
-
-```console
-$ cat /proc/sys/kernel/random/entropy_avail
-3049
-```
-
-An entropy pool value greater than 2000 is sufficient.
 
 # Creating keys
 
 Create a temporary directory which will be cleared on [reboot](https://en.wikipedia.org/wiki/Tmpfs):
 
 ```console
-$ export GNUPGHOME=$(mktemp -d)
+$ mkdir gpgkeys
 
-$ cd $GNUPGHOME
 ```
 
-Create a hardened configuration in the temporary directory with the following options:
 
-```console
-$ wget https://raw.githubusercontent.com/drduh/config/master/gpg.conf
-
-$ grep -ve "^#" $GNUPGHOME/gpg.conf
-personal-cipher-preferences AES256 AES192 AES
-personal-digest-preferences SHA512 SHA384 SHA256
-personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
-default-preference-list SHA512 SHA384 SHA256 AES256 AES192 AES ZLIB BZIP2 ZIP Uncompressed
-cert-digest-algo SHA512
-s2k-digest-algo SHA512
-s2k-cipher-algo AES256
-charset utf-8
-fixed-list-mode
-no-comments
-no-emit-version
-keyid-format 0xlong
-list-options show-uid-validity
-verify-options show-uid-validity
-with-fingerprint
-require-cross-certification
-no-symkey-cache
-throw-keyids
-use-agent
-```
 
 Disable networking for the remainder of the setup.
 
