@@ -1,3 +1,4 @@
+```console
 def hexStrEndianSwap(theString):
         """Rearranges character-couples in a little endian hex string to
         convert it into a big endian hex string and vice-versa. i.e. 'A3F2'
@@ -75,3 +76,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
