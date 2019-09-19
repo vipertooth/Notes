@@ -60,10 +60,10 @@ def main():
 
 
 
-    #s_byte(255, fuzzable=False)
-    #s_word(65535, fuzzable=False)
-    #s_dword(4294967295 , fuzzable=False)
-    #s_qword(18446744073709551615, fuzzable=False)   #all F
+    #s_byte(255, fuzzable=False)                        # FF
+    #s_word(65535, fuzzable=False)                      # FF:FF
+    #s_dword(4294967295 , fuzzable=False)               # FF:FF:FF:FF
+    #s_qword(18446744073709551615, fuzzable=False)      # FF:FF:FF:FF:FF:FF:FF:FF
     s_string("test")
 
     #s_string("KSTET", fuzzable=False)
