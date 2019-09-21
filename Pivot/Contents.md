@@ -1,15 +1,11 @@
 
 The Attacking Box (Kali Linux)   
-IP: 192.168.1.16   
-Netmask: 255.255.255.0   
-Gateway: 192.168.1.1   
+IP: 192.168.1.16    
 
 The pivot host (Windows XP) or linux     
 User: lowuser   
-FIRST IP: 192.168.1.30   
-Netmask: 255.255.255.0   
-SECOND IP: 10.0.0.2   
-Netmask: 255.0.0.0    
+FIRST IP: 192.168.1.30     
+SECOND IP: 10.0.0.2    
 
 Web server    
 IP: 10.0.0.10   
@@ -42,6 +38,13 @@ From Target
 From Kali   
 `rdesktop 192.168.1.30:3390`
 
+Other Local Forwarding methods   
+
+From Kali   
+`ssh -f -N -L 3390:10.0.0.10:3389 lowuser@192.168.1.30`   
+`rdesktop localhost:3390`
+
+
 ### Dynamic Forwarding
 
 Firewall only allows inbound port 2222 and 80
@@ -58,7 +61,10 @@ From Kali
 
 `proxychains nmap -sT -Pn <IP>`
 
+Other Dynamic Forwarding   
 
+From Kali   
+`ssh -f -N -D 8080 lowuser@192.168.1.30`
 
 ### Other tools
 
