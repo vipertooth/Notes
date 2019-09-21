@@ -8,8 +8,7 @@ FIRST IP: 192.168.1.30
 SECOND IP: 10.0.0.2    
 
 Web server    
-IP: 10.0.0.10   
-Netmask: 255.0.0.0   
+IP: 10.0.0.10     
 
 # Port Forwarding
  
