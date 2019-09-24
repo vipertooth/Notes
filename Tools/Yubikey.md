@@ -556,7 +556,7 @@ $ gpg -a --export $KEYID > ~/Desktop/gpgkeys/<name>_pub_key/<name>_public_key_as
 
 ```
 
-Change the last line of ssh.pub to yubikey something 
+Change the last line of ssh.pub to <name>_YUBIKEYS
 
 # Backup
 
@@ -607,7 +607,7 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-Create a new partition with a 10 Megabyte size:
+Create a new partition with a 100 Megabyte size:
 
 ```console
 $ sudo fdisk /dev/sdb
@@ -620,9 +620,9 @@ Partition type
 Select (default p):
 Partition number (1-4, default 1):
 First sector (2048-62980095, default 2048):
-Last sector, +sectors or +size{K,M,G,T,P} (2048-62980095, default 62980095): +10M
+Last sector, +sectors or +size{K,M,G,T,P} (2048-62980095, default 62980095): +100M
 
-Created a new partition 1 of type 'Linux' and of size 10 MiB.
+Created a new partition 1 of type 'Linux' and of size 100 MiB.
 
 Command (m for help): w
 The partition table has been altered.
