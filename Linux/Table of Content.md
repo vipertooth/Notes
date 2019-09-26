@@ -221,6 +221,7 @@ things to pull when all you can do is blindly read like in LFI/dir traversal (Do
 * cat /etc/apt/sources.list
 * ls -l /etc/yum.repos.d/
 * cat /etc/yum.conf
+* wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add  
 
 
 <a name="finding"/></a>
