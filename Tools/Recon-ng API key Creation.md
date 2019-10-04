@@ -8,7 +8,7 @@ API Keys:
 
    2. **builtwith_api** - Go [here](https://api.builtwith.com/) and sign up.  Once you enter an email and password, it will show you the API key at the Tools> API Access dropdown.
 
-   3. **censysio_id** - Go [here](https://censys.io/register) and sign up. Once you register, confirm your account by clicking on the link in the email. Then login and go [here](https://censys.io/account) to view the "ID" and "Secret"
+   3. **censysio_id** - Go [here](https://censys.io/register) and sign up. Once you register, confirm your account by clicking on the link in the email. Then login and go [here](https://censys.io/account/api) to view the "ID" and "Secret"
 
    4. **censysio_secret** - Look at #3
 
