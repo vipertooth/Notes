@@ -6,7 +6,7 @@ API Keys:
 
    1.  **bing_api** _(optional $$$)_ - Sign up [here](https://azure.microsoft.com/en-us/services/cognitive-services/bing-web-search-api/) (I chose the free plan), agree to all the terms until you get to "Thank You", then go [here](https://azure.microsoft.com/en-us/try/cognitive-services/my-apis/) to view the key. (free account: 3000 transactions per month key valid 7 days) [Guide](https://helpcenterhq.com/knowledgebase.php?article=189)
 
-   2. **builtwith_api** - Go [here](https://api.builtwith.com/) and sign up.  Once you enter an email and password, it will show you the API key
+   2. **builtwith_api** - Go [here](https://api.builtwith.com/) and sign up.  Once you enter an email and password, it will show you the API key at the Tools> API Access dropdown.
 
    3. **censysio_id** - Go [here](https://censys.io/register) and sign up. Once you register, confirm your account by clicking on the link in the email. Then login and go [here](https://censys.io/account) to view the "ID" and "Secret"
 
