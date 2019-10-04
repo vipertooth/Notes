@@ -4,7 +4,7 @@ Instructions for Recon-NG v5.0.1:
 
 API Keys:
 
-   1.  **bing_api** _(optional $$$)_ - Sign up [here](http://datamarket.azure.com/dataset/bing/search) (I chose the free plan), agree to all the terms until you get to "Thank You", then go [here](https://datamarket.azure.com/account/keys) to view the key. (free account: 5000 transactions per month)
+   1.  **bing_api** _(optional $$$)_ - Sign up [here](https://azure.microsoft.com/en-us/services/cognitive-services/bing-web-search-api/) (I chose the free plan), agree to all the terms until you get to "Thank You", then go [here](https://datamarket.azure.com/account/keys) to view the key. (free account: 5000 transactions per month)
 
    2. **builtwith_api** - Go [here](https://api.builtwith.com/) and sign up.  Once you enter an email and password, it will show you the API key
 
