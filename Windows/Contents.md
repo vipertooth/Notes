@@ -87,3 +87,4 @@ If readable, then see what the executable is doing.
 If writable, then replace with malicious.
 
 . . .
+NetSh Advfirewall set allprofiles state off
