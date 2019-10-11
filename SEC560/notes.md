@@ -36,3 +36,6 @@ Crack ticket with tgsrepcrack.py from TIM Medin github.com/nidem
 ```
 python tgsrepcrack.py example.dict C:\Users\sec560\Desktop\1-40a10000-john.doe@svcsqlserver~dc01.sec560.local~1433-SEC560.LOCAL.kirbi
 ```
+
+## Responder
+
