@@ -1,3 +1,9 @@
+Kill firewall
+
+```
+netsh advfirewall set allprofiles state off
+```
+
 
 binary to put in service.exe
 
