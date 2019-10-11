@@ -5,7 +5,9 @@ strings -n 8 for different encoding types -e l for little endian b for big endia
 ```
 strings -n 8 -e b WidgetStatisticalWhitepaper.doc WidgetStatisticalAnalysis.xls WidgetStatisticalWhitepaper.pdf | grep '\\'
 ```
-
+```
+exfiltool
+```
 
 
 
