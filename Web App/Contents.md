@@ -97,9 +97,18 @@ Execution sink eval call error
 
 # **<a name="SQLi">SQLi</a>**
 
+#### Injections to try
+```
+'
+"
+`
+''
+""
+```
 `xyz' OR 1=1--`   
-`" or 1=1 #`
-
+`xyz" or 1=1 #`   
+`xyz' or 'a'='a`   
+`xyz')or('a'='a`   
 
 ## Cheatsheats
 
