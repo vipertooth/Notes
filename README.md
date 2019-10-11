@@ -1,5 +1,5 @@
 # Notes
-This is a compilation of commands and notes.
+This is a living compilation of commands and notes. that is not really formatted yet.
 
 ### Table of Contents
 * [Linux](https://github.com/vipertooth/Notes/blob/master/Linux/Table%20of%20Content.md)
