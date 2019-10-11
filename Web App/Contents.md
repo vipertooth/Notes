@@ -97,7 +97,7 @@ Execution sink eval call error
 
 # **<a name="SQLi">SQLi</a>**
 
-`xyz' OR 1=1--`
+`xyz' OR 1=1--`   
 `" or 1=1 #`
 
 
