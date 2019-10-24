@@ -17,3 +17,7 @@ You can also Enable backups for $1.00 a month if you do not want to worry about 
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/enable_backups.png)
 
+Once you server is up and running you will get a email from Digital Ocean, you will then click on your newly created project and click on the name of the ubuntu server that was created this will bring you to a new screen where you will click on Access to get you public ip address to SSH in.
+
+![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/get_ip_address.png)
+
