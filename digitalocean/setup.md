@@ -77,3 +77,7 @@ These new rules can be viewd with.
 iptables -L -n -v --line-numbers
 ```
 
+The Log of all dropped requests can be viewd at`/var/log/syslog` using the tail command.   
+```
+tail -f /var/log/syslog
+```
