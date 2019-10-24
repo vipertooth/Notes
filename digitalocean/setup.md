@@ -81,3 +81,10 @@ The Log of all dropped requests can be viewd at`/var/log/syslog` using the tail 
 ```
 tail -f /var/log/syslog
 ```
+
+If any changes need to be made to Iptables it can be done using the iptables command or from the persistant rules file.   
+```
+vim /etc/iptables/rules.v4
+vim /etc/iptables/rules.v6
+```
+
