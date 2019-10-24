@@ -26,3 +26,49 @@ You should now be able to SSH into you server with a command like.
 ssh root@public_ip -i /ssh_key.pub
 ```
 
+Now that you have access to a terminal on your Digital Ocean server, the first thing you will want to do is secure the box by doing the following.   
+Resetting root password with 
+```
+passwd
+```
+Updating the box   
+```
+apt-get update
+apt-get install tmux tmuxinator conntrack iptables-persistent iptstate
+```
+
+Setting up Iptables Rules   
+```
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
+iptables -A FORWARD -m conntrack --ctstate INVALID -j DROP
+iptables -A INPUT ! -i lo --source 127.0.0/8 -j DROP
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A INPUT -s 127.0.0/8 -j DROP
+iptables -A OUTPUT -p udp -s PUBLIC_IP --dport 123 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p udp -d PUBLIC_IP --sport 123 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p udp -s PUBLIC_IP --dport 53 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p udp -d PUBLIC_IP --sport 53 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -s PUBLIC_IP --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp -d PUBLIC_IP --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -s PUBLIC_IP --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp -d PUBLIC_IP --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -I INPUT 5 -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
+iptables -I INPUT 6 -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 15 -j DROP
+iptables -I INPUT 7 -p tcp -d PUBLIC_IP --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -I OUTPUT 3 -p tcp -s PUBLIC_IP --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+iptables -A INPUT -j LOG --log-prefix "DROP INPUT IPv4: "
+iptables -A OUTPUT -j LOG --log-prefix "DROP OUTPUT IPv4: "
+ip6tables -P INPUT DROP
+ip6tables -P OUTPUT DROP
+ip6tables -P FORWARD DROP
+ip6tables -A INPUT -j LOG --log-prefix "DROP INPUT IPv6: "
+ip6tables -A OUTPUT -j LOG --log-prefix "DROP OUTPUT IPv6: "
+iptables-save > /etc/iptables/rules.v4
+ip6tables-save > /etc/iptables/rules.v6
+```
+
