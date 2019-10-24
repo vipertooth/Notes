@@ -21,3 +21,8 @@ Once you server is up and running you will get a email from Digital Ocean, you w
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/get_ip_address.png)
 
+You should now be able to SSH into you server with a command like.    
+```
+ssh root@public_ip -i /ssh_key.pub
+```
+
