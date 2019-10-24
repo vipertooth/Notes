@@ -72,3 +72,8 @@ iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 ```
 
+These new rules can be viewd with.   
+```
+iptables -L -n -v --line-numbers
+```
+
