@@ -88,3 +88,8 @@ vim /etc/iptables/rules.v4
 vim /etc/iptables/rules.v6
 ```
 
+Rules changed this way will need to be restored to the active overide the active rules with the following command.   
+```
+iptables-restore < /etc/iptables/rules.v4
+ip6tables-restore < /etc/iptables/rules.v6
+```
