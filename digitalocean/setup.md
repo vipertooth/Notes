@@ -7,7 +7,7 @@ Then once you have logged into Digital Ocean click + New Project in top Left cor
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/create_project.png)   
 
 
-You will then use the following settings in Digital Ocean project creation. note you will want to use Yubikey SSH for security.  creating a regular ssh account will suffice for learning perposes. 
+You will then use the following settings in Digital Ocean project creation. Note that you will want to use Yubikey SSH for security.  Creating a regular ssh account will suffice for learning purposes. 
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/setup_project.png)
 
@@ -19,7 +19,7 @@ You can also Enable backups for $1.00 a month if you do not want to worry about 
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/enable_backups.png)
 
-Once your server is up and running you will get a email from Digital Ocean, you will then click on your newly created project and click on the name of the ubuntu server that was created this will bring you to a new screen where you will click on Access to get you public ip address to SSH in.
+Once your server is up and running you will get a email from Digital Ocean. You will then click on your newly created project and click on the name of the ubuntu server that was created this will bring you to a new screen where you will click on Access to get you public ip address to SSH in.
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/get_ip_address.png)
 
@@ -74,12 +74,12 @@ iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 ```
 
-These new rules can be viewd with.   
+These new rules can be viewed with.   
 ```
 iptables -L -n -v --line-numbers
 ```
 
-The Log of all dropped requests can be viewd at`/var/log/syslog` using the tail command.   
+The Log of all dropped requests can be viewed at`/var/log/syslog` using the tail command.   
 ```
 tail -f /var/log/syslog
 ```
