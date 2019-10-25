@@ -36,3 +36,5 @@ We will then use Proxychains to grab the webpage through the tunnel.
 proxychains curl 127.0.0.1:80
 ```   
 This will push are command through the Dynamic tunnel onto the sshed box where it will hit the remote tunnel and come back to ssh'ing box on 8080 where it will hit the open webserver.   
+
+![alt text](https://github.com/vipertooth/Notes/blob/master/digitalocean/tunneling_proxychains.png)
