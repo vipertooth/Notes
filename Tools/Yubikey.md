@@ -560,7 +560,7 @@ Change the last line of ssh.pub to <name>_YUBIKEYS
 
 # Backup
 
-Copy the .gnupg file from /home/user/.gnupg to gpgkeys folder.
+Copy the .gnupg directory from /home/user/.gnupg to gpgkeys folder.
 
 Backup the gpgkeys folder to external device.
 
