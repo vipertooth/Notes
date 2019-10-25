@@ -1,1 +1,38 @@
-ToDo
+# Redirecting Traffic
+
+
+### SSH Forwarding
+
+SSH can be used to forward traffic multiple ways.  This tutorial will show it being used Dynamically and Remotely.
+
+To forward remotly you will use -R, the syntax is `ssh root@IP -R 80:127.0.0.1:8080`   
+This will open a remote listening port, a port on the machine you are ssh'ing to.   
+It will forward any traffic that is sent to that port to your local machine, a port on the machine you used to ssh.   
+In the above senario the port 80 will be listening on all interfaces on the machine and forward that traffic to the localhost port 8080.   
+
+To forward Dynamically you will use -D, the syntax is `ssh root@IP -D 127.0.0.1:9050`   
+This will open a listener port on your local machine, the machine you used to ssh.   
+Any traffic that is sent to this port will then be forwarded to the remote machine to be sent out by that machine.
+This is important because it utalizes a socks4 proxy that will forward any type of traffic.  It will even work with TLS.   
+
+### Proxychains
+
+Proxychains is a tool that will allow you to easily pass commands threw a proxy.  The config file for porxychains is located at `/etc/proxychains.conf`.   
+In the config file you just need to set the type of proxy, the ip of the proxy and the port of the proxy.  
+The syntax for using proxychains is 
+```
+proxychains curl IP
+```   
+
+### Redirecting with SSH
+
+In the following senario we will combine the above examples to hit a webserver.   
+We will simaltaniously create a dynamic and remote forwarding tunnel to complete this with the following command.   
+```
+ssh root@IP -R 80:127.0.0.1:8080 -D 127.0.0.1:9050
+```   
+We will then use Proxychains to grab the webpage through the tunnel.   
+```
+proxychains curl 127.0.0.1:80
+```   
+This will push are command through the Dynamic tunnel onto the sshed box where it will hit the remote tunnel and come back to ssh'ing box on 8080 where it will hit the open webserver.   
