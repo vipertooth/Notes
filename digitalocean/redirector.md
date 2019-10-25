@@ -17,7 +17,7 @@ This is important because it utilizes a socks4 proxy that will forward any type 
 
 ### Proxychains
 
-Proxychains is a tool that will allow you to easily pass commands threw a proxy.  The config file for porxychains is located at `/etc/proxychains.conf`.   
+Proxychains is a tool that will allow you to easily pass commands through a proxy.  The config file for proxychains is located at `/etc/proxychains.conf`.   
 In the config file you just need to set the type of proxy, the ip of the proxy and the port of the proxy.  
 The syntax for using proxychains is 
 ```
