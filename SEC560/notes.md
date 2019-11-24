@@ -45,25 +45,30 @@ Usefull commands
 --reason
 ```
 
-#### Other Scanning tools   
+## Other Scanning tools   
+
+#### Masscan   
 ```
 masscan -0-65535 --rate 1500 10.10.10.0/24
-```
+```   
+
+#### Tcpdump   
 ```
 tcpdump -nnX tcp and dst 10.10.10.10
 tcpdump -nn udp and src 10.10.10.10
 tcpdump -nn tcp and port 80 and host 10.10.10.10
 ```
-```
-echo "" | nc -nvw2 10.10.10.60 20-80
-```
+
 #### IPv6 scans
 
 multicast scan   
 ```
 ping6 -I eth0 ff02::1
 ```   
-#### Netcat
+#### Netcat   
+```
+echo "" | nc -nvw2 10.10.10.60 20-80
+```   
 
 Transfer files
 ```
