@@ -22,7 +22,7 @@ dig @server target.tgt -t AXFR
 
 # Chapter 2 Scanning
 
-## Nmap   
+## Nmap  
 ### UID 0 vs non-UID 0   
 
 #### UID 0 same subnet   
@@ -43,7 +43,11 @@ Usefull commands
 ```
 --packet-trace
 --reason
-```
+```   
+#### NSE   
+located at `/usr/local/share/nmap/scripts`   
+The file `/usr/local/share/nmap/scripts/script.db` can be searched to find the categories of scripts.   
+
 
 ## Other Scanning tools   
 
