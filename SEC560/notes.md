@@ -22,20 +22,20 @@ dig @server target.tgt -t AXFR
 
 # Chapter 2 Scanning
 
-#### Nmap   
-UID 0 vs non-UID 0   
+## Nmap   
+### UID 0 vs non-UID 0   
 
-UID 0 same subnet   
+#### UID 0 same subnet   
 * Arp Request   
 
-UID 0 different subnet   
+#### UID 0 different subnet   
 In order quick fire without waiting for results   
 * ICMP Echo Request   
 * TCP SYN port 443   
 * TCP ACK port 80   
 * ICMP Timestamp Request (Type 13)   
 
-non-UID 0   
+#### Non-UID 0   
 * TCP SYN port 80 3 way connect    
 * TCP SYN port 443 3 way connect
 
