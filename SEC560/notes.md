@@ -12,7 +12,11 @@ DNS recon
 ```
 dig @server target.tgt -t AXFR
 ```   
-
+```
+[recon-ng] > set nameserver 10.10.10.60
+[recon-ng] > use reverse_resolve
+[recon-ng] > run
+```
 
 
 
