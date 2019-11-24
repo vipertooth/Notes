@@ -29,7 +29,7 @@ UID 0 same subnet
 * Arp Request   
 
 UID 0 different subnet   
-* In order quick fire without waiting for results   
+In order quick fire without waiting for results   
 * ICMP Echo Request   
 * TCP SYN port 443   
 * TCP ACK port 80   
