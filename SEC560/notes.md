@@ -7,7 +7,12 @@ strings -n 8 -e b WidgetStatisticalWhitepaper.doc | grep '\\'
 ```
 ```
 exfiltool
+```   
+DNS recon   
 ```
+dig @server target.tgt -t AXFR
+```   
+
 
 
 
