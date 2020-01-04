@@ -38,6 +38,14 @@ Updating the box
 apt-get update
 apt-get install tmux tmuxinator conntrack iptables-persistent iptstate
 ```
+Configuation Changes
+
+Allow Remote Forwarding by modifying `/etc/ssh/sshd_config`   
+
+```
+GatewayPorts yes
+
+```
 
 Setting up Iptables Rules   
 ```
