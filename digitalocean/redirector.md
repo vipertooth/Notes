@@ -42,9 +42,11 @@ server = 127.0.0.1
 server_type = 5
 # The port defaults to 1080 but I've stated it here for clarity 
 server_port = 9050
+```   
+The syntax for using proxychains is   
+ ```console
+ tsocks "command"
 ```
-
-
 
 
 ### Redirecting with SSH
