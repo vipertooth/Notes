@@ -53,11 +53,11 @@ The syntax for using proxychains is
 
 In the following senario we will combine the above examples to hit a webserver.   
 We will simultaneously create a dynamic and remote forwarding tunnel to complete this with the following command.   
-```
+```bash
 ssh root@IP -R 80:127.0.0.1:8080 -D 127.0.0.1:9050
 ```   
 We will then use Proxychains to grab the webpage through the tunnel.   
-```
+```bash
 proxychains curl 127.0.0.1:80
 ```   
 This will push commands through the Dynamic tunnel onto the sshed box where it will hit the remote tunnel and come back to ssh'ing box on 8080 where it will hit the open webserver.   
