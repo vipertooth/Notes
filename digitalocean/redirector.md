@@ -29,8 +29,23 @@ socks5  127.0.0.1 9050
 
 The syntax for using proxychains is 
 ```
-proxychains curl IP
+proxychains "command"
 ```   
+
+### Tsocks
+
+Tsocks is another tool to proxy commands from other tools.  The benefit of tsocks is that it will force UDP DNS requests to TCP allowing the proxy to handle web requests.  The config file for tsocks is at `/etc/tsocks.conf`   
+In the config file you will need to modify server, server_type, and server_port fields.   
+```vim
+server = 127.0.0.1
+# Server type defaults to 4 so we need to specify it as 5 for this one
+server_type = 5
+# The port defaults to 1080 but I've stated it here for clarity 
+server_port = 9050
+```
+
+
+
 
 ### Redirecting with SSH
 
