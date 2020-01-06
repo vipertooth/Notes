@@ -44,7 +44,7 @@ server_type = 5
 server_port = 9050
 ```   
 The syntax for using proxychains is   
- ```console
+ ```bash
  tsocks "command"
 ```
 
