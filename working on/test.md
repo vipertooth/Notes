@@ -15,3 +15,5 @@ flag{iH4t3A1rp0rt5}
 flag{3b532e0a187006879d262141e16fa5f05f2e6752}
 
 dr4g0n_or_p4tric1an_it5_LLVM
+
+flag{li0ns_and_tig3rs_4nd_b34rs_0h_mi}
