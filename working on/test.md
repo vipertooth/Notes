@@ -21,3 +21,5 @@ flag{li0ns_and_tig3rs_4nd_b34rs_0h_mi}
 NOHACK4UXWRATHOFKFUHRERX
 
 bkp{dont-f-these-dux}
+
+i_should_have_used_askhell_instead.
