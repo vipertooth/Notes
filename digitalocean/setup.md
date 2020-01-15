@@ -44,7 +44,7 @@ Allow Remote Forwarding by modifying `/etc/ssh/sshd_config`
 GatewayPorts yes
 ```
 
-Setting up Iptables Rules   
+## Setting up Iptables Rules   
 ```
 iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
