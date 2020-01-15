@@ -1,6 +1,6 @@
 # Guide   
 
-This is a guide to setting up a reverse shell and Gaining Persistance in the environment.
+This is a guide to setting up a reverse shell and Gaining Persistance in the environment. Try to complete each section without following the linked guide. 
 
 ## Senario
 
@@ -14,4 +14,4 @@ firewall is up but systems require 80,443,53 outbound
 
 ## Creating your Payload
 
-For idead on payload creation you can reference [Payload](https://github.com/vipertooth/Notes/blob/master/Lab1/Payload.md)
+For a guide on payload creation you can reference [Payload](https://github.com/vipertooth/Notes/blob/master/Lab1/Payload.md)
