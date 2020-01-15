@@ -361,7 +361,7 @@ We decided to use this module during testing.  We found that it worked however i
   
 To do that we created a resource file for metasploit that will upload a payload and execute it.
 
-#### resource file    
+#### Resource file    
 uploadandrun.rc   
 ```ruby
 <ruby>
@@ -377,7 +377,7 @@ end
 
 This file will upload the file AutoPWN to the tmp directory on each of the sessions that are currently open.  Then it will make the file executable and execute the file with root.
 
-#### payload file    
+#### Payload file    
 AutoPWN    
 ```bash
 #!/bin/bash
