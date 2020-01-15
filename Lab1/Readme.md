@@ -8,7 +8,7 @@ You will create a payload that will be ran on the blue team training environment
 
 ### Hints   
 
-Linux 64x
+Linux 64x   
 firewall is up but systems require 80,443,53 outbound
 
 
