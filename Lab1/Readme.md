@@ -145,7 +145,11 @@ Final size of elf file: 1046512 bytes
 Saved as: reverse_shell
 ```
 
-## Gaining Persistance
+
+## Receiving our Callback
+
+
+## Gaining Persistence
 
 We can start by searching all the metasploit modules.  To do this we will run metasploit.
   
@@ -190,4 +194,59 @@ root@kali:~# msfconsole
 
 msf5 > 
 ```
+
+Then we will search for persistence modules to use with the search commands.
+
+```console
+msf5 > search persistence
+
+Matching Modules
+================
+
+   #   Name                                                  Disclosure Date  Rank       Check  Description
+   -   ----                                                  ---------------  ----       -----  -----------
+   0   auxiliary/server/regsvr32_command_delivery_server                      normal     No     Regsvr32.exe (.sct) Command Delivery Server
+   1   exploit/linux/local/apt_package_manager_persistence   1999-03-09       excellent  No     APT Package Manager Persistence
+   2   exploit/linux/local/autostart_persistence             2006-02-13       excellent  No     Autostart Desktop Item Persistence
+   3   exploit/linux/local/bash_profile_persistence          1989-06-08       normal     No     Bash Profile Persistence
+   4   exploit/linux/local/cron_persistence                  1979-07-01       excellent  No     Cron Persistence
+   5   exploit/linux/local/rc_local_persistence              1980-10-01       excellent  No     rc.local Persistence
+   6   exploit/linux/local/service_persistence               1983-01-01       excellent  No     Service Persistence
+   7   exploit/linux/local/yum_package_manager_persistence   2003-12-17       excellent  No     Yum Package Manager Persistence
+   8   exploit/osx/local/persistence                         2012-04-01       excellent  No     Mac OS X Persistent Payload Installer
+   9   exploit/osx/local/sudo_password_bypass                2013-02-28       normal     Yes    Mac OS X Sudo Password Bypass
+   10  exploit/unix/local/at_persistence                     1997-01-01       excellent  Yes    at(1) Persistence
+   11  exploit/windows/local/persistence                     2011-10-19       excellent  No     Windows Persistent Registry Startup Payload Installer
+   12  exploit/windows/local/persistence_image_exec_options  2008-06-28       excellent  No     Windows Silent Process Exit Persistence
+   13  exploit/windows/local/persistence_service             2018-10-20       excellent  No     Windows Persistent Service Installer
+   14  exploit/windows/local/ps_wmi_exec                     2012-08-19       excellent  No     Authenticated WMI Exec via Powershell
+   15  exploit/windows/local/registry_persistence            2015-07-01       excellent  Yes    Windows Registry Only Persistence
+   16  exploit/windows/local/s4u_persistence                 2013-01-02       excellent  No     Windows Manage User Level Persistent Payload Installer
+   17  exploit/windows/local/vss_persistence                 2011-10-21       excellent  No     Persistent Payload in Windows Volume Shadow Copy
+   18  exploit/windows/local/wmi_persistence                 2017-06-06       normal     No     WMI Event Subscription Persistence
+   19  exploit/windows/smb/psexec_psh                        1999-01-01       manual     No     Microsoft Windows Authenticated Powershell Command Execution
+   20  post/linux/manage/sshkey_persistence                                   excellent  No     SSH Key Persistence
+   21  post/windows/gather/enum_ad_managedby_groups                           normal     No     Windows Gather Active Directory Managed Groups
+   22  post/windows/manage/persistence_exe                                    normal     No     Windows Manage Persistent EXE Payload Installer 
+```
+
+We can filter this down with by specifying the platform we are looking for.
+
+```console
+msf5 > search platform linux -S persistence
+
+Matching Modules
+================
+
+   #    Name                                                                      Disclosure Date  Rank       Check  Description
+   -    ----                                                                      ---------------  ----       -----  -----------
+   227  exploit/linux/local/apt_package_manager_persistence                       1999-03-09       excellent  No     APT Package Manager Persistence
+   229  exploit/linux/local/autostart_persistence                                 2006-02-13       excellent  No     Autostart Desktop Item Persistence
+   230  exploit/linux/local/bash_profile_persistence                              1989-06-08       normal     No     Bash Profile Persistence
+   235  exploit/linux/local/cron_persistence                                      1979-07-01       excellent  No     Cron Persistence
+   257  exploit/linux/local/rc_local_persistence                                  1980-10-01       excellent  No     rc.local Persistence
+   261  exploit/linux/local/service_persistence                                   1983-01-01       excellent  No     Service Persistence
+   271  exploit/linux/local/yum_package_manager_persistence                       2003-12-17       excellent  No     Yum Package Manager Persistence
+   674  post/linux/manage/sshkey_persistence                                                       excellent  No     SSH Key Persistence
+   ```
 
