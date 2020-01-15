@@ -15,3 +15,7 @@ firewall is up but systems require 80,443,53 outbound
 ## Creating your Payload
 
 For a guide on payload creation you can reference [Payload](https://github.com/vipertooth/Notes/blob/master/Lab1/Payload.md)
+
+
+## Gaining Persistance
+
