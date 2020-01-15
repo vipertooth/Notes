@@ -331,13 +331,12 @@ sleep 60 && kworker
 
 This payload will find the meterpreter payload that I created and copy it to /sbin/.  Then it will write into the crontab the job to run my payload ever 30 min.  It also put in a note about how it is required so the blue team might look over it.  Then it will change the file modification date with the touch command so the exploit will have the same date as route.  This will make it harder to find.  Finally it will clean up the payload file, clear history and launch the meterpreter payload as root.
 
-![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/resource%20run.png)
+![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/runandexecute.png)
+![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/newsessions.png)
 
 
 
 
-What these files did was crea
-This only worked because we already had the user password.
 
 
 
