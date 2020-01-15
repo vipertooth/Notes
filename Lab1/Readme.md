@@ -157,6 +157,7 @@ Saved as: reverse_shell
 
 ## <a name="callback">Receiving our Callback<a/>
 
+First we will need to allow traffic though our redirector to receive our payloads.  For a reference on how to do this visit my Redirector [writeup](https://github.com/vipertooth/Notes/blob/master/digitalocean/redirector.md)
 To receive our callback we will use metasploit, to start we metasploit we run msfconsole.
 
 ```console
