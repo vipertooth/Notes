@@ -3,11 +3,15 @@
 This is a guide to setting up a reverse shell and gaining persistance in the environment. 
 
 #### Table of Contents   
-* [Senario](#senario)
+* [Scenario](#scenario)     
+* [Creating your Payload](#payload)   
+* [Receiving our Callback](#callback)   
+* [Gaining Persistence](#persistence)   
+* [Disruption](#disruption)   
+* [Destruction](#destruction)
 
 
-
-## <a name="senario">Senario</a>
+## <a name="scenario">Scenario</a>
 
 We will create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal will be to stealthly persist as many systems as possilble day one. Day two if we have any persistance we will start to do things to alert the blue team of your presence. EX: Change background, delete firewall rules and remove files.
 
@@ -17,7 +21,7 @@ Linux 64x
 firewall is up but systems require 80,443,53 outbound
 
 
-## Creating your Payload
+## <a name="payload">Creating your Payload<a/>
 
 There is many ways to create a payload but one of the easiest is using msfvenom.  
 To find a payload to use you can list all payloads with `msfvenom -l payloads`   
@@ -151,7 +155,7 @@ Saved as: reverse_shell
 ```
 
 
-## Receiving our Callback
+## <a name="callback">Receiving our Callback<a/>
 
 To receive our callback we will use metasploit, to start we metasploit we run msfconsole.
 
@@ -249,7 +253,7 @@ Jobs
 
 This will allow metasploit to catch meterpreter shells untill the job is killed.
 
-## Gaining Persistence
+## <a name="persistence">Gaining Persistence<a/>
 
 We can start by searching all the metasploit modules for persistence with the search command.
 
@@ -391,7 +395,7 @@ This payload will find the meterpreter payload that I created and copy it to /sb
 ![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/newsessions.png)
 
 
-## Disruption   
+## <a name="disruption">Disruption<a/>   
 
 To dirupt the blue team we changed the background and played music.
 
@@ -425,7 +429,7 @@ end
 </ruby>
 ```
 
-## Destruction
+## <a name="destruction">Destruction<a/>
 
 To destroy all remaining systems we can run a resource file:   
 mass-destruction.rc  
