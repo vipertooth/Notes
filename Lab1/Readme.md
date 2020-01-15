@@ -1,10 +1,10 @@
 # Guide   
 
-This is a guide to setting up a reverse shell and Gaining Persistance in the environment. Try to complete each section without following the linked guide. 
+This is a guide to setting up a reverse shell and Gaining Persistance in the environment. 
 
 ## Senario
 
-You will create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Your goal will be to stealthly persist as many systems as possilble day one. Day two if you have any persistance you will start to do things to alert the blue team of your presence. EX: Change background, delete firewall rules and remove files.
+We will create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal will be to stealthly persist as many systems as possilble day one. Day two if we have any persistance we will start to do things to alert the blue team of your presence. EX: Change background, delete firewall rules and remove files.
 
 ### Hints   
 
@@ -13,8 +13,6 @@ firewall is up but systems require 80,443,53 outbound
 
 
 ## Creating your Payload
-
-# Creating a Payload
 
 There is many ways to create a payload but one of the easiest is using msfvenom.  
 To find a payload to use you can list all payloads with `msfvenom -l payloads`   
@@ -134,7 +132,7 @@ After this you other options that can be important are:
 ```
 All of these options can be used with --list to show valid options.   
 
-For Your Senario -f elf will work.
+For our Senario -f elf will work.
 
 The final command should look as follows:   
 ```console
@@ -147,7 +145,49 @@ Final size of elf file: 1046512 bytes
 Saved as: reverse_shell
 ```
 
-
-
 ## Gaining Persistance
+
+We can start by searching all the metasploit modules.  To do this we will run metasploit.
+  
+```console
+root@kali:~# msfconsole
+                          ########                  #
+                      #################            #
+                   ######################         #
+                  #########################      #
+                ############################
+               ##############################
+               ###############################
+              ###############################
+              ##############################
+                              #    ########   #
+                 ##        ###        ####   ##
+                                      ###   ###
+                                    ####   ###
+               ####          ##########   ####
+               #######################   ####
+                 ####################   ####
+                  ##################  ####
+                    ############      ##
+                       ########        ###
+                      #########        #####
+                    ############      ######
+                   ########      #########
+                     #####       ########
+                       ###       #########
+                      ######    ############
+                     #######################
+                     #   #   ###  #   #   ##
+                     ########################
+                      ##     ##   ##     ##
+                            https://metasploit.com
+
+
+       =[ metasploit v5.0.67-dev                          ]
++ -- --=[ 1957 exploits - 1093 auxiliary - 336 post       ]
++ -- --=[ 558 payloads - 45 encoders - 10 nops            ]
++ -- --=[ 7 evasion                                       ]
+
+msf5 > 
+```
 
