@@ -7,7 +7,8 @@
 #### Manual
 
 Show devices   
--`iw phy`
+-`iw phy`   
+-`ls /sys/class/ieee80211/`
 
 Show interfaces   
 -`iw dev`   
