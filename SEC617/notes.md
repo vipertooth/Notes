@@ -32,6 +32,9 @@ Set device interface to specific channel
 -`iw dev mon0 set channel 1`   
 -`iw dev mon0 set channel 1 HT40+`
 
+Set Regulatory Domain Settings(to use ranges outside legal in us)   
+-`iw reg set CH`
+
 #### Automatic
 
 Set device interface to monitor mode   
