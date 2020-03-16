@@ -17,7 +17,7 @@ Show interfaces
 Create interface from phy device   
 -`iw phy phy0 interface add wlan0 type managed`
 
-Set device to monitor mode   
+Set device interface to monitor mode   
 -`iw dev wlan0 interface add mon0 type monitor`    
 -`iwconfig wlan0 mode monitor`   
 
@@ -27,15 +27,15 @@ Delete device interface
 Get information on device interface   
 -`iw dev mon0 info`
 
-Set monitoring device to spacific channel   
+Set device interface to spacific channel   
 -`iw dev mon0 set channel 1`
 
 #### Automatic
 
-Set device to monitor mode   
+Set device interface to monitor mode   
 -`airmon-ng start wlan0`
 
-Set device channel   
+Set device interface channel   
 -`airmon-ng start wlan0 11`
 
 Kill confliting processes   
