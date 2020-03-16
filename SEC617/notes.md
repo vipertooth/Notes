@@ -51,5 +51,23 @@ Kill confliting processes
 #### TCPDUMP
 
 Important flags   
-- `-i `   Specify interface to capture on
-- what do i look like
+- `-i `  Specify interface to capture on
+- `-e`   Print MAC addresses and BSSID
+- `-n`   Skip DNS lookups
+- `-s`   Set capture snap length
+- `-X`   Print payload in ascii and hex
+
+
+#### Wireshark
+
+Filters
+- eq, ==
+- ne, !=
+- gt, >
+- lt, <
+- ge, >=
+- le, <=
+- contains
+- and
+- or
+- not
