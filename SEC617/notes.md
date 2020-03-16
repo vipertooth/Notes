@@ -28,8 +28,9 @@ Delete device interface
 Get information on device interface   
 -`iw dev mon0 info`
 
-Set device interface to spacific channel   
--`iw dev mon0 set channel 1`
+Set device interface to specific channel   
+-`iw dev mon0 set channel 1`   
+-`iw dev mon0 set channel 1 HT40+`
 
 #### Automatic
 
