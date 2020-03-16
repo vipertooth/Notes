@@ -2,3 +2,42 @@
 
 ## Wifi Data Collection and Analysis
 
+### 802.11 configuration   
+
+#### Manual
+
+Show devices   
+-`iw phy`
+
+Show interfaces   
+-`iw dev`   
+-`iwconfig`   
+-`ifconfig -a`
+
+Create interface from phy device   
+-`iw phy phy0 interface add wlan0 type managed`
+
+Set device to monitor mode   
+-`iw dev wlan0 interface add mon0 type monitor`    
+-`iwconfig wlan0 mode monitor`   
+
+Delete device interface   
+-`iw dev mon0 del`
+
+Get information on device interface   
+-`iw dev mon0 info`
+
+Set monitoring device to spacific channel   
+-`iw dev mon0 set channel 1`
+
+#### Automatic
+
+Set device to monitor mode   
+-`airmon-ng start wlan0`
+
+Set device channel   
+-`airmon-ng start wlan0 11`
+
+Kill confliting processes   
+-`airmon-ng check kill`
+
