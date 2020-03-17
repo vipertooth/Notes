@@ -1,6 +1,6 @@
 # Notes for GAWN
 
-## Wifi Data Collection and Analysis
+## Wifi 
 
 ### 802.11 configuration   
 
@@ -83,8 +83,8 @@ Filters
 - wlan.bssid == 00:11:22:33:44:55  "find exact bssid"
 - frame contains ORA-  "finds string matching ORA- exactly useful for finding oracle traffic"
 
-
-### Cracking WPA/WPA2 
+### Attacking 802.11 Protocols   
+#### Cracking WPA/WPA2 
 
 Scan all channels   
 `airodump-ng wlan0mon`
@@ -177,4 +177,6 @@ Starting PTW attack with 98468 ivs.
              KEY FOUND! [ E2:28:9E:0F:19:4A:B7:1A:9F:33:53:55:54 ] 
         Decrypted correctly: 100%
 ```
+
+
 
