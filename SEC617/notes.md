@@ -101,6 +101,7 @@ Deauthentication to get handshake
 
 <a href="https://youtu.be/DqjOqEwq8uE" title="Link Title"><img src="https://github.com/vipertooth/Notes/blob/master/SEC617/images/Death-screenshot.png" alt="Alternate Text" /></a>
 
+[![Alt text](https://github.com/vipertooth/Notes/blob/master/SEC617/images/Death-screenshot.png)](https://youtu.be/DqjOqEwq8uE)
 
 Capture Handshake   
 `airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile wlan0mon`   
