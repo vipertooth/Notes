@@ -99,7 +99,7 @@ CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
 ```
 Deauthentication to get handshake   
 
-<a href="{https://drive.google.com/file/d/1-hqwRo5vI3Hk2AtWNkgny2bXZLSwt4k_/view?usp=sharing}" title="Link Title"><img src="{image-url}" alt="Alternate Text" /></a>
+<a href="https://drive.google.com/file/d/1-hqwRo5vI3Hk2AtWNkgny2bXZLSwt4k_/view?usp=sharing" title="Link Title"><img src="https://github.com/vipertooth/Notes/blob/master/SEC617/images/Death-screenshot.png" alt="Alternate Text" /></a>
 
 
 Capture Handshake   
