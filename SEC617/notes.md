@@ -99,7 +99,7 @@ CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
 ```
 Deauthentication to get handshake   
 
-<video src="Deauth.webm" width="320" height="200" controls reload></video>
+<a href="{https://github.com/vipertooth/Notes/blob/master/SEC617/Deauth.webm}" title="Link Title"><img src="{https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260}" alt="Alternate Text" /></a>
 
 Capture Handshake   
 `airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile wlan0mon`   
