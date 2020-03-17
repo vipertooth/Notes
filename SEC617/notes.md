@@ -189,4 +189,26 @@ Number of plaintext data packets        14
 Number of decrypted WEP  packets     83972
 Number of corrupted WEP  packets         0
 Number of decrypted WPA  packets         0
+
+root@SEC617:~/notes# airdecap-ng -p EASYPASSWD -e 16:59:C0:XX:XX:XX savefile.cap
+Total number of stations seen            2
+Total number of packets read          1176
+Total number of WEP data packets         0
+Total number of WPA data packets         1
+Number of plaintext data packets         0
+Number of decrypted WEP  packets         0
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets         0
+Number of bad TKIP (WPA) packets         0
+Number of bad CCMP (WPA) packets         0
+
+root@vipertooth:~# ls -la
+total 130804
+drwxr-xr-x  2 root root     4096 Mar 17 10:44 .
+drwxr-xr-x 19 root root     4096 Mar 17 09:59 ..
+-rw-r--r--  1 root root    44408 Mar 16 21:08 savefile.cap
+-rw-r--r--  1 root root       24 Mar 17 10:45 savefile-dec.cap
+-rw-r--r--  1 root root 64174740 Mar 17 10:43 wep-dec.pcap
+-rw-r--r--  1 root root 69695613 Mar 17 10:03 wep.pcap
+
 ```
