@@ -57,6 +57,19 @@ Important flags
 - `-s`   Set capture snap length
 - `-X`   Print payload in ascii and hex
 
+#### Airodmup-ng
+
+Scan all channels   
+`airodump-ng wlan0mon`
+
+```bash
+CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
+
+ BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
+
+ 14:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR73
+ 16:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
+```
 
 #### Wireshark
 
@@ -71,3 +84,7 @@ Filters
 - and
 - or
 - not
+- !wlan.fc.type_subtype == 8   "excludes beacon frames"
+- !wlan.fc.protected == 1      "excludes encrypted networks"
+- wlan.bssid == 00:11:22:33:44:55  "find exact bssid"
+- frame contains ORA-  "finds string matching ORA- exactly useful for finding oracle traffic"
