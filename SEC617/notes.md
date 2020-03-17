@@ -145,19 +145,19 @@ Read 92091 packets.
                                                                                                         
    1  6C:70:9F:DE:66:89  TH3PAD                    WPA (0 handshake)                                    
    2  88:1F:A1:32:A7:F9  Vulnerable Bank           WPA (0 handshake)                                    
-   3  58:6D:8F:07:4E:8F  wep                       WEP (83754 IVs)                                                          
-   4  00:1C:DF:B2:E6:47  jeff                      WEP (1852 IVs)                                       
+   3  85:4D:68:07:4D:8F  wep                       WEP (98468 IVs)                                                          
+   4  00:1C:DF:B2:E6:47  jeff                      WPA (0 handshake)                                       
                                                                                                         
 Index number of target network ? 3                                                                      
                                                                                                         
 Opening wep.pcap                                                                                       
 Attack will be restarted every 5000 captured ivs.                                                       
-Starting PTW attack with 83754 ivs.                                                                     
+Starting PTW attack with 98468 ivs.                                                                     
 
                                              Aircrack-ng 1.2 
 
 
-                             [00:00:02] Tested 1397591 keys (got 83754 IVs)
+                             [00:00:02] Tested 1397591 keys (got 98468 IVs)
 
    KB    depth   byte(vote)
     0    0/  1   E2(109056) 2F(97536) A5(97536) 44(94464) 87(94464) D7(93952) 06(93696) 
