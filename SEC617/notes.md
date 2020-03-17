@@ -57,7 +57,13 @@ Important flags
 - `-s`   Set capture snap length
 - `-X`   Print payload in ascii and hex
 
+#### Airodump-ng
 
+Capture all channels while channel hoping   
+`airodump-ng -w savefile wlan0mon`   
+
+Capture on single channel   
+`airodump-ng -w savefile -c 5 wlan0mon`   
 
 #### Wireshark
 
