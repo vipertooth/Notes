@@ -57,7 +57,29 @@ Important flags
 - `-s`   Set capture snap length
 - `-X`   Print payload in ascii and hex
 
-#### Airodmup-ng
+
+
+#### Wireshark
+
+Filters
+- eq, ==
+- ne, !=
+- gt, >
+- lt, <
+- ge, >=
+- le, <=
+- contains
+- and
+- or
+- not
+- !wlan.fc.type_subtype == 8   "excludes beacon frames"
+- !wlan.fc.protected == 1      "excludes encrypted networks"
+- wlan.bssid == 00:11:22:33:44:55  "find exact bssid"
+- frame contains ORA-  "finds string matching ORA- exactly useful for finding oracle traffic"
+
+
+### WPA/WPA2 Cracking
+
 
 Scan all channels   
 `airodump-ng wlan0mon`
@@ -106,22 +128,3 @@ Crack WPA2
 
       EAPOL HMAC     : E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
 ```
-
-
-#### Wireshark
-
-Filters
-- eq, ==
-- ne, !=
-- gt, >
-- lt, <
-- ge, >=
-- le, <=
-- contains
-- and
-- or
-- not
-- !wlan.fc.type_subtype == 8   "excludes beacon frames"
-- !wlan.fc.protected == 1      "excludes encrypted networks"
-- wlan.bssid == 00:11:22:33:44:55  "find exact bssid"
-- frame contains ORA-  "finds string matching ORA- exactly useful for finding oracle traffic"
