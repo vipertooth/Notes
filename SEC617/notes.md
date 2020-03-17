@@ -97,6 +97,8 @@ CH  6 ][ Elapsed: 18 s ][ 2020-03-16 20:58
  14:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR73
  16:59:C0:XX:XX:XX  -16        5        0    0   4  195  WPA2 CCMP   PSK  NETGEAR-Guest
 ```
+Deauthentication to get handshake   
+
 
 Capture Handshake   
 `airodump-ng -c 4 -d 16:59:C0:XX:XX:XX -w savefile wlan0mon`   
