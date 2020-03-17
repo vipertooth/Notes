@@ -137,22 +137,22 @@ Crack WPA2
 #### Cracking WEP
 
 ```bash
-root@vipertooth:~# aircrack-ng wep.pcap                                                              
+root@vipertooth:~# aircrack-ng wep.pcap                               
+Opening wep.pcap                                                      
+Read 92091 packets.                                                   
+                                                                      
+   #  BSSID              ESSID                     Encryption         
+                                                                      
+   1  6C:70:9F:DE:66:89  TH3PAD                    WPA (0 handshake)  
+   2  88:1F:A1:32:A7:F9  Vulnerable Bank           WPA (0 handshake)  
+   3  85:4D:68:07:4D:8F  wep                       WEP (98468 IVs)    
+   4  00:1C:DF:B2:E6:47  jeff                      WPA (0 handshake)   
+                                                                       
+Index number of target network ? 3                                     
+                                                                       
 Opening wep.pcap                                                                                       
-Read 92091 packets.                                                                                     
-                                                                                                        
-   #  BSSID              ESSID                     Encryption                                           
-                                                                                                        
-   1  6C:70:9F:DE:66:89  TH3PAD                    WPA (0 handshake)                                    
-   2  88:1F:A1:32:A7:F9  Vulnerable Bank           WPA (0 handshake)                                    
-   3  85:4D:68:07:4D:8F  wep                       WEP (98468 IVs)                                 
-   4  00:1C:DF:B2:E6:47  jeff                      WPA (0 handshake)                                       
-                                                                                                        
-Index number of target network ? 3                                                                      
-                                                                                                        
-Opening wep.pcap                                                                                       
-Attack will be restarted every 5000 captured ivs.                                                       
-Starting PTW attack with 98468 ivs.                                                                     
+Attack will be restarted every 5000 captured ivs.                      
+Starting PTW attack with 98468 ivs.                                    
 
                                              Aircrack-ng 1.2 
 
