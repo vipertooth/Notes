@@ -121,7 +121,7 @@ Crack WPA2
 
       Time left: 1 hour, 45 minutes, 12 seconds                  0.00%
 
-                           KEY FOUND! [ XXXXXXXX ]
+                           KEY FOUND! [ EASYPASSWD ]
 
 
       Master Key     : FD 3F 34 FD 32 6F 4D 16 DB 9B DA 5B B6 47 58 63
