@@ -285,9 +285,29 @@ drwxr-xr-x 19 root root     4096 Mar 17 09:59 ..
 -rw-r--r--  1 root root 69695613 Mar 17 10:03 wep.pcap
 
 ```
-
-### Bridging Connections Windows CMD
-```
+### Windows CMD   
+#### Bridging Connections Windows CMD
+```cmd
 C:\> netsh wlan set partynetwork mode=allow ssid=party key=Password
 C:\> netsh wlan start partynetwork
 ```
+#### Get Wifi creds
+
+```cmd
+C:\> netsh wlan show interface
+C:\> netsh wlan show profiles
+C:\> netsh wlan export profile <profile here>
+```
+#### Discover wireless networks
+```cmd
+C:\> netsh wlan show networks
+```
+#### Connect to wireless network from CMD
+```cmd
+C:\> netsh wlan connect name="Profile"
+```
+#### Import saved profile to cmd
+```cmd
+C:\> netsh wlan add profile "saved_file.xml"
+```
+
