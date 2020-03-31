@@ -285,3 +285,9 @@ drwxr-xr-x 19 root root     4096 Mar 17 09:59 ..
 -rw-r--r--  1 root root 69695613 Mar 17 10:03 wep.pcap
 
 ```
+
+### Bridging Connections Windows CMD
+```
+C:\> netsh wlan set partynetwork mode=allow ssid=party key=Password
+C:\> netsh wlan start partynetwork
+```
