@@ -11,7 +11,7 @@ Setup for GPG usage.
   * [Add extra identities](#add-extra-identities)
 - [Verify](#verify)
 - [SSH](#ssh)
-  * [Load GPG Authentication key to SSH] (#Load GPG Authentication key to SSH)
+  * [Load GPG Authentication key to SSH] (#load-gpg-authentication-key-to-ssh)
   * [Copy public key](#copy-public-key)
   * [Connect with public key authentication](#connect-with-public-key-authentication)
 
