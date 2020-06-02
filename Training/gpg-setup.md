@@ -39,23 +39,7 @@ Setup for GPG usage.
   * [(Optional) Save public key for identity file configuration](#-optional--save-public-key-for-identity-file-configuration)
   * [Connect with public key authentication](#connect-with-public-key-authentication)
   * [Import SSH keys](#import-ssh-keys)
-  * [Remote Machines (Agent Forwarding)](#remote-machines--agent-forwarding-)
-    + [Steps for older distributions](#steps-for-older-distributions)
-  * [GitHub](#github)
-  * [OpenBSD](#openbsd-1)
-  * [Windows](#windows-1)
-    + [WSL](#wsl)
-      - [Prerequisites](#prerequisites)
-      - [WSL configuration](#wsl-configuration)
-      - [Remote host configuration](#remote-host-configuration)
-- [Using Multiple Keys](#using-multiple-keys)
-- [Require touch](#require-touch)
-- [Email](#email)
-  * [Mailvelope on macOS](#mailvelope-on-macos)
-- [Reset](#reset)
-- [Notes](#notes)
-- [Troubleshooting](#troubleshooting)
-- [Links](#links)
+
 
 
 
@@ -546,39 +530,11 @@ Primary key fingerprint: 011C E16B D45B 27A5 5BA8  776D FF3E 7D88 647E BCDB
      Subkey fingerprint: 07AA 7735 E502 C5EB E09E  B8B0 BECF A3C1 AE19 1D15
 ```
 
-Use a [shell function](https://github.com/drduh/config/blob/master/zshrc) to make encrypting files easier:
-
-```
-secret () {
-        output=~/"${1}".$(date +%s).enc
-        gpg --encrypt --armor --output ${output} -r 0x0000 -r 0x0001 -r 0x0002 "${1}" && echo "${1} -> ${output}"
-}
-
-reveal () {
-        output=$(echo "${1}" | rev | cut -c16- | rev)
-        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
-}
-```
-
-```console
-$ secret document.pdf
-document.pdf -> document.pdf.1580000000.enc
-
-$ reveal document.pdf.1580000000.enc
-gpg: anonymous recipient; trying secret key 0xFF3E7D88647EBCDB ...
-gpg: okay, we are the anonymous recipient.
-gpg: encrypted with RSA key, ID 0x0000000000000000
-document.pdf.1580000000.enc -> document.pdf
-```
 
 
 # SSH
 
-[gpg-agent](https://wiki.archlinux.org/index.php/GnuPG#SSH_agent) supports the OpenSSH ssh-agent protocol (`enable-ssh-support`), as well as Putty's Pageant on Windows (`enable-putty-support`). This means it can be used instead of the traditional ssh-agent / pageant. There are some differences from ssh-agent, notably that gpg-agent does not _cache_ keys rather it converts, encrypts and stores them - persistently - as GPG keys and then makes them available to ssh clients. Any existing ssh private keys that you'd like to keep in `gpg-agent` should be deleted after they've been imported to the GPG agent.
-
-When importing the key to `gpg-agent`, you'll be prompted for a passphrase to protect that key within GPG's key store - you may want to use the same passphrase as the original's ssh version. GPG can both cache passphrases for a determined period (ref. `gpg-agent`'s various `cache-ttl` options), and since version 2.1 can store and fetch passphrases via the macOS keychain. Note than when removing the old private key after importing to `gpg-agent`, keep the `.pub` key file around for use in specifying ssh identities (e.g. `ssh -i /path/to/identity.pub`).
-
-Probably the biggest thing missing from `gpg-agent`'s ssh agent support is being able to remove keys. `ssh-add -d/-D` have no effect. Instead, you need to use the `gpg-connect-agent` utility to lookup a key's keygrip, match that with the desired ssh key fingerprint (as an MD5) and then delete that keygrip. The [gnupg-users mailing list](https://lists.gnupg.org/pipermail/gnupg-users/2016-August/056499.html) has more information.
+SSH can be used in conjuction with GPG.  
 
 ## Load GPG Authentication key to ssh
 
