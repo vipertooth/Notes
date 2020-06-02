@@ -11,6 +11,7 @@ Setup for GPG usage.
   * [Add extra identities](#add-extra-identities)
 - [Verify](#verify)
 - [SSH](#ssh)
+  * [Load GPG Authentication key to SSH] (#Load GPG Authentication key to SSH)
   * [Copy public key](#copy-public-key)
   * [Connect with public key authentication](#connect-with-public-key-authentication)
 
@@ -510,7 +511,7 @@ Primary key fingerprint: 011C E16B D45B 27A5 5BA8  776D FF3E 7D88 647E BCDB
 
 SSH can be used in conjuction with GPG.  
 
-## Load GPG Authentication key to ssh
+## Load GPG Authentication key to SSH
 
 ```console
 $ gpg -K --with-keygrip
