@@ -580,8 +580,7 @@ When importing the key to `gpg-agent`, you'll be prompted for a passphrase to pr
 
 Probably the biggest thing missing from `gpg-agent`'s ssh agent support is being able to remove keys. `ssh-add -d/-D` have no effect. Instead, you need to use the `gpg-connect-agent` utility to lookup a key's keygrip, match that with the desired ssh key fingerprint (as an MD5) and then delete that keygrip. The [gnupg-users mailing list](https://lists.gnupg.org/pipermail/gnupg-users/2016-August/056499.html) has more information.
 
-
-## Copy public key
+## Load GPG Authentication key to ssh
 
 ```console
 $ gpg -K --with-keygrip
@@ -599,20 +598,26 @@ ssb   rsa2048 2019-03-21 [A]
 $ echo 7710BA0643CC022B92544181FF2EAC2A290CDC0E >> ~/.gnupg/sshcontrol
 ```
 
-**Note** It is **not** necessary to import the corresponding GPG public key in order to use SSH.
+
+## Copy public key
+
 
 Copy and paste the output from `ssh-add` to the server's `authorized_keys` file:
 
 ```console
 $ ssh-add -L
 ssh-rsa AAAAB4NzaC1yc2EAAAADAQABAAACAz[...]zreOKM+HwpkHzcy9DQcVG2Nw== cardno:000605553211
+$ ssh guest@masterserver
+$ su rtadmin -
+$ cd ~
+$ echo "ssh-rsa AAAAB4NzaC1yc2EAAAADAQABAAACAz[...]zreOKM+HwpkHzcy9DQcVG2Nw== cardno:000605553211" >> .ssh/authorized_keys
 ```
 
 
 ## Connect with public key authentication
 
 ```console
-$ ssh git@github.com -vvv
+$ ssh rtadmin@masterserver -vvv
 [...]
 debug2: key: cardno:000605553211 (0x1234567890),
 debug1: Authentications that can continue: publickey
@@ -632,71 +637,5 @@ debug1: Authentication succeeded (publickey).
 [...]
 ```
 
-**Tip** To make multiple connections or securely transfer many files, consider using the [ControlMaster](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing) ssh option. Also see [drduh/config/ssh_config](https://github.com/drduh/config/blob/master/ssh_config).
-
-
-# Troubleshooting
-
-- Use `man gpg` to understand GPG options and command-line flags.
-
-- To get more information on potential errors, restart the `gpg-agent` process with debug output to the console with `pkill gpg-agent; gpg-agent --daemon --no-detach -v -v --debug-level advanced --homedir ~/.gnupg`.
-
-- If you encounter problems connecting to YubiKey with GPG - try unplugging and re-inserting YubiKey, and restarting the `gpg-agent` process.
-
-- If you receive the error, `gpg: decryption failed: secret key not available` - you likely need to install GnuPG version 2.x. Another possibility is that there is a problem with the PIN, e.g. it is too short or blocked.
-
-- If you receive the error, `Yubikey core error: no yubikey present` - make sure the YubiKey is inserted correctly. It should blink once when plugged in.
-
-- If you still receive the error, `Yubikey core error: no yubikey present` - you likely need to install newer versions of yubikey-personalize as outlined in [Required software](#required-software).
-
-- If you receive the error, `Yubikey core error: write error` - YubiKey is likely locked. Install and run yubikey-personalization-gui to unlock it.
-
-- If you receive the error, `Key does not match the card's capability` - you likely need to use 2048 bit RSA key sizes.
-
-- If you receive the error, `sign_and_send_pubkey: signing failed: agent refused operation` - make sure you replaced `ssh-agent` with `gpg-agent` as noted above.
-
-- If you still receive the error, `sign_and_send_pubkey: signing failed: agent refused operation` - [run the command](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=835394) `gpg-connect-agent updatestartuptty /bye`
-
-- If you still receive the error, `sign_and_send_pubkey: signing failed: agent refused operation` - edit `~/.gnupg/gpg-agent.conf` to set a valid `pinentry` program path, e.g. `pinentry-program /usr/local/bin/pinentry-mac` on macOS.
-
-- If you receive the error, `The agent has no identities` from `ssh-add -L`, make sure you have installed and started `scdaemon`.
-
-- If you receive the error, `Error connecting to agent: No such file or directory` from `ssh-add -L`, the UNIX file socket that the agent uses for communication with other processes may not be set up correctly. On Debian, try `export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"`. Also see that `gpgconf --list-dirs agent-ssh-socket` is returning single path, to existing `S.gpg-agent.ssh` socket.
-
-- If you receive the error, `Permission denied (publickey)`, increase ssh verbosity with the `-v` flag and ensure the public key from the card is being offered: `Offering public key: RSA SHA256:abcdefg... cardno:00060123456`. If it is, ensure you are connecting as the right user on the target system, rather than as the user on the local system. Otherwise, be sure `IdentitiesOnly` is not [enabled](https://github.com/FiloSottile/whosthere#how-do-i-stop-it) for this host.
-
-- If SSH authentication still fails - add up to 3 `-v` flags to the `ssh` client to increase verbosity.
-
-- If it still fails, it may be useful to stop the background `sshd` daemon process service on the server (e.g. using `sudo systemctl stop sshd`) and instead start it in the foreground with extensive debugging output, using `/usr/sbin/sshd -eddd`. Note that the server will not fork and will only process one connection, therefore has to be re-started after every `ssh` test.
-
-- If you receive the error, `Please insert the card with serial number: *` see [using of multiple keys](#using-multiple-keys).
-
-- If you receive the error, `There is no assurance this key belongs to the named user` or `encryption failed: Unusable public key` use `gpg --edit-key` to set `trust` to `5 = I trust ultimately`.
-
-- If you receive the error, `gpg: 0x0000000000000000: skipped: Unusable public key` or `encryption failed: Unusable public key` the sub-key may be expired and can no longer be used to encrypt nor sign messages. It can still be used to decrypt and authenticate, however.
-
-# Links
-
-* https://alexcabal.com/creating-the-perfect-gpg-keypair/
-* https://blog.habets.se/2013/02/GPG-and-SSH-with-Yubikey-NEO
-* https://blog.josefsson.org/2014/06/23/offline-gnupg-master-key-and-subkeys-on-yubikey-neo-smartcard/
-* https://blog.onefellow.com/post/180065697833/yubikey-forwarding-ssh-keys
-* https://developers.yubico.com/PGP/Card_edit.html
-* https://developers.yubico.com/PIV/Introduction/Admin_access.html
-* https://developers.yubico.com/yubico-piv-tool/YubiKey_PIV_introduction.html
-* https://developers.yubico.com/yubikey-personalization/
-* https://developers.yubico.com/yubikey-piv-manager/PIN_and_Management_Key.html
-* https://evilmartians.com/chronicles/stick-with-security-yubikey-ssh-gnupg-macos
-* https://gist.github.com/ageis/14adc308087859e199912b4c79c4aaa4
-* https://github.com/herlo/ssh-gpg-smartcard-config
-* https://github.com/tomlowenthal/documentation/blob/master/gpg/smartcard-keygen.md
-* https://help.riseup.net/en/security/message-security/openpgp/best-practices
-* https://jclement.ca/articles/2015/gpg-smartcard/
-* https://rnorth.org/gpg-and-ssh-with-yubikey-for-mac
-* https://trmm.net/Yubikey
-* https://www.bootc.net/archives/2013/06/09/my-perfect-gnupg-ssh-agent-setup/
-* https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/
-* https://www.hanselman.com/blog/HowToSetupSignedGitCommitsWithAYubiKeyNEOAndGPGAndKeybaseOnWindows.aspx
-* https://www.void.gr/kargig/blog/2013/12/02/creating-a-new-gpg-key-with-subkeys/
-* https://mlohr.com/gpg-agent-forwarding/
-* https://www.ingby.com/?p=293
+TODO:
+when master server is created make ssh for mounting mission file on trainee
