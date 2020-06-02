@@ -43,7 +43,7 @@ The first key to generate is the master key. It will be used for certification o
 
 You'll be prompted to enter and verify a passphrase - keep it handy as you'll need it multiple times later.
 
-For this training you can use a simple passphrase EX: ITEClbsaTRAINING
+For this training you can use a simple passphrase EX: `ITEClbsaTRAINING`
 
 
 Generate a new key with GPG, selecting `(8) RSA (set your own capabilities)`, `Certify` capability only and `4096` bit key size.
@@ -161,7 +161,7 @@ sec  rsa4096/0xEA5DE91459B80592
 
 Use 4096-bit RSA keys.
 
-Use a 1 year expiration for sub-keys - they can be renewed using the offline master key. See [rotating keys](#rotating-keys).
+Use a 1-3 year expiration for sub-keys.
 
 ## Signing
 
