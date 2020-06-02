@@ -194,22 +194,6 @@ Export the key ID as a [variable](https://stackoverflow.com/questions/1158091/de
 $ export KEYID=0xFF3E7D88647EBCDB
 ```
 
-# Sign with existing key
-
-(Optional) If you already have a PGP key, you may want to sign the new key with the old one to prove that the new key is controlled by you.
-
-Export your existing key to move it to the working keyring:
-
-```console
-$ gpg --export-secret-keys --armor --output /tmp/new.sec
-```
-
-Then sign the new key:
-
-```console
-$ gpg  --default-key $OLDKEY --sign-key $KEYID
-```
-
 # Sub-keys
 
 Edit the master key to add sub-keys:
