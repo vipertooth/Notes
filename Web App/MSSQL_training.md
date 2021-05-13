@@ -334,3 +334,4 @@ This will return nothing on the web but `tcpdump icmp` will pick up pings from t
 - http://www.securityidiots.com/Web-Pentest/SQL-Injection/MSSQL/MSSQL-Union-Based-Injection.html
 - https://medium.com/@notsoshant/a-not-so-blind-rce-with-sql-injection-13838026331e
 - https://portswigger.net/web-security/sql-injection
+- https://www.exploit-db.com/papers/12975
