@@ -13,7 +13,7 @@ The following database has the name "Users_db" with one table "Users_tb".  This 
 | Alice | is_the_best |
 | Bob | Str0ngP@ss! |
 
-We will be using a standard login page for this training. For the login page the logic of the query will be as follows.
+We will be using a standard login page for this training. For the login page the logic of the database query will be as follows.
 ```
 SELECT * FROM Users_tb WHERE username = '$user' AND password = '$pass'
 ```
