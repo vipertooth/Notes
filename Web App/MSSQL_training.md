@@ -18,7 +18,7 @@ We will be using a standard login page for this training. For the login page the
 SELECT * FROM Users_tb WHERE username = '$user' AND password = '$pass'
 ```
 
-The login.php logic is as follows.
+The web page login.php logic is as follows.
 ```
 if true:
 	do welcome.php
