@@ -9,8 +9,19 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Windows/Priv Esc/Contents.md",
+            "file": "Web App/Contents.md",
             "mode": "source"
+          }
+        }
+      },
+      {
+        "id": "f6fd4ad4cfe008a7",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Windows/Priv Esc/Windows PrivEsc.md",
+            "mode": "preview"
           }
         }
       }
@@ -48,7 +59,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -68,7 +80,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Windows/Priv Esc/Contents.md",
+                "file": "Windows/Priv Esc/Windows PrivEsc.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,17 +98,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "b03e241cdf4390a8",
+  "active": "f6fd4ad4cfe008a7",
   "lastOpenFiles": [
-    "Windows/Priv Esc/Contents.md",
+    "Windows/Priv Esc/Windows PrivEsc.md",
+    "Web App/Contents.md",
+    "Linux/Table of Content.md",
     "Windows/Contents.md",
-    "Windows/Enumeration/Contents.md",
+    "Linux/Priv Esc/Contents.md",
     "Windows/Post Exploitation/Contents.md",
+    "Windows/Enumeration/Contents.md",
     "README.md",
     "Web App/MSSQL_training.md",
-    "Pivot/Contents.md",
-    "Lab1/Readme.md",
-    "Linux/Enumeration/Contents.md",
-    "Linux/Table of Content.md"
+    "Pivot/Contents.md"
   ]
 }
