@@ -15,7 +15,7 @@
 	- [Registry](#registry)
 	- [Saved Creds](#saved-creds)
 	- [Configuration Files](#configuration-files)
-	- [SAM/SYSTEM Backups](#sam/system-backups)
+	- [SAM/SYSTEM Backups](#samsystem-backups)
 - [Scheduled Tasks](#scheduled-tasks)
 - [Breakout](#breakout)
 - [Startup Apps](#startup-apps)

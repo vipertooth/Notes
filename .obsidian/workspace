@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Windows/Priv Esc/Windows PrivEsc.md",
+            "file": "README.md",
             "mode": "source"
           }
         }
@@ -21,7 +21,8 @@
           "type": "markdown",
           "state": {
             "file": "Windows/Priv Esc/Windows PrivEsc.md",
-            "mode": "preview"
+            "mode": "source",
+            "backlinks": true
           }
         }
       }
@@ -79,7 +80,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Windows/Priv Esc/Windows PrivEsc.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -96,7 +97,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Windows/Priv Esc/Windows PrivEsc.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -120,8 +121,9 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "f6fd4ad4cfe008a7",
+  "active": "bcc5dec9ba6fcde4",
   "lastOpenFiles": [
+    "README.md",
     "Windows/Priv Esc/Windows PrivEsc.md",
     "Web App/Contents.md",
     "Linux/Table of Content.md",
@@ -129,7 +131,6 @@
     "Linux/Priv Esc/Contents.md",
     "Windows/Post Exploitation/Contents.md",
     "Windows/Enumeration/Contents.md",
-    "README.md",
     "Web App/MSSQL_training.md",
     "Pivot/Contents.md"
   ]
