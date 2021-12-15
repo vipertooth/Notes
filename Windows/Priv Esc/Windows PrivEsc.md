@@ -1,11 +1,11 @@
 
 # Windows PrivEsc
 #### Table of Contents
-- [Kernel Exploit](#kernel_exploit)
+- [Kernel Exploit](#kernel-exploit)
+- [Services](#services)
+	- [Attacking Insecure Service Permissions](#attacking-insecure-service-permissions)
 
-
-<a name="kernel_exploit">test</a>
-## kernel_exploit
+## Kernel Exploit
 
 Windows exploit suggester   
 `https://github.com/bitsadmin/wesng`

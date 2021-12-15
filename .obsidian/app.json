@@ -1,5 +1,9 @@
 {
   "promptDelete": false,
   "readableLineLength": false,
-  "spellcheck": true
+  "spellcheck": true,
+  "showFrontmatter": true,
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true,
+  "foldHeading": true
 }
