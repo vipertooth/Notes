@@ -4,9 +4,10 @@
   "spellcheck": true,
   "showFrontmatter": true,
   "alwaysUpdateLinks": true,
-  "useMarkdownLinks": false,
+  "useMarkdownLinks": true,
   "foldHeading": true,
   "spellcheckDictionary": [
     "Executables"
-  ]
+  ],
+  "newLinkFormat": "relative"
 }

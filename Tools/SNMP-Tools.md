@@ -1,6 +1,0 @@
-snmpwalk
-
-
-
-snmp-check
-

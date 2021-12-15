@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "README.md",
-            "mode": "preview"
+            "mode": "source"
           }
         }
       },
@@ -124,14 +124,14 @@
   "active": "bcc5dec9ba6fcde4",
   "lastOpenFiles": [
     "README.md",
-    "Windows/Priv Esc/Windows PrivEsc.md",
-    "Web App/Contents.md",
-    "Linux/Table of Content.md",
-    "Windows/Contents.md",
-    "Linux/Priv Esc/Contents.md",
-    "Windows/Post Exploitation/Contents.md",
-    "Windows/Enumeration/Contents.md",
+    "working on/boofuzz.md",
+    "working on/scans.md",
+    "working on/test.md",
     "Web App/MSSQL_training.md",
-    "Pivot/Contents.md"
+    "Lab1/Readme.md",
+    "Lab1/Pictures/shells.png",
+    "digitalocean/setup.md",
+    "digitalocean/redirector.md",
+    "File-Transfer/Contents.md"
   ]
 }
