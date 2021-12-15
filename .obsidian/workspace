@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "989f04301e61a451",
+    "type": "split",
+    "children": [
+      {
+        "id": "b03e241cdf4390a8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Windows/Priv Esc/Contents.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "21c3acb109876bfe",
+    "type": "split",
+    "children": [
+      {
+        "id": "95958dfa18bb1667",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "004a095f7fe7c654",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "f567dfeed0f76b18",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0449d93ccbc54640",
+    "type": "split",
+    "children": [
+      {
+        "id": "db6da8e815039d66",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "58af7266c747147f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Windows/Priv Esc/Contents.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "b03e241cdf4390a8",
+  "lastOpenFiles": [
+    "Windows/Priv Esc/Contents.md",
+    "Windows/Post Exploitation/Contents.md",
+    "Windows/Enumeration/Contents.md",
+    "README.md",
+    "Windows/Contents.md",
+    "Web App/MSSQL_training.md",
+    "Pivot/Contents.md",
+    "Lab1/Readme.md",
+    "Linux/Enumeration/Contents.md",
+    "Linux/Table of Content.md"
+  ]
+}
