@@ -89,10 +89,10 @@
   "active": "b03e241cdf4390a8",
   "lastOpenFiles": [
     "Windows/Priv Esc/Contents.md",
-    "Windows/Post Exploitation/Contents.md",
-    "Windows/Enumeration/Contents.md",
-    "README.md",
     "Windows/Contents.md",
+    "Windows/Enumeration/Contents.md",
+    "Windows/Post Exploitation/Contents.md",
+    "README.md",
     "Web App/MSSQL_training.md",
     "Pivot/Contents.md",
     "Lab1/Readme.md",
