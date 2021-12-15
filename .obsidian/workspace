@@ -4,33 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "ead4be7ee7b2f84a",
-        "type": "split",
-        "children": [
-          {
-            "id": "b03e241cdf4390a8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Web App/Contents.md",
-                "mode": "source"
-              }
-            }
-          },
-          {
-            "id": "bcc5dec9ba6fcde4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Windows/Priv Esc/Windows PrivEsc.md",
-                "mode": "source"
-              }
-            }
+        "id": "bcc5dec9ba6fcde4",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Windows/Priv Esc/Windows PrivEsc.md",
+            "mode": "source"
           }
-        ],
-        "direction": "horizontal"
+        }
       },
       {
         "id": "f6fd4ad4cfe008a7",
@@ -39,7 +21,7 @@
           "type": "markdown",
           "state": {
             "file": "Windows/Priv Esc/Windows PrivEsc.md",
-            "mode": "source"
+            "mode": "preview"
           }
         }
       }
@@ -77,8 +59,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -139,7 +120,7 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "bcc5dec9ba6fcde4",
+  "active": "f6fd4ad4cfe008a7",
   "lastOpenFiles": [
     "Windows/Priv Esc/Windows PrivEsc.md",
     "Web App/Contents.md",

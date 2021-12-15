@@ -5,5 +5,8 @@
   "showFrontmatter": true,
   "alwaysUpdateLinks": true,
   "useMarkdownLinks": true,
-  "foldHeading": true
+  "foldHeading": true,
+  "spellcheckDictionary": [
+    "Executables"
+  ]
 }
