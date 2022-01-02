@@ -6,3 +6,6 @@ with VI
 :shell
 
 :!bash
+
+test
+
