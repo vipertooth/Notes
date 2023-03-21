@@ -61,9 +61,9 @@ Start/Stop a service:
 > net start/stop \<name>   
 > net stop BITS   
 > Stop-Service -Name "BITS"   
-> Start-Service -Name "BITS"
-> sc start BITS
-> sc stop BITS
+> Start-Service -Name "BITS"  
+> sc start BITS  
+> sc stop BITS  
 
 Using accesschk to find permissions on services.
 > accesschk.exe /accepteula -uwcqv user BITS
