@@ -4,7 +4,7 @@
   "spellcheck": true,
   "showFrontmatter": true,
   "alwaysUpdateLinks": true,
-  "useMarkdownLinks": true,
+  "useMarkdownLinks": false,
   "foldHeading": true,
   "spellcheckDictionary": [
     "Executables"

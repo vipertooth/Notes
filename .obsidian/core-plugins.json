@@ -4,6 +4,7 @@
   "switcher",
   "graph",
   "backlink",
+  "canvas",
   "outgoing-link",
   "tag-pane",
   "page-preview",
@@ -11,6 +12,5 @@
   "command-palette",
   "markdown-importer",
   "word-count",
-  "open-with-default-app",
   "file-recovery"
 ]
